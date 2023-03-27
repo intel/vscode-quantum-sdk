@@ -1,0 +1,39 @@
+{
+    "title" : "Sample Circuit 1",
+    "numQbits" : 3,
+    "qbitNames": [
+        "example_0",
+        "",
+        ""
+    ],
+    "gates" : [
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [1]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "X",
+            "qubits" : [1, 0]
+        },
+        {
+            "name" : "X",
+            "qubits" : [2, 0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [1]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        }
+    ]
+}

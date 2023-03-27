@@ -1,0 +1,69 @@
+{
+    "title" : "Superdense coding: 11",
+    "numQbits" : 2,
+    "qbitNames": [
+        "example_0",
+        ""
+    ],
+    "kernels" : {
+        "Prep" : {
+            "gates" : [
+                {
+                    "name" : "Prep",
+                    "qubits" : [0]
+                },
+                {
+                    "name" : "Prep",
+                    "qubits" : [1]
+                }
+            ]
+        },
+        "Hadamard" : {
+            "gates" : [
+                {
+                    "name" : "H",
+                    "qubits" : [0]
+                }
+            ]
+        },
+        "OtherStuff" : {
+            "gates" : [
+                {
+                    "name" : "X",
+                    "qubits" : [0,1]
+                },
+                {
+                    "name" : "X",
+                    "qubits" : [0]
+                },
+                {
+                    "name" : "Z",
+                    "qubits" : [0]
+                },
+                {
+                    "name" : "X",
+                    "qubits" : [0,1]
+                }
+            ]
+        },
+        "MeasureAll" : {
+            "gates" : [
+                {
+                    "name" : "MeasZ",
+                    "qubits" : [0]
+                },
+                {
+                    "name" : "MeasZ",
+                    "qubits" : [1]
+                }
+            ]
+        }
+    },
+    "main" : [
+        "Prep",
+        "Hadamard",
+        "OtherStuff",
+        "Hadamard",
+        "MeasureAll"
+    ]
+}

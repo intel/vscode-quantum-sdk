@@ -1,0 +1,5790 @@
+{
+    "title" : "massive",
+    "numQbits" : 30,
+    "qbitNames": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "gates" : [
+        {
+            "name" : "PrepZ",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [1]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "X",
+            "qubits" : [1, 0]
+        },
+        {
+            "name" : "X",
+            "qubits" : [2, 0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [1]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [1]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "X",
+            "qubits" : [1, 0]
+        },
+        {
+            "name" : "X",
+            "qubits" : [2, 0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [1]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [2]
+        },
+        {
+            "name" : "H",
+            "qubits" : [4]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
+        },
+        {
+            "name" : "H",
+            "qubits" : [8]
+        },
+        {
+            "name" : "H",
+            "qubits" : [10]
+        },
+        {
+            "name" : "H",
+            "qubits" : [12]
+        },
+        {
+            "name" : "H",
+            "qubits" : [14]
+        },
+        {
+            "name" : "H",
+            "qubits" : [16]
+        },
+        {
+            "name" : "H",
+            "qubits" : [18]
+        },
+        {
+            "name" : "H",
+            "qubits" : [20]
+        },
+        {
+            "name" : "H",
+            "qubits" : [22]
+        },
+        {
+            "name" : "H",
+            "qubits" : [24]
+        },
+        {
+            "name" : "H",
+            "qubits" : [26]
+        },
+        {
+            "name" : "H",
+            "qubits" : [28]
+        },
+        {
+            "name" : "H",
+            "qubits" : [29]
+        }
+    ]
+}

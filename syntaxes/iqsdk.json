@@ -1,0 +1,28 @@
+{
+	"scopeName": "quantum_compiler.injection",
+	"injectionSelector": "R:source.cpp",
+	"patterns": [
+		{ "include": "#quantum-namespace" },
+		{ "include": "#quantum-type" },
+		{ "include": "#quantum-kernel" },
+		{ "include": "#quantum-function" }
+	],
+	"repository": {
+		"quantum-namespace": {
+			"match": "(?<!\/\/.*)(?<!\".*)(?<!'.*)(?<!`.*)\\b(iqsdk)(?=::)",
+			"name": "entity.name.scope-resolution.cpp"
+		},
+		"quantum-type": {
+			"match": "(?<!\/\/.*)(?<!\".*)(?<!'.*)(?<!`.*)\\b(qbit|cbit)\\b",
+			"name": "storage.type"
+		},
+		"quantum-kernel": {
+            "match": "(?<!\/\/.*)(?<!\".*)(?<!'.*)(?<!`.*)\\b(quantum_kernel)(?=.*\\(.*\\).*\\{)",
+			"name": "markup.bold"
+        },
+        "quantum-function": {
+            "match": "(?<!\/\/.*)(?<!\".*)(?<!'.*)(?<!`.*)\\b(release_quantum_state|H|X|Y|Z|S|Sdag|T|Tdag|RX|RY|RZ|CZ|CNOT|SWAP|Toffoli|PrepX|PrepY|PrepZ|MeasX|MeasY|MeasZ|CPhase|RXY|SwapA)(?=\\(.*\\))",
+            "name": "not.working"
+        }
+	}
+}

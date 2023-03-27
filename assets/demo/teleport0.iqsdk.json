@@ -1,0 +1,51 @@
+{
+    "title" : "Teleport |0⟩",
+    "numQbits" : 3,
+    "qbitNames": [
+        "example_0",
+        "",
+        ""
+    ],
+    "gates" : [
+        {
+            "name" : "H",
+            "qubits" : [1]
+        },
+        {
+            "name" : "X",
+            "qubits" : [1,2]
+        },
+        {
+            "name" : "X",
+            "qubits" : [0,1]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0]
+        },
+        {
+            "name" : "Z",
+            "qubits" : [0,2]
+        },
+        {
+            "name" : "X",
+            "qubits" : [1,2]
+        },
+        {
+            "name": "SPACE",
+            "qubits": [0]
+        },
+        {
+            "name" : "MeasZ",
+            "qubits" : [0]
+        },
+        {
+            "name" : "MeasZ",
+            "qubits" : [1]
+        },
+        {
+            "name" : "MeasZ",
+            "qubits" : [2]
+        }
+    ]
+}
