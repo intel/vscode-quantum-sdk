@@ -16,3 +16,4 @@ clean:
 	code --uninstall-extension intel-quantum-sdk-1.0.0.vsix
 	@echo "CTRL + SHIFT + P -> Reload Window" 
 
+
