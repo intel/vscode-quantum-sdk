@@ -7,7 +7,7 @@ import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
 
-// this method is called when your extension is activated
+// this method is called when the extension is activated
 export function activate(context: vscode.ExtensionContext) {
 
 	const setupCommand = 'intel-quantum.setup'
