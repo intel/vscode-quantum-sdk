@@ -3,9 +3,6 @@
 #   Licensed under the MIT License. See License.txt in the project root for license information.
 # ----------------------------------------------------------------------------------------------
 
-buildAndInstall: build install
-	@echo "built and installed"
-
 build: 
 	vsce package
 
