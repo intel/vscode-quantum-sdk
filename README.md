@@ -1,5 +1,5 @@
 <a href="https://www.intel.com/content/www/us/en/research/quantum-computing.html">
-    <img src="./assets/intel-logo-blue.png" alt="Intel logo" title="Intel" align="right" height="60" />
+    <img src="./assets/logos/intel.png" alt="Intel logo" title="Intel" align="right" height="60" />
 </a>
 
 # Intel Quantum SDK VSCode Extension
