@@ -1,10 +1,9 @@
 {
     "IntelQuantumID": "Circuit-v1",
     "title" : "Superdense coding: 11",
-    "numQbits" : 3,
+    "numQbits" : 2,
     "qbitNames": [
         "example_0",
-        "",
         ""
     ],
     "gates" : [
