@@ -40,7 +40,7 @@
     "menus": {
       "editor/title": [
         {
-          "when": "resourceFilename =~ /.iqsdk.json/",
+          "when": "customContext.quantumFile",
           "command": "intel-quantum.drawCircuit",
           "group": "navigation"
         }

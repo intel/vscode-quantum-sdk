@@ -5,7 +5,7 @@ After cloning the repo open it in VS Code.
 
 Simply press `F5` to pull up a debugging instance of VS Code with the extension installed in its current state. From there, a developer can debug as usual.
 
-Feel free to use `assets/setupExamples/exampleCircuit.iqsdk.json` when debugging
+Feel free to use `assets/setupExamples/exampleCircuit.json` when debugging
 
 ### Install
 Run `make install`

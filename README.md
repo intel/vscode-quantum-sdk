@@ -9,7 +9,7 @@ The purpose of this extension is to create a visual representation of code for t
 > Note: See `README-Dev.md` for development instructions
 
 ## Generate Circuit Board
-Navigate to a valid `.iqsdk.json` file that represents a quantum circuit board (Either test files or the output of the compiler). Then press the |0⟩ button on the right side of the tab bar. This will display a [Webview](https://code.visualstudio.com/api/extension-guides/webview) containing the circuit board. 
+Navigate to a valid `json` file that represents a quantum circuit board (Either test files or the output of the compiler). Then press the |0⟩ button on the right side of the tab bar. This will display a [Webview](https://code.visualstudio.com/api/extension-guides/webview) containing the circuit board. 
 
 ![usageExample.png](./assets/documentation/usageExample.png)
 

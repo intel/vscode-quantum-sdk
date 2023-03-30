@@ -10,6 +10,9 @@ import * as fs from 'fs'
 // this method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
 
+	updateCustomContext(vscode.window.activeTextEditor)
+	vscode.window.onDidChangeActiveTextEditor(editor => { updateCustomContext(editor) })
+
 	const setupCommand = 'intel-quantum.setup'
 	const setup = () => {
 		let assetPath: string = context.extensionUri.fsPath + '/assets/setupExamples'
@@ -18,11 +21,11 @@ export function activate(context: vscode.ExtensionContext) {
 		if (!fs.existsSync(dir)) {
 			fs.mkdirSync(dir + '/circuits', { recursive: true });
 
-			fs.copyFile(assetPath + '/exampleCircuit.iqsdk.json', dir + '/circuits/exampleCircuit.iqsdk.json', function (err) {
+			fs.copyFile(assetPath + '/exampleCircuit.json', dir + '/circuits/exampleCircuit.json', function (err) {
 				if (err) {
 					console.log(err);
 				} else {
-					console.log("exampleCircuit.iqsdk.json written successfully\n");
+					console.log("exampleCircuit.json written successfully\n");
 				}
 			})
 
@@ -53,7 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const document = editor.document
 			const fileContent: string = document.getText()
 
-			if (document.fileName.endsWith(".iqsdk.json")) {
+			if (document.languageId === 'json') {
 
 				try {
 					let data: QData = JSON.parse(fileContent) as QData
@@ -71,6 +74,22 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitCommand, drawCircuit))
+}
+
+function updateCustomContext(editor: vscode.TextEditor | undefined) {
+	console.log(1)
+	if (editor && editor.document.languageId === "json") {
+		let editorText = editor.document.getText()
+		console.log(editorText)
+		console.log(editorText.includes('IntelQuantumID'))
+		if (editorText.includes('IntelQuantumID')) {
+			vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
+			console.log(3)
+			return
+		}
+	}
+	
+	vscode.commands.executeCommand('setContext', 'customContext.quantumFile', false)
 }
 
 // this method is called when your extension is deactivated
