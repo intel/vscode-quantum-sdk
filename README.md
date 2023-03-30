@@ -15,6 +15,11 @@ Navigate to a valid `json` file that represents a quantum circuit board (Either 
 
 ## Understanding the json
 ``` json 
+"IntelQuantumID": "Circuit-v1",
+```
+Tells the extension that this json represents a quantum circuit board
+
+``` json 
 "title" : "Teleport |1⟩",
 ```
 Sets the title of the circuit board
