@@ -9,7 +9,7 @@ The purpose of this extension is to create a visual representation of code for t
 > Note: See `README-Dev.md` for development instructions
 
 ## Generate Circuit Board
-Navigate to a valid `.iqsdk.json` file that represents a quantum circuit board (Either test files or the output of the Quantum Compiler). Then press the |0⟩ button on the right side of the tab bar. This will display a [Webview](https://code.visualstudio.com/api/extension-guides/webview) containing the circuit board. 
+Navigate to a valid `.iqsdk.json` file that represents a quantum circuit board (Either test files or the output of the compiler). Then press the |0⟩ button on the right side of the tab bar. This will display a [Webview](https://code.visualstudio.com/api/extension-guides/webview) containing the circuit board. 
 
 ![usageExample.png](./assets/documentation/usageExample.png)
 
@@ -61,7 +61,7 @@ Defines the name of each qbit. The drawer will dynamically size the circuit to a
 Defines the gates that will be displayed on the circuit board. Gates require a name and a list of qbits to act upon. There is also an option to add attributes which will be displayed when the user hovers over that specific gate. Notice that some gates such as `MeasZ` have a custom gate icon.
 
 ## Syntax Highlighting
-This extension extends the list of keywords that are highlighted by VSCode to include grammar from the Quantum SDK.
+This extension extends the list of keywords that are highlighted by VSCode to include grammar from the [Intel<sub>®</sub> Quantum SDK](https://developer.intel.com/quantumsdk).
 
 ## 3rd Party Materials
 | Project | Repo | License |
