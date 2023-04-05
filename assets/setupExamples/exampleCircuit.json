@@ -1,4 +1,5 @@
 {
+    "IntelQuantumID": "Circuit-v1",
     "title" : "Superdense coding: 11",
     "numQbits" : 2,
     "qbitNames": [
@@ -7,16 +8,24 @@
     ],
     "gates" : [
         {
-            "name" : "H",
+            "name" : "PrepZ",
             "qubits" : [0]
+        },
+        {
+            "name" : "PrepZ",
+            "qubits" : [1]
+        },
+        {
+            "name" : "H",
+            "qubits" : [0],
+            "attributes" : [
+                "Gate: Hadamard",
+                "Test: 1"
+            ]
         },
         {
             "name" : "X",
             "qubits" : [0,1]
-        },
-        {
-            "name": "SPACE",
-            "qubits": [0]
         },
         {
             "name" : "X",
@@ -25,10 +34,6 @@
         {
             "name" : "Z",
             "qubits" : [0]
-        },
-        {
-            "name": "SPACE",
-            "qubits": [0]
         },
         {
             "name" : "X",
@@ -41,10 +46,6 @@
         {
             "name" : "MeasZ",
             "qubits" : [0]
-        },
-        {
-            "name": "SPACE",
-            "qubits": [1]
         },
         {
             "name" : "MeasZ",

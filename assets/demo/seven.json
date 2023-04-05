@@ -1,8 +1,13 @@
 {
-    "title" : "Sample Circuit 1",
-    "numQbits" : 3,
+    "IntelQuantumID": "Circuit-v1",
+    "title" : "Sample Circuit 2",
+    "numQbits" : 7,
     "qbitNames": [
         "example_0",
+        "",
+        "",
+        "",
+        "",
         "",
         ""
     ],
@@ -13,23 +18,35 @@
         },
         {
             "name" : "H",
-            "qubits" : [1]
+            "qubits" : [3]
         },
         {
             "name" : "H",
-            "qubits" : [2]
+            "qubits" : [4]
+        },
+        {
+            "name" : "X",
+            "qubits" : [3, 0]
         },
         {
             "name" : "X",
             "qubits" : [1, 0]
         },
         {
-            "name" : "X",
-            "qubits" : [2, 0]
+            "name" : "H",
+            "qubits" : [2]
         },
         {
             "name" : "H",
-            "qubits" : [1]
+            "qubits" : [3]
+        },
+        {
+            "name" : "X",
+            "qubits" : [6, 0]
+        },
+        {
+            "name" : "H",
+            "qubits" : [6]
         },
         {
             "name" : "H",

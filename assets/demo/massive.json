@@ -1,4 +1,5 @@
 {
+    "IntelQuantumID": "Circuit-v1",
     "title" : "massive",
     "numQbits" : 30,
     "qbitNames": [

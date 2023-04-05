@@ -5,16 +5,10 @@ After cloning the repo open it in VS Code.
 
 Simply press `F5` to pull up a debugging instance of VS Code with the extension installed in its current state. From there, a developer can debug as usual.
 
-Feel free to use `assets/setupExamples/exampleCircuit.iqsdk.json` when debugging
+Feel free to use `assets/setupExamples/exampleCircuit.json` when debugging
 
-### Install
-Run `make install`
-This command accesses the `.vsix` file to install the extension.
-
-### Remove
-Run `make clean`
-
-The script prompts the user to reload VS Code using the command `CTRL + SHIFT + P -> Reload Window`. When VS Code restarts the extension will be removed.
+### Makefile
+The Makefile includes targets for building, installing and removing the extension.
 
 # Development
 
@@ -31,7 +25,7 @@ This is the main entry point into the extension. In its current state it waits f
 This class handles the creation and updating of the webview. It creates a webview and calls upon functions in `draw.ts` to fill in the contents of the webview.
 
 ### draw.ts
-This file contains the brains of the extension. It's function `drawBoard(qData)` takes the plain text contents of a json file and uses that to create all the components that make up the circuit board svg on the webview. Each of the functions it calls is a seperate layer of the board. All of these layers are stacked on top of each other and returned as a string. This string then becomes the contents of the svg in the webview, completing the image.
+This file contains the brains of the extension. It's function `drawBoard(QData)` takes the contents of a json file in the form of a QData struct and uses that to create all the components that make up the circuit board svg on the webview. Each of the functions it calls is a seperate layer of the board. All of these layers are stacked on top of each other and returned as a string. This string then becomes the contents of the svg in the webview, completing the image.
 
 ### assets
 This folder contains all images, scripts and styling sheets relevant to this project. There are also a number of sample json files that can be used to generate circuit boards.

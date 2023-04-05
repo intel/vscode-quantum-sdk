@@ -104,19 +104,19 @@ export class CircuitPanel {
   }
 
   /**
-   * Checks that the iqsdk.json is valid
+   * Checks that the json is valid
    */
   public static validateQData(data: QData) {
 
     // Syntax
     if (data.title === undefined) {
-      throw new Error('iqsdk.json File Missing Title <br><br>Example <br>"title": "My Circuit",')
+      throw new Error('Json File Missing Title <br><br>Example <br>"title": "My Circuit",')
     } else if (data.numQbits === undefined) {
-      throw new Error('iqsdk.json File Missing Qbit Quantity <br><br>Example <br>"numQbits": 2,')
+      throw new Error('Json File Missing Qbit Quantity <br><br>Example <br>"numQbits": 2,')
     } else if (data.qbitNames === undefined) {
-      throw new Error('iqsdk.json File Missing Qbit Names <br><br>Example <br>"qbitNames": [<br>"example_0",<br>""<br>],')
+      throw new Error('Json File Missing Qbit Names <br><br>Example <br>"qbitNames": [<br>"example_0",<br>""<br>],')
     } else if (data.gates === undefined) {
-      throw new Error('iqsdk.json File Missing List of Gates <br><br>Example <br> "gates" : [<br>{<br>"name" : "X",<br>"qubits" : [0]<br>},<br>{<br>"name" : "H",<br>"qubits" : [1]<br>},')
+      throw new Error('Json File Missing List of Gates <br><br>Example <br> "gates" : [<br>{<br>"name" : "X",<br>"qubits" : [0]<br>},<br>{<br>"name" : "H",<br>"qubits" : [1]<br>},')
     }
 
     // Semantic
