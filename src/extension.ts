@@ -77,14 +77,10 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function updateCustomContext(editor: vscode.TextEditor | undefined) {
-	console.log(1)
 	if (editor && editor.document.languageId === "json") {
 		let editorText = editor.document.getText()
-		console.log(editorText)
-		console.log(editorText.includes('IntelQuantumID'))
 		if (editorText.includes('IntelQuantumID')) {
 			vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
-			console.log(3)
 			return
 		}
 	}
