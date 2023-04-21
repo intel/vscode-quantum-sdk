@@ -3,6 +3,19 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
  
+ :root {
+    --background: #f7f7f7;
+    --backbackground: #ffffff;
+    --text-color: #202020;
+ }
+
+ [data-vscode-theme-kind="vscode-dark"] {
+    --background: #262626;
+    --backbackground: #1E1E1E;
+    --text-color: #808080;
+ }
+
+
 body {
     font-family: 'Source Sans Pro', sans-serif;
     display: flex;
@@ -18,17 +31,17 @@ h1 {
 }
 
 text {
-    fill: #808080;
+    fill: var(--text-color);
     font: 5px Courier;
     text-anchor: end;
 }
 
 .background {
-    fill: #262626
+    fill: var(--background);
 }
 
 .backbackground {
-    fill: #1E1E1E;
+    fill: var(--backbackground);
 }
 
 .gate {

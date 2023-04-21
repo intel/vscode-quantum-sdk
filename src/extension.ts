@@ -51,23 +51,25 @@ export function activate(context: vscode.ExtensionContext) {
 	const drawCircuitCommand = "intel-quantum.drawCircuit"
 	const drawCircuit = () => {
 		const editor = vscode.window.activeTextEditor
+		let fileContent: string = ''
 
 		if (editor !== undefined) {
-			const document = editor.document
-			const fileContent: string = document.getText()
+			if (editor.document.languageId === 'json') {
+				fileContent = editor.document.getText()
+			} 
+			// else if (editor.document.languageId === 'cpp') {
 
-			if (document.languageId === 'json') {
+			// }
 
-				try {
-					let data: QData = JSON.parse(fileContent) as QData
-					CircuitPanel.validateQData(data)
-					CircuitPanel.displayWebview(context.extensionUri, data, true)
-					vscode.ViewColumn.One
-				} catch (e) {
-					let dataError: QData = { title: (e as Error).message } as QData
-					CircuitPanel.displayWebview(context.extensionUri, dataError, false)
-					vscode.ViewColumn.One
-				}
+			try {
+				let data: QData = JSON.parse(fileContent) as QData
+				CircuitPanel.validateQData(data)
+				CircuitPanel.displayWebview(context.extensionUri, data, true)
+				vscode.ViewColumn.One
+			} catch (e) {
+				let dataError: QData = { title: (e as Error).message } as QData
+				CircuitPanel.displayWebview(context.extensionUri, dataError, false)
+				vscode.ViewColumn.One
 			}
 		} else {
 			console.log("No Active Editor")
@@ -83,6 +85,12 @@ function updateCustomContext(editor: vscode.TextEditor | undefined) {
 			vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
 			return
 		}
+	// } else if (editor && editor.document.languageId === "cpp") {
+	// 	let editorText = editor.document.getText()
+	// 	if (editorText.includes('#include <quantum.hpp>')) { 
+	// 		vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
+	// 		return
+	// 	}
 	}
 	
 	vscode.commands.executeCommand('setContext', 'customContext.quantumFile', false)
@@ -90,5 +98,3 @@ function updateCustomContext(editor: vscode.TextEditor | undefined) {
 
 // this method is called when your extension is deactivated
 export function deactivate() { }
-
-
