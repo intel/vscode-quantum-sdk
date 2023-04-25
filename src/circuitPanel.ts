@@ -182,7 +182,11 @@ export class CircuitPanel {
     }
   }
 
-  public static exportCircuit(directory: string, ext: string) {
+  /**
+   * Writes an exported image of the circuit board to the given directory
+   * with the file type provided
+   */
+  public static exportCircuit(directory: string, ext: 'svg' | 'png') {
 
     let svg = CircuitPanel.instance?.svgCircuit
     let title = this.instance?.jsonData.title
