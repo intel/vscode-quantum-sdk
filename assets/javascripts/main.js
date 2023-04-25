@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+// Panzoom
 function initializePanzoom(backgroundWidth, backgroundHeight) {
     var circuitBoard = document.getElementById('circuitBoard')
 
@@ -22,7 +23,7 @@ function initializePanzoom(backgroundWidth, backgroundHeight) {
         zoomSpeed: 0.3
     })
 
-    var scene =  document.getElementById('scene')
+    var scene = document.getElementById('scene')
 
     //Find a starting position for the cicuit board
     var startX = 0
@@ -33,28 +34,27 @@ function initializePanzoom(backgroundWidth, backgroundHeight) {
     if (scene.clientHeight > (backgroundHeight * minZoomSize)) {
         startY = (scene.clientHeight - backgroundHeight) / 2
     }
-    
+
     pz.moveTo(startX, startY)
 
     let zoomX = 0
     let zoomY = 0
     if (startX != 0) {
-        zoomX = scene.clientWidth/2
+        zoomX = scene.clientWidth / 2
     }
     if (startY != 0) {
-        zoomY = scene.clientHeight/2
+        zoomY = scene.clientHeight / 2
     }
     if (minZoomSize > 1) {
         pz.zoomTo(zoomX, zoomY, 9)
     }
-    pz.smoothZoom(zoomX, zoomY, minZoomSize/10)
+    pz.smoothZoom(zoomX, zoomY, minZoomSize / 10)
 }
 
-//document.getElementById("title").innerHTML = "Test"
-
+// Attributes
 function showAttributes(evt, text) {
     if (text.length > 0) {
-        let attrBlock = document.getElementById("attributes");  
+        let attrBlock = document.getElementById("attributes");
         attrBlock.innerHTML = text;
         attrBlock.style.display = "block";
         attrBlock.style.left = evt.pageX + 'px';

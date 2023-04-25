@@ -4,7 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as vscode from "vscode"
-import { drawBoard, getBackgroundHeight, getBackgroundWidth, getCircuitWidth, getNumQbits, initData } from "./draw"
+import { drawBoard, getBackgroundHeight, getBackgroundWidth, initData } from "./draw"
+import * as fs from 'fs'
+import * as svg2png from 'svg2png'
 
 /**
  * Represents a vscode panel which can handle the creation, storage,
@@ -18,6 +20,7 @@ export class CircuitPanel {
   private readonly panel: vscode.WebviewPanel
   private readonly uri: vscode.Uri
   public jsonData: QData
+  private svgCircuit: string = ""
 
   private disposables: vscode.Disposable[] = []
 
@@ -46,7 +49,7 @@ export class CircuitPanel {
       CircuitPanel.instance.panel.reveal(vscode.ViewColumn.Two, true)
     } else {
       const panel = vscode.window.createWebviewPanel(
-        "circuitGenerator",
+        "iqsdk-circuit",
         "Quantum Circuit",
         {
           viewColumn: vscode.ViewColumn.Two,
@@ -81,6 +84,16 @@ export class CircuitPanel {
       vscode.Uri.joinPath(this.uri, "assets", "styles", "style.css")
     )
 
+    initData(this.jsonData, true)
+    this.svgCircuit = `
+        <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
+          <g>
+            ${drawBoard()}
+          </g>
+        </svg>  
+      `
+
+    initData(this.jsonData, false)
     this.panel.webview.html = `
             <!DOCTYPE html>
             <html lang="en">
@@ -89,7 +102,6 @@ export class CircuitPanel {
               <link href="${styleUri}" rel="stylesheet">
               <script src="${panzoomScriptUri}"></script>
               <script src="${mainScriptUri}"></script>
-              <p hidden>${initData(this.jsonData)}</p>
             </head>
             <body onload="initializePanzoom(${getBackgroundWidth()}, ${getBackgroundHeight()})">
               <div id="attributes" display="none"></div>
@@ -167,6 +179,45 @@ export class CircuitPanel {
       if (garbage) {
         garbage.dispose()
       }
+    }
+  }
+
+  /**
+   * Writes an exported image of the circuit board to the given directory
+   * with the file type provided
+   */
+  public static exportCircuit(directory: string, ext: 'svg' | 'png') {
+
+    let svg = CircuitPanel.instance?.svgCircuit
+    let title = this.instance?.jsonData.title
+    let filename = title?.replace(/\s+/g, "_")
+
+    if (svg === undefined) {
+      return ""
+    }
+
+    switch (ext) {
+      case 'svg':
+        fs.writeFile(`${directory}/${filename}.${ext}`, svg, (err) => {
+          if (err) {
+            console.log("Error exporting file")
+            throw err
+          }
+          console.log('The file has been saved!')
+        });
+        break
+      case 'png':
+        let pngBuffer = svg2png(Buffer.from(svg), { width: getBackgroundWidth() * 5, height: getBackgroundHeight() * 5 })
+        pngBuffer.then((png) => {
+          fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
+            if (err) {
+              console.log("Error exporting file")
+              throw err
+            }
+            console.log('The file has been saved!')
+          });
+        })
+        break
     }
   }
 }

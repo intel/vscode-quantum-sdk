@@ -6,7 +6,10 @@
 // This file is used to generate the inside of the
 // circuit board svg with the given json data
 
+import * as style from './style'
+
 var data: QData
+var exporting: boolean
 
 //Constants for spacing
 const yPos = 20
@@ -14,6 +17,7 @@ const xPos = 20
 var lineWidth: number
 const gateWidth = 10
 const gateHeight = 10
+const textFontSize = 5
 
 var positionCounter: number[]
 const linePadding = 5
@@ -27,8 +31,9 @@ var backgroundHeight: number
 
 var maxGatesInOneLine: number
 
-export function initData(content: QData): void {
+export function initData(content: QData, isExporting: boolean): void {
     data = content
+    exporting = isExporting
     init()
 }
 
@@ -109,8 +114,13 @@ function init(): void {
 }
 
 function background(): string {
-    return `<rect class="backbackground" width="100%" height="100%"/>` +
-        `<rect onclick="pos(evt)" id="background" class="background" width="${backgroundWidth}" height="${backgroundHeight}"/>`
+    let output = `<rect onclick="pos(evt)" id="background" class="background" width="${backgroundWidth}" height="${backgroundHeight}" ${exportStyle(style.background)}/>`
+
+    if (!exporting) {
+        output = `<rect class="backbackground" width="100%" height="100%"/>` + output
+    }
+
+    return output    
 }
 
 function drawNames(): string {
@@ -121,7 +131,7 @@ function drawNames(): string {
             data.qbitNames[i - 1] = "0"
         }
 
-        output += `<text x="${15 + padName}" y="${yPos * (i)}">|${data.qbitNames[i - 1]}⟩</text>`
+        output += `<text x="${15 + padName}" y="${yPos * (i)}" ${exportStyle(style.text)}>|${data.qbitNames[i - 1]}⟩</text>`
     }
 
     return output
@@ -132,7 +142,7 @@ function drawLines(): string {
 
     for (let i = 1; i <= data.numQbits; i++) {
         output += `
-        <line class="line" x1="${xPos + padName}" y1="${yPos * i}" x2="${xPos + lineWidth + padName}" y2="${yPos * i}"/>`
+        <line class="line" x1="${xPos + padName}" y1="${yPos * i}" x2="${xPos + lineWidth + padName}" y2="${yPos * i}" ${exportStyle(style.line)}/>`
     }
 
     return output
@@ -154,17 +164,25 @@ function drawGate(gate: QGate): string {
     let x = (xPos + linePadding) + gateSpacing * (gate.position! - 1) + padName
     let y = (gate.qubits[gate.qubits.length - 1] + 1) * yPos - gateHeight / 2
 
-    // TODO: Account for more font sizes
+    // TODO: Account for more font sizes and find a cleaner solution
     // Check name length to make sure it fits
-    let fontsize = ""
+    let fontSizeNum = textFontSize
     if (gate.name.length > 3) {
-        fontsize = `style="font-size:4"`
+        fontSizeNum -= 1
+    }
+
+    let fontSize = ""
+    let fontSizeExporting = ""
+    if (exporting) {
+        fontSizeExporting = `font-size: ${fontSizeNum};`
+    } else {
+        fontSize = `style="font-size: ${fontSizeNum}"`
     }
 
     // Add potential attributes
     let attributes = ""
     let attrFunctionCall = ""
-    if (gate.attributes !== null && gate.attributes !== undefined) {
+    if (!exporting && gate.attributes !== null && gate.attributes !== undefined) {
         for (var attr of gate.attributes) {
             attributes += attr + '<br>'
         }
@@ -179,27 +197,28 @@ function drawGate(gate: QGate): string {
     //Draw lines to connect multi-qbit gates
     if (gate.qubits.length > 1) {
         //draw line to connect furthest qbits
-        output += `<line class="line" x1="${x + gateWidth / 2}" y1="${(Math.min(...gate.qubits) + 1) * yPos}" x2="${x + gateWidth / 2}" y2="${(Math.max(...gate.qubits) + 1) * yPos}"/>`
+        output += `<line class="line" x1="${x + gateWidth / 2}" y1="${(Math.min(...gate.qubits) + 1) * yPos}" x2="${x + gateWidth / 2}" y2="${(Math.max(...gate.qubits) + 1) * yPos}" ${exportStyle(style.line)}/>`
 
         //draw dots on target qbits
         for (let i = 0; i < gate.qubits.length - 1; i++) {
-            output += `<circle class="line" cx="${x + gateWidth / 2}" cy="${(gate.qubits[i] + 1) * yPos}" r="3"/>`
+            output += `<circle class="line" cx="${x + gateWidth / 2}" cy="${(gate.qubits[i] + 1) * yPos}" r="3" ${exportStyle(style.line)}/>`
         }
     }
 
     //Find subscript
     let subscript: string = '?'
-    if (gate.name.length > 1) {
-        subscript = gate.name.slice(-1);
+    let gateName: string = gate.name
+    if (gateName.length > 1) {
+        subscript = gateName.slice(-1);
         if (subscript === 'X' || subscript === 'Y' || subscript === 'Z') {
-            gate.name = gate.name.slice(0, -1)
+            gateName = gateName.slice(0, -1)
         }
     }
 
     //draw gate
-    output += `<rect class="gate" x="${x}" y="${y}" rx="1" ry="1" width="${gateWidth}" height="${gateHeight}" id="${gate.name}" ${attrFunctionCall}/>`
+    output += `<rect class="gate" x="${x}" y="${y}" rx="1" ry="1" width="${gateWidth}" height="${gateHeight}" id="${gateName}" ${attrFunctionCall} ${exportStyle(style.gate, gateName)}/>`
 
-    switch (gate.name) {
+    switch (gateName) {
         case "Meas":
             // Meas icon
             output += `
@@ -208,7 +227,7 @@ function drawGate(gate: QGate): string {
             break
         default:
             // Print gate name
-            output += `<text class="gateText" x="${x + gateWidth / 2}" y="${y + gateHeight / 2}" ${fontsize} ${attrFunctionCall} >${gate.name}</text>`
+            output += `<text class="gateText" x="${x + gateWidth / 2}" y="${y + gateHeight / 2}" ${fontSize} ${attrFunctionCall} ${exportStyle(style.gateText + fontSizeExporting)}>${gateName}</text>`
     }
 
     switch (subscript) {
@@ -223,4 +242,16 @@ function drawGate(gate: QGate): string {
     }
 
     return output
+}
+
+function exportStyle(styleStr: string, gateName?: string): string {
+    if (!exporting) {
+        return ""
+    }
+
+    if (gateName) {
+        return `style="${styleStr} ${style.gateFill(gateName)}"`
+    }
+
+    return `style="${styleStr}"`
 }
