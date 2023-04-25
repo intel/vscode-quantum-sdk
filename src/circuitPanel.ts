@@ -182,7 +182,7 @@ export class CircuitPanel {
     }
   }
 
-  public static exportCircuit(directory:string, ext: string) {
+  public static exportCircuit(directory: string, ext: string) {
 
     let svg = CircuitPanel.instance?.svgCircuit
     let title = this.instance?.jsonData.title
@@ -195,29 +195,25 @@ export class CircuitPanel {
     switch (ext) {
       case 'svg':
         fs.writeFile(`${directory}/${filename}.${ext}`, svg, (err) => {
-          if (err) { 
+          if (err) {
             console.log("Error exporting file")
-            throw err 
+            throw err
           }
           console.log('The file has been saved!')
-          });
+        });
         break
       case 'png':
-          let pngBuffer = svg2png(Buffer.from(svg), { width: getBackgroundWidth() * 5, height: getBackgroundHeight() * 5 })
-          pngBuffer.then((png) => {
-            fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
-              if (err) { 
-                console.log("Error exporting file")
-                throw err 
-              }
-              console.log('The file has been saved!')
-              });
-          })
-        return ""
-      case 'jpg':
-      case 'pdf':
-      default:
-        return ""
+        let pngBuffer = svg2png(Buffer.from(svg), { width: getBackgroundWidth() * 5, height: getBackgroundHeight() * 5 })
+        pngBuffer.then((png) => {
+          fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
+            if (err) {
+              console.log("Error exporting file")
+              throw err
+            }
+            console.log('The file has been saved!')
+          });
+        })
+        break
     }
   }
 }
