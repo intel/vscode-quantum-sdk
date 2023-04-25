@@ -3,9 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-export const background = 'fill: #262626;'
+export const backgroundLight = 'fill: #f7f7f7;'
+export const backgroundDark = 'fill: #262626;'
 export const line = 'stroke: #808080; stroke-width: 0.7;'
-export const text = `fill: #808080; text-anchor: end; font-family: 'Source Sans Pro', sans-serif; font-size: 5;`
+export const textLight = `fill: #202020; text-anchor: end; font-family: 'Source Sans Pro', sans-serif; font-size: 5;`
+export const textDark = `fill: #808080; text-anchor: end; font-family: 'Source Sans Pro', sans-serif; font-size: 5;`
 export const gateText = `text-anchor: middle; dominant-baseline: middle; fill: black !important; font: Courier;`
 export const gate = 'border: none; padding: 0; outline-width: 0;'
 

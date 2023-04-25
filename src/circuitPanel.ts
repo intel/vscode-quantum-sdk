@@ -84,15 +84,6 @@ export class CircuitPanel {
       vscode.Uri.joinPath(this.uri, "assets", "styles", "style.css")
     )
 
-    initData(this.jsonData, true)
-    this.svgCircuit = `
-        <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
-          <g>
-            ${drawBoard()}
-          </g>
-        </svg>  
-      `
-
     initData(this.jsonData, false)
     this.panel.webview.html = `
             <!DOCTYPE html>
@@ -186,9 +177,20 @@ export class CircuitPanel {
    * Writes an exported image of the circuit board to the given directory
    * with the file type provided
    */
-  public static exportCircuit(directory: string, ext: 'svg' | 'png') {
+  public static exportCircuit(directory: string, ext: 'svg' | 'png', isLightTheme: boolean) {
 
-    let svg = CircuitPanel.instance?.svgCircuit
+    if (!CircuitPanel.instance) {
+      return
+    }
+
+    initData(CircuitPanel.instance.jsonData, true, isLightTheme)
+    let svg = `
+        <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
+          <g>
+            ${drawBoard()}
+          </g>
+        </svg>  
+      `
     let title = this.instance?.jsonData.title
     let filename = title?.replace(/\s+/g, "_")
 
