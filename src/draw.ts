@@ -10,6 +10,7 @@ import * as style from './style'
 
 var data: QData
 var exporting: boolean
+var lightTheme: boolean | undefined
 
 //Constants for spacing
 const yPos = 20
@@ -31,9 +32,10 @@ var backgroundHeight: number
 
 var maxGatesInOneLine: number
 
-export function initData(content: QData, isExporting: boolean): void {
+export function initData(content: QData, isExporting: boolean, isLightTheme?: boolean): void {
     data = content
     exporting = isExporting
+    lightTheme = isLightTheme
     init()
 }
 
@@ -114,7 +116,7 @@ function init(): void {
 }
 
 function background(): string {
-    let output = `<rect onclick="pos(evt)" id="background" class="background" width="${backgroundWidth}" height="${backgroundHeight}" ${exportStyle(style.background)}/>`
+    let output = `<rect onclick="pos(evt)" id="background" class="background" width="${backgroundWidth}" height="${backgroundHeight}" ${exportStyle(lightTheme ? style.backgroundLight : style.backgroundDark)}/>`
 
     if (!exporting) {
         output = `<rect class="backbackground" width="100%" height="100%"/>` + output
@@ -131,7 +133,7 @@ function drawNames(): string {
             data.qbitNames[i - 1] = "0"
         }
 
-        output += `<text x="${15 + padName}" y="${yPos * (i)}" ${exportStyle(style.text)}>|${data.qbitNames[i - 1]}⟩</text>`
+        output += `<text x="${15 + padName}" y="${yPos * (i)}" ${exportStyle(lightTheme ? style.textLight : style.textDark)}>|${data.qbitNames[i - 1]}⟩</text>`
     }
 
     return output
@@ -247,6 +249,10 @@ function drawGate(gate: QGate): string {
 function exportStyle(styleStr: string, gateName?: string): string {
     if (!exporting) {
         return ""
+    }
+
+    if (lightTheme) {
+
     }
 
     if (gateName) {

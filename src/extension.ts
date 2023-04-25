@@ -7,7 +7,6 @@ import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
 
-// this method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
 
 	let dir = vscode.workspace.workspaceFolders![0].uri.path
@@ -79,13 +78,21 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitCommand, drawCircuit))
 	
-	const exportSVGCommand = "intel-quantum.exportSVG"
-	const exportSVG = () => { CircuitPanel.exportCircuit(dir, "svg") }
-	context.subscriptions.push(vscode.commands.registerCommand(exportSVGCommand, exportSVG))
+	const exportSvgLightCommand = "intel-quantum.exportSvgLight"
+	const exportSvgLight = () => { CircuitPanel.exportCircuit(dir, "svg", true) }
+	context.subscriptions.push(vscode.commands.registerCommand(exportSvgLightCommand, exportSvgLight))
 
-	const exportPNGCommand = "intel-quantum.exportPNG"
-	const exportPNG = () => { CircuitPanel.exportCircuit(dir, "png") }
-	context.subscriptions.push(vscode.commands.registerCommand(exportPNGCommand, exportPNG))
+	const exportSvgDarkCommand = "intel-quantum.exportSvgDark"
+	const exportSvgDark = () => { CircuitPanel.exportCircuit(dir, "svg", false) }
+	context.subscriptions.push(vscode.commands.registerCommand(exportSvgDarkCommand, exportSvgDark))
+
+	const exportPngLightCommand = "intel-quantum.exportPngLight"
+	const exportPngLight = () => { CircuitPanel.exportCircuit(dir, "png", true) }
+	context.subscriptions.push(vscode.commands.registerCommand(exportPngLightCommand, exportPngLight))
+
+	const exportPngDarkCommand = "intel-quantum.exportPngDark"
+	const exportPngDark = () => { CircuitPanel.exportCircuit(dir, "png", false) }
+	context.subscriptions.push(vscode.commands.registerCommand(exportPngDarkCommand, exportPngDark))
 }
 
 function updateCustomContext(editor: vscode.TextEditor | undefined) {
@@ -106,5 +113,4 @@ function updateCustomContext(editor: vscode.TextEditor | undefined) {
 	vscode.commands.executeCommand('setContext', 'customContext.quantumFile', false)
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() { }
