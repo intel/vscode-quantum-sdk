@@ -10,18 +10,20 @@ import * as fs from 'fs'
 // this method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
 
+	let dir = vscode.workspace.workspaceFolders![0].uri.path
+
 	updateCustomContext(vscode.window.activeTextEditor)
 	vscode.window.onDidChangeActiveTextEditor(editor => { updateCustomContext(editor) })
 
 	const setupCommand = 'intel-quantum.setup'
 	const setup = () => {
 		let assetPath: string = context.extensionUri.fsPath + '/assets/setupExamples'
-		let dir: string = vscode.workspace.workspaceFolders![0].uri.fsPath + '/visualization'
+		let visDir: string = vscode.workspace.workspaceFolders![0].uri.fsPath +'/visualization'
 
-		if (!fs.existsSync(dir)) {
-			fs.mkdirSync(dir + '/circuits', { recursive: true });
+		if (!fs.existsSync(visDir)) {
+			fs.mkdirSync(visDir + '/circuits', { recursive: true });
 
-			fs.copyFile(assetPath + '/exampleCircuit.json', dir + '/circuits/exampleCircuit.json', function (err) {
+			fs.copyFile(assetPath + '/exampleCircuit.json', visDir + '/circuits/exampleCircuit.json', function (err) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -29,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			})
 
-			fs.copyFile(assetPath + '/histogram.json', dir + '/histogram.json', function (err) {
+			fs.copyFile(assetPath + '/histogram.json', visDir + '/histogram.json', function (err) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -37,7 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			})
 
-			fs.copyFile(assetPath + '/README.md', dir + '/README.md', function (err) {
+			fs.copyFile(assetPath + '/README.md', visDir + '/README.md', function (err) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -56,7 +58,7 @@ export function activate(context: vscode.ExtensionContext) {
 		if (editor !== undefined) {
 			if (editor.document.languageId === 'json') {
 				fileContent = editor.document.getText()
-			} 
+			}
 			// else if (editor.document.languageId === 'cpp') {
 
 			// }
@@ -76,6 +78,14 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitCommand, drawCircuit))
+	
+	const exportSVGCommand = "intel-quantum.exportSVG"
+	const exportSVG = () => { CircuitPanel.exportCircuit(dir, "svg") }
+	context.subscriptions.push(vscode.commands.registerCommand(exportSVGCommand, exportSVG))
+
+	const exportPNGCommand = "intel-quantum.exportPNG"
+	const exportPNG = () => { CircuitPanel.exportCircuit(dir, "png") }
+	context.subscriptions.push(vscode.commands.registerCommand(exportPNGCommand, exportPNG))
 }
 
 function updateCustomContext(editor: vscode.TextEditor | undefined) {
@@ -85,14 +95,14 @@ function updateCustomContext(editor: vscode.TextEditor | undefined) {
 			vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
 			return
 		}
-	// } else if (editor && editor.document.languageId === "cpp") {
-	// 	let editorText = editor.document.getText()
-	// 	if (editorText.includes('#include <quantum.hpp>')) { 
-	// 		vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
-	// 		return
-	// 	}
+		// } else if (editor && editor.document.languageId === "cpp") {
+		// 	let editorText = editor.document.getText()
+		// 	if (editorText.includes('#include <quantum.hpp>')) { 
+		// 		vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
+		// 		return
+		// 	}
 	}
-	
+
 	vscode.commands.executeCommand('setContext', 'customContext.quantumFile', false)
 }
 
