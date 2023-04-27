@@ -251,10 +251,6 @@ function exportStyle(styleStr: string, gateName?: string): string {
         return ""
     }
 
-    if (lightTheme) {
-
-    }
-
     if (gateName) {
         return `style="${styleStr} ${style.gateFill(gateName)}"`
     }
