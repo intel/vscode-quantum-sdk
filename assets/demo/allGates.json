@@ -35,13 +35,13 @@
         {
             "name": "Y",
             "qubits": [
-                0
+                1
             ]
         },
         {
             "name": "Z",
             "qubits": [
-                0
+                2
             ]
         },
         {
@@ -51,27 +51,33 @@
             ]
         },
         {
-            "name": "T",
+            "name": "SPACE",
             "qubits": [
                 0
+            ]
+        },
+        {
+            "name": "T",
+            "qubits": [
+                1
             ]
         },
         {
             "name": "S",
             "qubits": [
-                0
+                2
             ]
         },
         {
             "name": "Tdag",
             "qubits": [
-                0
+                1
             ]
         },
         {
             "name": "Sdag",
             "qubits": [
-                0
+                2
             ]
         },
         {
@@ -83,13 +89,13 @@
         {
             "name": "RY",
             "qubits": [
-                0
+                1
             ]
         },
         {
             "name": "RZ",
             "qubits": [
-                0
+                2
             ]
         },
         {
@@ -115,23 +121,23 @@
             ]
         },
         {
-            "name": "SWAP",
+            "name": "CPhase",
             "qubits": [
-                2,
+                1,
                 0
             ]
         },
         {
-            "name": "SwapA",
+            "name": "SWAP",
             "qubits": [
                 2,
                 1
             ]
         },
         {
-            "name": "CPhase",
+            "name": "SwapA",
             "qubits": [
-                1,
+                2,
                 0
             ]
         },
