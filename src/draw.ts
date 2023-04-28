@@ -81,15 +81,26 @@ function init(): void {
     let curMax = 0
     for (let i = 0; i < data.gates.length; i++) {
 
-        //Find the leftmost open spot for this gate
-        curMax = 0
-        for (let j = 0; j < data.gates[i].qubits.length; j++) {
-            curMax = Math.max(curMax, positionCounter[data.gates[i].qubits[j]])
+        //Find range of qbits that a multi-qbit gate crosses over
+        let minQbit = Math.min(...data.gates[i].qubits)
+        let maxQbit = Math.max(...data.gates[i].qubits)
+
+        if (data.gates[i].qubits.length > 1) {
+
+
+
+            //Find the leftmost open spot for this gate
+            curMax = 0
+            for (let j = minQbit; j <= maxQbit; j++) {
+                curMax = Math.max(curMax, positionCounter[j])
+            }
+        } else {
+            curMax = positionCounter[data.gates[i].qubits[0]]
         }
 
         //Set the position for the gate and mark that this space is taken
         data.gates[i].position = curMax + 1
-        for (let j = Math.min(...data.gates[i].qubits); j <= Math.max(...data.gates[i].qubits); j++) {
+        for (let j = minQbit; j <= maxQbit; j++) {
             positionCounter[j] = data.gates[i].position!
         }
     }
@@ -122,7 +133,7 @@ function background(): string {
         output = `<rect class="backbackground" width="100%" height="100%"/>` + output
     }
 
-    return output    
+    return output
 }
 
 function drawNames(): string {
@@ -166,17 +177,24 @@ function drawGate(gate: QGate): string {
     let x = (xPos + linePadding) + gateSpacing * (gate.position! - 1) + padName
     let y = (gate.qubits[gate.qubits.length - 1] + 1) * yPos - gateHeight / 2
 
+    //Parse gate
+    let [gateName, gateSubscript, gateStyle] = parseGate(gate.name)
+
     // TODO: Account for more font sizes and find a cleaner solution
     // Check name length to make sure it fits
     let fontSizeNum = textFontSize
-    if (gate.name.length > 3) {
-        fontSizeNum -= 1
+    let extraSpaceForSubscript = 0
+    if (gateName.length > 3) {
+        fontSizeNum -= 1.5
+        if (gateSubscript !== '') {
+            extraSpaceForSubscript = 1
+        }
     }
 
     let fontSize = ""
     let fontSizeExporting = ""
     if (exporting) {
-        fontSizeExporting = `font-size: ${fontSizeNum};`
+        fontSizeExporting = ` font-size: ${fontSizeNum};`
     } else {
         fontSize = `style="font-size: ${fontSizeNum}"`
     }
@@ -207,18 +225,8 @@ function drawGate(gate: QGate): string {
         }
     }
 
-    //Find subscript
-    let subscript: string = '?'
-    let gateName: string = gate.name
-    if (gateName.length > 1) {
-        subscript = gateName.slice(-1);
-        if (subscript === 'X' || subscript === 'Y' || subscript === 'Z') {
-            gateName = gateName.slice(0, -1)
-        }
-    }
-
     //draw gate
-    output += `<rect class="gate" x="${x}" y="${y}" rx="1" ry="1" width="${gateWidth}" height="${gateHeight}" id="${gateName}" ${attrFunctionCall} ${exportStyle(style.gate, gateName)}/>`
+    output += `<rect class="gate" x="${x}" y="${y}" rx="1" ry="1" width="${gateWidth}" height="${gateHeight}" id="${gateStyle}" ${attrFunctionCall} ${exportStyle(style.gate, gateStyle)}/>`
 
     switch (gateName) {
         case "Meas":
@@ -229,10 +237,10 @@ function drawGate(gate: QGate): string {
             break
         default:
             // Print gate name
-            output += `<text class="gateText" x="${x + gateWidth / 2}" y="${y + gateHeight / 2}" ${fontSize} ${attrFunctionCall} ${exportStyle(style.gateText + fontSizeExporting)}>${gateName}</text>`
+            output += `<text class="gateText" x="${x + gateWidth / 2}" y="${y - extraSpaceForSubscript + gateHeight / 2}" ${fontSize} ${attrFunctionCall} ${exportStyle(style.gateText + fontSizeExporting)}>${gateName}</text>`
     }
 
-    switch (subscript) {
+    switch (gateSubscript) {
         case 'X':
             output += `<path transform="translate(${x}, ${y + 2})" d="M9.196 5.332L8.472 5.988L9.188 6.66L9.428 6.78V7H8.524V6.78L8.756 6.66L8.22 6.16L7.708 6.66L7.94 6.78V7H7.1V6.78L7.34 6.66L8.056 6.004L7.332 5.332L7.1 5.22V4.992H8V5.22L7.768 5.332L8.304 5.836L8.828 5.332L8.596 5.22V4.992H9.428V5.22L9.196 5.332Z" fill="black"/>`
             break
@@ -241,23 +249,77 @@ function drawGate(gate: QGate): string {
             break
         case 'Z':
             output += `<path transform="translate(${x}, ${y + 2})" d="M9.132 6.38V7H7.2V6.692L8.684 5.272H7.504L7.42 5.612H7.212V4.992H9.104V5.3L7.62 6.72H8.848L8.924 6.38H9.132Z" fill="black"/>`
-    }
+            break
+        case 'I':
+            output += `<line transform="translate(${x}, ${y})" x1="7.5" y1="1" x2="7.5" y2="4" stroke="black" stroke-width="0.2"/>
+                       <line transform="translate(${x}, ${y})"x1="6.5" y1="2" x2="8.5" y2="2" stroke="black" stroke-width="0.2"/>`
+            break
+        case 'A':
+            output += `<path transform="translate(${x}, ${y})" d="M9.3 8.78V9H8.824L8.72 8.712C8.61067 8.824 8.492 8.90667 8.364 8.96C8.23867 9.01333 8.09733 9.04 7.94 9.04C7.684 9.04 7.49467 8.99067 7.372 8.892C7.24933 8.79333 7.188 8.63333 7.188 8.412C7.188 8.17733 7.26133 8.008 7.408 7.904C7.55467 7.79733 7.79067 7.744 8.116 7.744C8.244 7.744 8.356 7.756 8.452 7.78C8.55067 7.80133 8.63067 7.828 8.692 7.86V7.704C8.692 7.58133 8.676 7.48667 8.644 7.42C8.61467 7.35067 8.56 7.30133 8.48 7.272C8.40267 7.24 8.28933 7.224 8.14 7.224C7.87067 7.224 7.59067 7.256 7.3 7.32V7.032C7.596 6.968 7.87867 6.936 8.148 6.936C8.39867 6.936 8.58667 6.96133 8.712 7.012C8.84 7.06267 8.924 7.136 8.964 7.232C9.00667 7.328 9.028 7.46133 9.028 7.632V8.66L9.3 8.78ZM7.54 8.388C7.54 8.51867 7.572 8.612 7.636 8.668C7.70267 8.724 7.82267 8.752 7.996 8.752C8.124 8.752 8.24667 8.72933 8.364 8.684C8.484 8.636 8.59333 8.57067 8.692 8.488V8.088C8.54267 8.04533 8.36267 8.024 8.152 8.024C7.92 8.024 7.76 8.05333 7.672 8.112C7.584 8.17067 7.54 8.26267 7.54 8.388Z" fill="black"/>`
+            break
+        }   
 
     return output
 }
 
-function exportStyle(styleStr: string, gateName?: string): string {
+function exportStyle(styleStr: string, gateStyle?: string): string {
     if (!exporting) {
         return ""
     }
 
-    if (lightTheme) {
-
-    }
-
-    if (gateName) {
-        return `style="${styleStr} ${style.gateFill(gateName)}"`
+    if (gateStyle) {
+        return `style="${styleStr} ${gateStyle}"`
     }
 
     return `style="${styleStr}"`
+}
+
+// Takes a gate name and returns the visible gate name, subscript, and style
+function parseGate(name: string): [string, string, string] {
+    //Get visible gate name and subscript
+    switch (name) {
+        case 'H':
+            return ['H', '', exporting ? style.gateGroup1 : 'gateGroup1']
+        case 'X':
+        case 'CNOT':
+        case 'Toffoli':
+            return ['X', '', exporting ? style.gateGroup2 : 'gateGroup2']
+        case 'Z':
+        case 'CZ':
+            return ['Z', '', exporting ? style.gateGroup3 : 'gateGroup3']
+        case 'Y':
+            return ['Y', '', exporting ? style.gateGroup3 : 'gateGroup3']
+        case 'S':
+            return ['S', '', exporting ? style.gateGroup3 : 'gateGroup3']
+        case 'Sdag':
+            return ['S', 'I', exporting ? style.gateGroup3 : 'gateGroup3']
+        case 'CPhase':
+            return ['P', '', exporting ? style.gateGroup3 : 'gateGroup3']
+        case 'RX':
+        case 'RY':
+        case 'RZ':
+        case 'RXY':
+        case 'T':
+            return [name, '', exporting ? style.gateGroup4 : 'gateGroup4']
+        case 'Tdag':
+            return ['T', 'I', exporting ? style.gateGroup4 : 'gateGroup4']
+        case 'SWAP':
+            return ['Swap', '', exporting ? style.gateGroup5 : 'gateGroup5']
+        case 'SwapA':
+            return ['Swap', 'A', exporting ? style.gateGroup5 : 'gateGroup5']
+        case 'MeasX':
+            return ['Meas', 'X', exporting ? style.gateGroup6 : 'gateGroup6']
+        case 'MeasY':
+            return ['Meas', 'Y', exporting ? style.gateGroup6 : 'gateGroup6']
+        case 'MeasZ':
+            return ['Meas', 'Z', exporting ? style.gateGroup6 : 'gateGroup6']
+        case 'PrepX':
+            return ['Prep', 'X', exporting ? style.gateGroup6 : 'gateGroup6']
+        case 'PrepY':
+            return ['Prep', 'Y', exporting ? style.gateGroup6 : 'gateGroup6']
+        case 'PrepZ':
+            return ['Prep', 'Z', exporting ? style.gateGroup6 : 'gateGroup6']
+        default:
+            return [name, '', exporting ? style.gateGroup7 : 'gateGroup7']
+    }
 }

@@ -12,19 +12,10 @@ export const gateText = `text-anchor: middle; dominant-baseline: middle; fill: b
 export const gate = 'border: none; padding: 0; outline-width: 0;'
 
 /* Gate Colors */
-export function gateFill(name: string): string {
-    switch (name) {
-        case 'H':
-            return 'fill: #00C7FD;'
-        case 'X':
-            return 'fill: #FF8F51;'
-        case 'Z':
-            return 'fill: #CC94DA'
-        case 'Meas':
-            return 'fill: #B1D272;'
-        case 'Prep':
-            return 'fill: rgb(247, 132, 132);'
-        default:
-            return 'fill: #00C7FD;'
-    }
-}
+export const gateGroup1 = 'fill: #00C7FD;'
+export const gateGroup2 = 'fill: #FF8F51;'
+export const gateGroup3 = 'fill: #CC94DA;'
+export const gateGroup4 = 'fill: #FF5662;'
+export const gateGroup5 = 'fill: #FFE17A;'
+export const gateGroup6 = 'fill: #B1D272;'
+export const gateGroup7 = 'fill: #E9E9E9;'
