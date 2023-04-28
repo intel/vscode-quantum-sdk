@@ -1,0 +1,157 @@
+{
+    "IntelQuantumID": "Circuit-v1",
+    "title": "allGates",
+    "numQbits": 3,
+    "qbitNames": [
+        "Q_0",
+        "Q_1",
+        "Q_2"
+    ],
+    "gates": [
+        {
+            "name": "PrepX",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "PrepY",
+            "qubits": [
+                1
+            ]
+        },
+        {
+            "name": "PrepZ",
+            "qubits": [
+                2
+            ]
+        },
+        {
+            "name": "X",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "Y",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "Z",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "H",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "T",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "S",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "Tdag",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "Sdag",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "RX",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "RY",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "RZ",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "CNOT",
+            "qubits": [
+                0,
+                1
+            ]
+        },
+        {
+            "name": "Toffoli",
+            "qubits": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "name": "CZ",
+            "qubits": [
+                1,
+                2
+            ]
+        },
+        {
+            "name": "SWAP",
+            "qubits": [
+                2,
+                0
+            ]
+        },
+        {
+            "name": "SwapA",
+            "qubits": [
+                2,
+                1
+            ]
+        },
+        {
+            "name": "CPhase",
+            "qubits": [
+                1,
+                0
+            ]
+        },
+        {
+            "name": "MeasZ",
+            "qubits": [
+                2
+            ]
+        },
+        {
+            "name": "MeasX",
+            "qubits": [
+                0
+            ]
+        },
+        {
+            "name": "MeasY",
+            "qubits": [
+                1
+            ]
+        }
+    ]
+}
