@@ -8,7 +8,7 @@
 
 import * as style from './style'
 
-var data: QData
+var data: QCircuitData
 var exporting: boolean
 var lightTheme: boolean | undefined
 
@@ -32,7 +32,7 @@ var backgroundHeight: number
 
 var maxGatesInOneLine: number
 
-export function initData(content: QData, isExporting: boolean, isLightTheme?: boolean): void {
+export function initData(content: QCircuitData, isExporting: boolean, isLightTheme?: boolean): void {
     data = content
     exporting = isExporting
     lightTheme = isLightTheme
