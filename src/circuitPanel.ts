@@ -6,7 +6,8 @@
 import * as vscode from "vscode"
 import { drawBoard, getBackgroundHeight, getBackgroundWidth, initData } from "./draw"
 import * as fs from 'fs'
-import * as svg2png from 'svg2png'
+
+const svgToPng = require("convert-svg-to-png")
 
 /**
  * Represents a vscode panel which can handle the creation, storage,
@@ -20,7 +21,6 @@ export class CircuitPanel {
   private readonly panel: vscode.WebviewPanel
   private readonly uri: vscode.Uri
   public jsonData: QData
-  private svgCircuit: string = ""
 
   private disposables: vscode.Disposable[] = []
 
@@ -149,11 +149,11 @@ export class CircuitPanel {
    */
   public setPanelError() {
     this.panel.webview.html = `
-              <!DOCTYPE html>
+            <!DOCTYPE html>
               <body>
                 <h1 id="title">${this.jsonData.title}</h1>
               </body>
-              </html>`
+            </html>`
   }
 
   /**
@@ -177,18 +177,22 @@ export class CircuitPanel {
    * Writes an exported image of the circuit board to the given directory
    * with the file type provided
    */
-  public static exportCircuit(directory: string, ext: 'svg' | 'png', isLightTheme: boolean) {
+  public static async exportCircuit(directory: string, ext: 'svg' | 'png', isLightTheme: boolean) {
 
     if (!CircuitPanel.instance) {
       return
     }
 
+    const styleUri = CircuitPanel.instance.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(CircuitPanel.instance.uri, "assets", "styles", "style.css")
+    )
+    let styleContent = fs.readFileSync(styleUri.fsPath, "utf-8")
+
     initData(CircuitPanel.instance.jsonData, true, isLightTheme)
     let svg = `
         <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
-          <g>
-            ${drawBoard()}
-          </g>
+          <style>${styleContent}</style>
+          <g>${drawBoard()}</g>
         </svg>  
       `
     let title = this.instance?.jsonData.title
@@ -209,16 +213,20 @@ export class CircuitPanel {
         });
         break
       case 'png':
-        let pngBuffer = svg2png(Buffer.from(svg), { width: getBackgroundWidth() * 5, height: getBackgroundHeight() * 5 })
-        pngBuffer.then((png) => {
-          fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
-            if (err) {
-              console.log("Error exporting file")
-              throw err
-            }
-            console.log('The file has been saved!')
-          });
+        const png = await svgToPng.convert(svg, {
+          width: getBackgroundWidth(),
+          height: getBackgroundHeight(),
+          scale: 5
         })
+
+        fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
+          if (err) {
+            console.log("Error exporting file")
+            throw err
+          }
+          console.log('The file has been saved!')
+        });
+
         break
     }
   }
