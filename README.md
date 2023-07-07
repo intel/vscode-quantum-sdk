@@ -28,7 +28,7 @@ title: Sets the title of the circuit board
 ```
 
 gateColorMethod: Chooses one of a few styles that describes how the gates should be colored
-> Note: Gate Color methods include `default`, `clifford`, `axis`, and `simple`
+> Note: Gate color methods include `default`, `clifford`, `axis`, and `simple`
 ``` json
 "gateColorMethod": "simple",
 ```
