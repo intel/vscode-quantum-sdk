@@ -6,6 +6,7 @@
 import * as vscode from "vscode"
 import { drawBoard, getBackgroundHeight, getBackgroundWidth, initData } from "./draw"
 import * as fs from 'fs'
+import { QData } from "./types"
 
 const svgToPng = require("convert-svg-to-png")
 

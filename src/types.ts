@@ -3,16 +3,30 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-interface QGate {
+export interface QGate {
     name: string,
     qubits: number[],
     attributes?: string[],
     position?: number
 }
 
-interface QData {
+export interface QData {
     title: string,
+    gateColorMethod: string
     numQbits: number,
     qbitNames: string[],
     gates: QGate[]
+}
+
+export interface GateData {
+    name: string,
+    subscript: string,
+    colors: string[]
+}
+
+export enum ColorMethod {
+    default,
+    clifford,
+    axis,
+    simple
 }
