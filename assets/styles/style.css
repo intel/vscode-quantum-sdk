@@ -2,19 +2,18 @@
  *  Copyright (c) Intel Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
- 
- :root {
+
+:root {
     --background: #f7f7f7;
     --backbackground: #ffffff;
     --text-color: #202020;
- }
+}
 
- [data-vscode-theme-kind="vscode-dark"] {
+[data-vscode-theme-kind="vscode-dark"] {
     --background: #262626;
     --backbackground: #1E1E1E;
     --text-color: #808080;
- }
-
+}
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
@@ -45,7 +44,8 @@ text {
 }
 
 .gate {
-    fill: #00C7FD; /* TODO: Choose a gate color for custom gates */
+    fill: #00C7FD;
+    /* TODO: Choose a gate color for custom gates */
     border: none;
     padding: 0;
     outline-width: 0;
@@ -73,7 +73,7 @@ text {
 #attributes {
     background: rgb(48, 48, 48);
     border: 1px solid rgb(97, 97, 97);
-    color:rgb(225, 225, 225);
+    color: rgb(225, 225, 225);
     border-radius: 5px;
     border-width: 2px;
     padding: 5px;
@@ -82,11 +82,24 @@ text {
 }
 
 /* Gate Colors */
-#gateGroup1 { fill: #00C7FD; }
-#gateGroup2 { fill: #FF8F51; }
-#gateGroup3 { fill: #CC94DA; }
-#gateGroup4 { fill: #FF5662; }
-#gateGroup5 { fill: #FFE17A; }
-#gateGroup6 { fill: #B1D272; }
-#gateGroup7 { fill: #E9E9E9; }
-
+#blue {
+    fill: #00C7FD;
+}
+#orange {
+    fill: #FF8F51;
+}
+#purple {
+    fill: #CC94DA;
+}
+#red {
+    fill: #FF5662;
+}
+#yellow {
+    fill: #FFE17A;
+}
+#green {
+    fill: #B1D272;
+}
+#gray {
+    fill: #E9E9E9;
+}

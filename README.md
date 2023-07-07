@@ -27,6 +27,12 @@ title: Sets the title of the circuit board
 "title" : "Teleport |1⟩",
 ```
 
+gateColorMethod: Chooses one of a few styles that describes how the gates should be colored
+> Note: Gate Color methods include `default`, `clifford`, `axis`, and `simple`
+``` json
+"gateColorMethod": "simple",
+```
+
 numQbits: Defines the size of the y-axis and the number of qbits to display
 ``` json 
 "numQbits" : 3,

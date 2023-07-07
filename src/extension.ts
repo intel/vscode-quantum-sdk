@@ -6,6 +6,7 @@
 import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
+import { QData } from './types'
 
 export function activate(context: vscode.ExtensionContext) {
 
