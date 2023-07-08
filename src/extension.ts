@@ -67,11 +67,9 @@ export function activate(context: vscode.ExtensionContext) {
 				let data: QData = JSON.parse(fileContent) as QData
 				CircuitPanel.validateQData(data)
 				CircuitPanel.displayWebview(context.extensionUri, data, true)
-				vscode.ViewColumn.One
 			} catch (e) {
 				let dataError: QData = { title: (e as Error).message } as QData
 				CircuitPanel.displayWebview(context.extensionUri, dataError, false)
-				vscode.ViewColumn.One
 			}
 		} else {
 			console.log("No Active Editor")
