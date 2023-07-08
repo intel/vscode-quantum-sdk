@@ -14,7 +14,9 @@ Navigate to a valid `json` file that represents a quantum circuit board (Either 
 ![usageExample.png](./assets/documentation/usageExample.png)
 
 ## Export Circuit Board
-Click on the tab with the generated circuit board to make it the active window. On the right side of the tab bar there will be an export button. This gives the user the option to export to an svg or png in either dark or light mode. The file will then appear as `title.(chosen extension)` in the directory opened in VS Code.
+Click on the tab with the generated circuit board to make it the active window. On the right side of the tab bar there will be an export button. This gives the user the option to export to an svg or png. The file will then appear as `title.(chosen extension)` in the directory opened in VS Code.
+
+> Note: Exported images will be light or dark based on your VS Code theme. To change your theme in VS Code press `Ctrl` + `Shift` + `P` and enter `Color Theme`.
 
 ## Understanding the json
 IntelQuantumID: Tells the extension that this json represents a quantum circuit board

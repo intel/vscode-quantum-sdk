@@ -9,7 +9,6 @@ import { QGate, QData, GateData, ColorMethod } from './types'
 
 var data: QData
 var exporting: boolean
-var lightTheme: boolean | undefined
 
 const gateMap = new Map<string, GateData>()
 
@@ -33,10 +32,9 @@ var backgroundHeight: number
 
 var maxGatesInOneLine: number
 
-export function initData(content: QData, isExporting: boolean, isLightTheme?: boolean): void {
+export function initData(content: QData, isExporting: boolean): void {
     data = content
     exporting = isExporting
-    lightTheme = isLightTheme
     setGateMap()
     if (data.gateColorMethod === undefined) { data.gateColorMethod = 'default' }
     init()
