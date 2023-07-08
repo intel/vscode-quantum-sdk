@@ -208,7 +208,6 @@ function drawGate(gate: QGate): string {
     //Parse gate
     let [gateName, gateSubscript, gateColor] = parseGate(gate.name)
 
-    // TODO: Account for more font sizes and find a cleaner solution
     // Check name length to make sure it fits
     let fontSizeNum = textFontSize
     let extraSpaceForSubscript = 0
