@@ -6,7 +6,7 @@
 import * as vscode from "vscode"
 import { drawBoard, getBackgroundHeight, getBackgroundWidth, initData } from "./draw"
 import * as fs from 'fs'
-import { QData } from "./types"
+import { QCircuitData, QHistogramData } from "./types"
 
 const svgToPng = require("convert-svg-to-png")
 
@@ -21,14 +21,16 @@ export class CircuitPanel {
 
   private readonly panel: vscode.WebviewPanel
   private readonly uri: vscode.Uri
-  public jsonData: QData
+  public jsonCircuitData: QCircuitData
+  public jsonHistogramData: QHistogramData
 
   private disposables: vscode.Disposable[] = []
 
   private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri, content: any) {
     this.panel = panel
     this.uri = extensionUri
-    this.jsonData = content
+    this.jsonCircuitData = content
+    this.jsonHistogramData = content
 
     this.panel.iconPath = {
       light: vscode.Uri.joinPath(this.uri, "assets", "logos", "iqsdk-light.png"),
@@ -42,11 +44,11 @@ export class CircuitPanel {
    * Reveals panel if there is an instance stored, otherwise creates one
    * and stores it. Then calls setPanelData() to update panel content. 
    */
-  public static displayWebview(extensionUri: vscode.Uri, data: QData, valid: boolean) {
+  public static displayCircuitWebview(extensionUri: vscode.Uri, data: QCircuitData, valid: boolean) {
 
     if (CircuitPanel.instance) {
-      CircuitPanel.instance.jsonData = data
-      valid ? CircuitPanel.instance.setPanelData() : CircuitPanel.instance.setPanelError()
+      CircuitPanel.instance.jsonCircuitData = data
+      valid ? CircuitPanel.instance.setCircuitPanelData() : CircuitPanel.instance.setPanelError()
       CircuitPanel.instance.panel.reveal(vscode.ViewColumn.Two, true)
     } else {
       const panel = vscode.window.createWebviewPanel(
@@ -63,15 +65,15 @@ export class CircuitPanel {
       )
 
       CircuitPanel.instance = new CircuitPanel(panel, extensionUri, data)
-      valid ? CircuitPanel.instance.setPanelData() : CircuitPanel.instance.setPanelError()
+      valid ? CircuitPanel.instance.setCircuitPanelData() : CircuitPanel.instance.setPanelError()
     }
   }
 
   /**
-   * Gathers assets and input json data to create the webview content,
-   * and assigns it to the panel's webview.
+   * Gathers assets and input json data to create the webview content 
+   * for a circuit board and assigns it to the panel's webview.
    */
-  private setPanelData() {
+  private setCircuitPanelData() {
     const webview = this.panel.webview
 
     // Create links to all assets
@@ -85,7 +87,7 @@ export class CircuitPanel {
       vscode.Uri.joinPath(this.uri, "assets", "styles", "style.css")
     )
 
-    initData(this.jsonData, false)
+    initData(this.jsonCircuitData, false)
     this.panel.webview.html = `
             <!DOCTYPE html>
             <html lang="en">
@@ -97,7 +99,7 @@ export class CircuitPanel {
             </head>
             <body onload="initializePanzoom(${getBackgroundWidth()}, ${getBackgroundHeight()})">
               <div id="attributes" display="none"></div>
-              <h1 id="title">${this.jsonData.title}</h1>
+              <h1 id="title">${this.jsonCircuitData.title}</h1>
               <svg id='scene' width="95%" height="60%">
                 <g id='circuitBoard'>
                   ${drawBoard()}
@@ -108,9 +110,9 @@ export class CircuitPanel {
   }
 
   /**
-   * Checks that the json is valid
+   * Checks that the json is valid for a quantum circuit board
    */
-  public static validateQData(data: QData) {
+  public static validateQCircuitData(data: QCircuitData) {
 
     // Syntax
     if (data.title === undefined) {
@@ -146,13 +148,104 @@ export class CircuitPanel {
   }
 
   /**
+   * Reveals panel if there is an instance stored, otherwise creates one
+   * and stores it. Then calls setHistogramPanelData() to update panel content. 
+   */
+  public static displayHistogramWebview(extensionUri: vscode.Uri, data: QHistogramData) {
+    if (CircuitPanel.instance) {
+      CircuitPanel.instance.jsonHistogramData = data
+      CircuitPanel.instance.setHistogramPanelData()
+      CircuitPanel.instance.panel.reveal(vscode.ViewColumn.Two, true)
+    } else {
+      const panel = vscode.window.createWebviewPanel(
+        "iqsdk-circuit",
+        "Quantum Circuit",
+        {
+          viewColumn: vscode.ViewColumn.Two,
+          preserveFocus: true
+        },
+        {
+          localResourceRoots: [vscode.Uri.joinPath(extensionUri, "assets")],
+          enableScripts: true,
+        }
+        )
+        
+        CircuitPanel.instance = new CircuitPanel(panel, extensionUri, data)
+        CircuitPanel.instance.setHistogramPanelData()
+    }
+  }
+
+  /**
+   * Gathers assets and input json data to create the webview content
+   * for a histogram and assigns it to the panel's webview.
+   */
+  private setHistogramPanelData() {
+    const webview = this.panel.webview
+
+    const histogramScriptUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this.uri, "assets", "javascripts", "hist.js")
+    )
+    const histStyleUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this.uri, "assets", "styles", "histStyle.css")
+    )
+    
+      this.panel.webview.html = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <link href="${histStyleUri}" rel="stylesheet">
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+        <script src="${histogramScriptUri}"></script>
+      </head>
+      <body>
+        <script>
+          let data = ${JSON.stringify(this.jsonHistogramData.states)}
+          window.onload = function () { runD3(data) }
+        </script>
+        <h1 id="title">${this.jsonHistogramData.title}</h1>
+        <svg id="histogram" viewbox="0 0 1500 1000"></svg>
+        <div id="options"></div>
+      </body>
+      </html>`
+  }
+
+  /**
+   * Checks that the json is valid for a quantum circuit board
+   */
+  public static validateQHistogramData(data: QHistogramData) {
+
+    // Syntax
+    if (data.title === undefined) {
+      throw new Error('Json File Missing Title <br><br>Example <br>"title": "My Histogram",')
+    } else if (data.states === undefined) {
+      throw new Error('Json File Missing Histogram Data <br><br>Example <br> "data" : [<br>{<br>"state" : "0",<br>"prob" : "0.25"<br>},<br>{<br>"state" : "1",<br>"prob" : "1"<br>},')
+    }
+
+    data.states.forEach((state, index) => {
+      // Syntax
+      if (state.value === undefined) {
+        throw new Error('state at index ' + index + ' needs a value <br><br>Example <br>"value" : "101",')
+      } else if (state.probability === undefined) {
+        throw new Error('state at index ' + index + ' needs a probability <br><br>Example <br>"probability" : 0.725')
+      }
+
+      // Semantic
+      if (state.probability > 1.0) {
+        throw new Error('state at index ' + index + ' has a probability exceeding 1.0')
+      }
+    })
+  }
+
+  /**
    * Prints an error to the webview
    */
   public setPanelError() {
     this.panel.webview.html = `
             <!DOCTYPE html>
               <body>
-                <h1 id="title">${this.jsonData.title}</h1>
+                <h1 id="title">${this.jsonCircuitData.title}</h1>
               </body>
             </html>`
   }
@@ -184,10 +277,6 @@ export class CircuitPanel {
       return
     }
 
-    if (vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark) {
-
-    }
-
     const styleUri = CircuitPanel.instance.panel.webview.asWebviewUri(
       vscode.Uri.joinPath(CircuitPanel.instance.uri, "assets", "styles", "style.css")
     )
@@ -200,14 +289,14 @@ export class CircuitPanel {
       styleContent = ':root' + styleContent.slice(index)
     }
 
-    initData(CircuitPanel.instance.jsonData, true)
+    initData(CircuitPanel.instance.jsonCircuitData, true)
     let svg = `
         <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
           <style>${styleContent}</style>
           <g>${drawBoard()}</g>
         </svg>  
       `
-    let title = this.instance?.jsonData.title
+    let title = this.instance?.jsonCircuitData.title
     let filename = title?.replace(/\s+/g, "_")
 
     if (svg === undefined) {

@@ -5,9 +5,9 @@
 
 // This file is used to generate the inside of the
 // circuit board svg with the given json data
-import { QGate, QData, GateData, ColorMethod } from './types'
+import { QGate, QCircuitData, GateData, ColorMethod } from './types'
 
-var data: QData
+var data: QCircuitData
 var exporting: boolean
 
 const gateMap = new Map<string, GateData>()
@@ -32,7 +32,7 @@ var backgroundHeight: number
 
 var maxGatesInOneLine: number
 
-export function initData(content: QData, isExporting: boolean): void {
+export function initData(content: QCircuitData, isExporting: boolean): void {
     data = content
     exporting = isExporting
     setGateMap()

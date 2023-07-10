@@ -39,6 +39,15 @@
         }
       },
       {
+        "command": "intel-quantum.drawHistogram",
+        "title": "Draw Histogram",
+        "category": "Intel Quantum",
+        "icon": {
+          "light": "./assets/icons/editor-actions-light.svg",
+          "dark": "./assets/icons/editor-actions-dark.svg"
+        }
+      },
+      {
         "command": "intel-quantum.exportSvg",
         "title": "Export as SVG",
         "category": "Intel Quantum"
@@ -52,8 +61,13 @@
     "menus": {
       "editor/title": [
         {
-          "when": "customContext.quantumFile",
+          "when": "customContext.quantumCircuitFile",
           "command": "intel-quantum.drawCircuit",
+          "group": "navigation"
+        },
+        {
+          "when": "customContext.quantumHistogramFile",
+          "command": "intel-quantum.drawHistogram",
           "group": "navigation"
         },
         {

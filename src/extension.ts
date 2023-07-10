@@ -6,7 +6,7 @@
 import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
-import { QData } from './types'
+import { QCircuitData, QHistogramData } from './types'
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const setupCommand = 'intel-quantum.setup'
 	const setup = () => {
 		let assetPath: string = context.extensionUri.fsPath + '/assets/setupExamples'
-		let visDir: string = vscode.workspace.workspaceFolders![0].uri.fsPath +'/visualization'
+		let visDir: string = vscode.workspace.workspaceFolders![0].uri.fsPath + '/visualization'
 
 		if (!fs.existsSync(visDir)) {
 			fs.mkdirSync(visDir + '/circuits', { recursive: true });
@@ -64,19 +64,47 @@ export function activate(context: vscode.ExtensionContext) {
 			// }
 
 			try {
-				let data: QData = JSON.parse(fileContent) as QData
-				CircuitPanel.validateQData(data)
-				CircuitPanel.displayWebview(context.extensionUri, data, true)
+				let data: QCircuitData = JSON.parse(fileContent) as QCircuitData
+				CircuitPanel.validateQCircuitData(data)
+				CircuitPanel.displayCircuitWebview(context.extensionUri, data, true)
 			} catch (e) {
-				let dataError: QData = { title: (e as Error).message } as QData
-				CircuitPanel.displayWebview(context.extensionUri, dataError, false)
+				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
+				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
 			}
 		} else {
 			console.log("No Active Editor")
 		}
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitCommand, drawCircuit))
-	
+
+	const drawHistogramCommand = "intel-quantum.drawHistogram"
+	const drawHistogram = () => {
+		const editor = vscode.window.activeTextEditor
+		let fileContent: string = ''
+
+		if (editor !== undefined) {
+			if (editor.document.languageId === 'json') {
+				fileContent = editor.document.getText()
+			}
+			// else if (editor.document.languageId === 'cpp') {
+
+			// }
+
+			try {
+				let data: QHistogramData = JSON.parse(fileContent) as QHistogramData
+				CircuitPanel.validateQHistogramData(data)
+				CircuitPanel.displayHistogramWebview(context.extensionUri, data)
+			} catch (e) {
+				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
+				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
+			}
+		} else {
+			console.log("No Active Editor")
+		}
+	}
+	context.subscriptions.push(vscode.commands.registerCommand(drawHistogramCommand, drawHistogram))
+
+
 	const exportSvgCommand = "intel-quantum.exportSvg"
 	const exportSvg = () => { CircuitPanel.exportCircuit(dir, "svg") }
 	context.subscriptions.push(vscode.commands.registerCommand(exportSvgCommand, exportSvg))
@@ -87,21 +115,33 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function updateCustomContext(editor: vscode.TextEditor | undefined) {
+	// Set all contexts to false
+	vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', false)
+	vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', false)
+
+	// Set correct context to true
 	if (editor && editor.document.languageId === "json") {
 		let editorText = editor.document.getText()
-		if (editorText.includes('IntelQuantumID')) {
-			vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
+		if (!editorText.includes('IntelQuantumID')) {
 			return
 		}
-		// } else if (editor && editor.document.languageId === "cpp") {
+
+		if (editorText.includes('Circuit')) {
+			vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', true)
+			return
+		}
+
+		if (editorText.includes('Histogram')) {
+			vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', true)
+			return
+		}
+	}
+	// else if (editor && editor.document.languageId === "cpp") {
 		// 	let editorText = editor.document.getText()
 		// 	if (editorText.includes('#include <quantum.hpp>')) { 
 		// 		vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
 		// 		return
 		// 	}
-	}
-
-	vscode.commands.executeCommand('setContext', 'customContext.quantumFile', false)
 }
 
 export function deactivate() { }
