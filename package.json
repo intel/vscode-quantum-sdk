@@ -39,23 +39,13 @@
         }
       },
       {
-        "command": "intel-quantum.exportSvgLight",
-        "title": "Export as Light SVG",
+        "command": "intel-quantum.exportSvg",
+        "title": "Export as SVG",
         "category": "Intel Quantum"
       },
       {
-        "command": "intel-quantum.exportSvgDark",
-        "title": "Export as Dark SVG",
-        "category": "Intel Quantum"
-      },
-      {
-        "command": "intel-quantum.exportPngLight",
-        "title": "Export as Light PNG",
-        "category": "Intel Quantum"
-      },
-      {
-        "command": "intel-quantum.exportPngDark",
-        "title": "Export as Dark PNG",
+        "command": "intel-quantum.exportPng",
+        "title": "Export as PNG",
         "category": "Intel Quantum"
       }
     ],
@@ -74,16 +64,10 @@
       ],
       "export": [
         {
-          "command": "intel-quantum.exportSvgLight"
+          "command": "intel-quantum.exportSvg"
         },
         {
-          "command": "intel-quantum.exportSvgDark"
-        },
-        {
-          "command": "intel-quantum.exportPngLight"
-        },
-        {
-          "command": "intel-quantum.exportPngDark"
+          "command": "intel-quantum.exportPng"
         }
       ]
     },

@@ -178,10 +178,14 @@ export class CircuitPanel {
    * Writes an exported image of the circuit board to the given directory
    * with the file type provided
    */
-  public static async exportCircuit(directory: string, ext: 'svg' | 'png', isLightTheme: boolean) {
+  public static async exportCircuit(directory: string, ext: 'svg' | 'png') {
 
     if (!CircuitPanel.instance) {
       return
+    }
+
+    if (vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark) {
+
     }
 
     const styleUri = CircuitPanel.instance.panel.webview.asWebviewUri(
@@ -189,7 +193,14 @@ export class CircuitPanel {
     )
     let styleContent = fs.readFileSync(styleUri.fsPath, "utf-8")
 
-    initData(CircuitPanel.instance.jsonData, true, isLightTheme)
+    // Remove some CSS to make svg dark themed
+    if (vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark) {
+      let substring = '[data-vscode-theme-kind="vscode-dark"]'
+      const index = styleContent.indexOf(substring) + substring.length
+      styleContent = ':root' + styleContent.slice(index)
+    }
+
+    initData(CircuitPanel.instance.jsonData, true)
     let svg = `
         <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
           <style>${styleContent}</style>

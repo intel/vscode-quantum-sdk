@@ -9,7 +9,6 @@ import { QGate, QData, GateData, ColorMethod } from './types'
 
 var data: QData
 var exporting: boolean
-var lightTheme: boolean | undefined
 
 const gateMap = new Map<string, GateData>()
 
@@ -33,10 +32,9 @@ var backgroundHeight: number
 
 var maxGatesInOneLine: number
 
-export function initData(content: QData, isExporting: boolean, isLightTheme?: boolean): void {
+export function initData(content: QData, isExporting: boolean): void {
     data = content
     exporting = isExporting
-    lightTheme = isLightTheme
     setGateMap()
     if (data.gateColorMethod === undefined) { data.gateColorMethod = 'default' }
     init()
@@ -210,7 +208,6 @@ function drawGate(gate: QGate): string {
     //Parse gate
     let [gateName, gateSubscript, gateColor] = parseGate(gate.name)
 
-    // TODO: Account for more font sizes and find a cleaner solution
     // Check name length to make sure it fits
     let fontSizeNum = textFontSize
     let extraSpaceForSubscript = 0

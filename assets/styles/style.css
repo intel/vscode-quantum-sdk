@@ -7,12 +7,14 @@
     --background: #f7f7f7;
     --backbackground: #ffffff;
     --text-color: #202020;
+    --dot-color: #919191;
 }
 
 [data-vscode-theme-kind="vscode-dark"] {
     --background: #262626;
     --backbackground: #1E1E1E;
     --text-color: #808080;
+    --dot-color: #080808;
 }
 
 body {
@@ -60,6 +62,7 @@ text {
 .line {
     stroke: #808080;
     stroke-width: 0.7;
+    fill: var(--dot-color);
 }
 
 .title {
