@@ -6,13 +6,17 @@
  :root {
   --background: #f7f7f7;
   --backbackground: #ffffff;
-  --text-color: #202020;
+  --text-color: black;
+  --line-color: #808080;
+  --bar-color: #0068B5;
 }
 
 [data-vscode-theme-kind="vscode-dark"] {
   --background: #262626;
   --backbackground: #1E1E1E;
-  --text-color: #808080;
+  --text-color: white;
+  --line-color: #808080;
+  --bar-color: #00C7FD;
 }
  
  h1 {
@@ -32,22 +36,22 @@
 }
 
 .bar {
-  fill: #00C7FD;
+  fill: var(--bar-color);
 }
 
 .labelX {
   font-size: 48px;
   text-anchor: middle;  
-  fill: white;
+  fill: var(--text-color);
 }
 
 .labelY {
   font-size: 40px; 
-  fill: white;
+  fill: var(--text-color);
   text-anchor: end;
   dominant-baseline: middle;
 }
 
 .line {
-  stroke: white;
+  stroke: var(--line-color);
 }
