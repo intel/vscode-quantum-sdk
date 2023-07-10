@@ -6,7 +6,9 @@
 import * as vscode from "vscode"
 import { drawBoard, getBackgroundHeight, getBackgroundWidth, initData } from "./draw"
 import * as fs from 'fs'
-import * as svg2png from 'svg2png'
+import { QCircuitData, QHistogramData } from "./types"
+
+const svgToPng = require("convert-svg-to-png")
 
 /**
  * Represents a vscode panel which can handle the creation, storage,
@@ -241,11 +243,11 @@ export class CircuitPanel {
    */
   public setPanelError() {
     this.panel.webview.html = `
-              <!DOCTYPE html>
+            <!DOCTYPE html>
               <body>
                 <h1 id="title">${this.jsonCircuitData.title}</h1>
               </body>
-              </html>`
+            </html>`
   }
 
   /**
@@ -269,18 +271,29 @@ export class CircuitPanel {
    * Writes an exported image of the circuit board to the given directory
    * with the file type provided
    */
-  public static exportCircuit(directory: string, ext: 'svg' | 'png', isLightTheme: boolean) {
+  public static async exportCircuit(directory: string, ext: 'svg' | 'png') {
 
     if (!CircuitPanel.instance) {
       return
     }
 
-    initData(CircuitPanel.instance.jsonCircuitData, true, isLightTheme)
+    const styleUri = CircuitPanel.instance.panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(CircuitPanel.instance.uri, "assets", "styles", "style.css")
+    )
+    let styleContent = fs.readFileSync(styleUri.fsPath, "utf-8")
+
+    // Remove some CSS to make svg dark themed
+    if (vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark) {
+      let substring = '[data-vscode-theme-kind="vscode-dark"]'
+      const index = styleContent.indexOf(substring) + substring.length
+      styleContent = ':root' + styleContent.slice(index)
+    }
+
+    initData(CircuitPanel.instance.jsonCircuitData, true)
     let svg = `
         <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
-          <g>
-            ${drawBoard()}
-          </g>
+          <style>${styleContent}</style>
+          <g>${drawBoard()}</g>
         </svg>  
       `
     let title = this.instance?.jsonCircuitData.title
@@ -301,16 +314,20 @@ export class CircuitPanel {
         });
         break
       case 'png':
-        let pngBuffer = svg2png(Buffer.from(svg), { width: getBackgroundWidth() * 5, height: getBackgroundHeight() * 5 })
-        pngBuffer.then((png) => {
-          fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
-            if (err) {
-              console.log("Error exporting file")
-              throw err
-            }
-            console.log('The file has been saved!')
-          });
+        const png = await svgToPng.convert(svg, {
+          width: getBackgroundWidth(),
+          height: getBackgroundHeight(),
+          scale: 5
         })
+
+        fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
+          if (err) {
+            console.log("Error exporting file")
+            throw err
+          }
+          console.log('The file has been saved!')
+        });
+
         break
     }
   }

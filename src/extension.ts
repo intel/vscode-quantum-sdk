@@ -6,6 +6,7 @@
 import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
+import { QCircuitData, QHistogramData } from './types'
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -66,11 +67,9 @@ export function activate(context: vscode.ExtensionContext) {
 				let data: QCircuitData = JSON.parse(fileContent) as QCircuitData
 				CircuitPanel.validateQCircuitData(data)
 				CircuitPanel.displayCircuitWebview(context.extensionUri, data, true)
-				vscode.ViewColumn.One
 			} catch (e) {
 				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
 				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
-				vscode.ViewColumn.One
 			}
 		} else {
 			console.log("No Active Editor")
@@ -95,11 +94,9 @@ export function activate(context: vscode.ExtensionContext) {
 				let data: QHistogramData = JSON.parse(fileContent) as QHistogramData
 				CircuitPanel.validateQHistogramData(data)
 				CircuitPanel.displayHistogramWebview(context.extensionUri, data)
-				vscode.ViewColumn.One
 			} catch (e) {
 				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
 				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
-				vscode.ViewColumn.One
 			}
 		} else {
 			console.log("No Active Editor")
@@ -108,21 +105,13 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand(drawHistogramCommand, drawHistogram))
 
 
-	const exportSvgLightCommand = "intel-quantum.exportSvgLight"
-	const exportSvgLight = () => { CircuitPanel.exportCircuit(dir, "svg", true) }
-	context.subscriptions.push(vscode.commands.registerCommand(exportSvgLightCommand, exportSvgLight))
+	const exportSvgCommand = "intel-quantum.exportSvg"
+	const exportSvg = () => { CircuitPanel.exportCircuit(dir, "svg") }
+	context.subscriptions.push(vscode.commands.registerCommand(exportSvgCommand, exportSvg))
 
-	const exportSvgDarkCommand = "intel-quantum.exportSvgDark"
-	const exportSvgDark = () => { CircuitPanel.exportCircuit(dir, "svg", false) }
-	context.subscriptions.push(vscode.commands.registerCommand(exportSvgDarkCommand, exportSvgDark))
-
-	const exportPngLightCommand = "intel-quantum.exportPngLight"
-	const exportPngLight = () => { CircuitPanel.exportCircuit(dir, "png", true) }
-	context.subscriptions.push(vscode.commands.registerCommand(exportPngLightCommand, exportPngLight))
-
-	const exportPngDarkCommand = "intel-quantum.exportPngDark"
-	const exportPngDark = () => { CircuitPanel.exportCircuit(dir, "png", false) }
-	context.subscriptions.push(vscode.commands.registerCommand(exportPngDarkCommand, exportPngDark))
+	const exportPngCommand = "intel-quantum.exportPng"
+	const exportPng = () => { CircuitPanel.exportCircuit(dir, "png") }
+	context.subscriptions.push(vscode.commands.registerCommand(exportPngCommand, exportPng))
 }
 
 function updateCustomContext(editor: vscode.TextEditor | undefined) {
