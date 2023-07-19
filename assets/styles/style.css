@@ -17,8 +17,13 @@
     --dot-color: #080808;
 }
 
+@font-face {
+    font-family: "Intel";
+    src: url("./../fonts/intelone-display-font-family-regular.woff2") format("woff2");
+}
+
 body {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Intel";
     display: flex;
     height: 100vh;
     overflow: hidden;
@@ -33,7 +38,7 @@ h1 {
 
 text {
     fill: var(--text-color);
-    font: 5px Courier;
+    font-size: 5px;
     text-anchor: end;
 }
 
@@ -88,21 +93,27 @@ text {
 #blue {
     fill: #00C7FD;
 }
+
 #orange {
     fill: #FF8F51;
 }
+
 #purple {
     fill: #CC94DA;
 }
+
 #red {
     fill: #FF5662;
 }
+
 #yellow {
     fill: #FFE17A;
 }
+
 #green {
     fill: #B1D272;
 }
+
 #gray {
     fill: #E9E9E9;
 }

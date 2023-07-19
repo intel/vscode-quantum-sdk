@@ -1,4 +1,26 @@
 {
-    "thing1": 1,
-    "thing2": 2
+    "IntelQuantumID": "Histogram-v1",
+    "title": "2 Qubit Example",
+    "states": [
+        {
+            "value": "00",
+            "probability": 0.2,
+            "amplitude": [0.0, 0.0]
+        },
+        {
+            "value": "01",
+            "probability": 0.075,
+            "amplitude": [0.0, 0.0]
+        },
+        {
+            "value": "10",
+            "probability": 0.7,
+            "amplitude": [0.0, 0.0]
+        },
+        {
+            "value": "11",
+            "probability": 0.025,
+            "amplitude": [0.0, 0.0]
+        }
+    ]
 }

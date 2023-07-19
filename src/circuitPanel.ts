@@ -292,6 +292,12 @@ export class CircuitPanel {
     initData(CircuitPanel.instance.jsonCircuitData, true)
     let svg = `
         <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
+          <style>
+          @font-face {
+            font-family: "Intel";
+            src: url("./../assets/fonts/intelone-display-font-family-regular.woff2") format("woff2");
+          }
+          </style>
           <style>${styleContent}</style>
           <g>${drawBoard()}</g>
         </svg>  
@@ -317,7 +323,7 @@ export class CircuitPanel {
         const png = await svgToPng.convert(svg, {
           width: getBackgroundWidth(),
           height: getBackgroundHeight(),
-          scale: 5
+          scale: 10
         })
 
         fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
