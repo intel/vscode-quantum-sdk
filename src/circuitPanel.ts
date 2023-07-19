@@ -8,8 +8,6 @@ import { drawBoard, getBackgroundHeight, getBackgroundWidth, initData } from "./
 import * as fs from 'fs'
 import { QCircuitData, QHistogramData } from "./types"
 
-const svgToPng = require("convert-svg-to-png")
-
 /**
  * Represents a vscode panel which can handle the creation, storage,
  * manipulation and deletion of the webview panel for displaying
@@ -272,69 +270,5 @@ export class CircuitPanel {
    * with the file type provided
    */
   public static async exportCircuit(directory: string, ext: 'svg' | 'png') {
-
-    if (!CircuitPanel.instance) {
-      return
-    }
-
-    const styleUri = CircuitPanel.instance.panel.webview.asWebviewUri(
-      vscode.Uri.joinPath(CircuitPanel.instance.uri, "assets", "styles", "style.css")
-    )
-    let styleContent = fs.readFileSync(styleUri.fsPath, "utf-8")
-
-    // Remove some CSS to make svg dark themed
-    if (vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark) {
-      let substring = '[data-vscode-theme-kind="vscode-dark"]'
-      const index = styleContent.indexOf(substring) + substring.length
-      styleContent = ':root' + styleContent.slice(index)
-    }
-
-    initData(CircuitPanel.instance.jsonCircuitData, true)
-    let svg = `
-        <svg viewbox="0 0 ${getBackgroundWidth()} ${getBackgroundHeight()}">
-          <style>
-          @font-face {
-            font-family: "Intel";
-            src: url("./../assets/fonts/intelone-display-font-family-regular.woff2") format("woff2");
-          }
-          </style>
-          <style>${styleContent}</style>
-          <g>${drawBoard()}</g>
-        </svg>  
-      `
-    let title = this.instance?.jsonCircuitData.title
-    let filename = title?.replace(/\s+/g, "_")
-
-    if (svg === undefined) {
-      return ""
-    }
-
-    switch (ext) {
-      case 'svg':
-        fs.writeFile(`${directory}/${filename}.${ext}`, svg, (err) => {
-          if (err) {
-            console.log("Error exporting file")
-            throw err
-          }
-          console.log('The file has been saved!')
-        });
-        break
-      case 'png':
-        const png = await svgToPng.convert(svg, {
-          width: getBackgroundWidth(),
-          height: getBackgroundHeight(),
-          scale: 10
-        })
-
-        fs.writeFile(`${directory}/${filename}.${ext}`, png, (err) => {
-          if (err) {
-            console.log("Error exporting file")
-            throw err
-          }
-          console.log('The file has been saved!')
-        });
-
-        break
-    }
   }
 }
