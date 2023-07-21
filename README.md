@@ -13,10 +13,12 @@ Navigate to a valid `json` file that represents a quantum circuit board (Either 
 
 ![circuitUsageExample.png](./assets/documentation/circuitUsageExample.png)
 
-## Export Circuit Board (Temporarily removed due to bugs)
+## Export Circuit Board
 Click on the tab with the generated circuit board to make it the active window. On the right side of the tab bar there will be an export button. This gives the user the option to export to an svg or png. The file will then appear as `title.(chosen extension)` in the directory opened in VS Code.
 
 > Note: Exported images will be light or dark based on your VS Code theme. To change your theme in VS Code press `Ctrl` + `Shift` + `P` and enter `Color Theme`.
+
+> Note: There is an issue where exported images do not contain Intel's custom font.
 
 ## Understanding the json
 IntelQuantumID: Tells the extension that this json represents a quantum circuit board
@@ -92,6 +94,7 @@ This extension extends the list of keywords that are highlighted by VSCode to in
 | Project | Repo | License |
 | ------- | ---- | ------- |
 | [Panzoom](assets/javascripts/panzoom.js) | https://github.com/anvaka/panzoom | MIT |
+| [Html2Canvas](assets/javascripts/html2canvas.js) | https://github.com/niklasvh/html2canvas | MIT |
 
 ## License
 Copyright (c) 2023 Intel Corporation. All rights reserved.

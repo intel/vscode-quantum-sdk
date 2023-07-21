@@ -104,13 +104,8 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(drawHistogramCommand, drawHistogram))
 
-
-	const exportSvgCommand = "intel-quantum.exportSvg"
-	const exportSvg = () => { CircuitPanel.exportCircuit(dir, "svg") }
-	context.subscriptions.push(vscode.commands.registerCommand(exportSvgCommand, exportSvg))
-
 	const exportPngCommand = "intel-quantum.exportPng"
-	const exportPng = () => { CircuitPanel.exportCircuit(dir, "png") }
+	const exportPng = () => { CircuitPanel.exportCircuit() }
 	context.subscriptions.push(vscode.commands.registerCommand(exportPngCommand, exportPng))
 }
 

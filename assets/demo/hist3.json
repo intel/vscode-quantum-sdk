@@ -4,35 +4,43 @@
     "states": [
         {
             "value": "000",
-            "prob": "0.1"
+            "probability": 0.1,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "001",
-            "prob": "0.2"
+            "probability": 0.2,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "010",
-            "prob": "0.3"
+            "probability": 0.3,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "011",
-            "prob": "0.025"
+            "probability": 0.025,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "100",
-            "prob": "0.075"
+            "probability": 0.075,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "101",
-            "prob": "0.2"
+            "probability": 0.2,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "110",
-            "prob": "0.05"
+            "probability": 0.05,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "111",
-            "prob": "0.05"
+            "probability": 0.05,
+            "amplitude": [0.6, 0.1]
         }
     ]
 }

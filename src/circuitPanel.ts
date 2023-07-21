@@ -81,6 +81,9 @@ export class CircuitPanel {
     const panzoomScriptUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this.uri, "assets", "javascripts", "panzoom.js")
     )
+    const canvasScriptUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this.uri, "assets", "javascripts", "html2canvas.js")
+    )
     const styleUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this.uri, "assets", "styles", "style.css")
     )
@@ -93,16 +96,30 @@ export class CircuitPanel {
               <meta charset="UTF-8">
               <link href="${styleUri}" rel="stylesheet">
               <script src="${panzoomScriptUri}"></script>
+              <script src="${canvasScriptUri}"></script>
               <script src="${mainScriptUri}"></script>
+              <script>
+                window.addEventListener('message', event => {
+                  const message = event.data
+                  switch (message.command) {
+                      case 'export':
+                          exportImage(${getBackgroundWidth()}, ${getBackgroundHeight()})
+                          break
+                  }
+                })
+              </script>
             </head>
             <body onload="initializePanzoom(${getBackgroundWidth()}, ${getBackgroundHeight()})">
               <div id="attributes" display="none"></div>
               <h1 id="title">${this.jsonCircuitData.title}</h1>
-              <svg id='scene' width="95%" height="60%">
-                <g id='circuitBoard'>
-                  ${drawBoard()}
-                </g>
-              </svg>  
+                <svg id='scene' width="95%" height="60%">
+                  <g id='circuitBoard'>${drawBoard()}</g>
+                </svg> 
+              <div id="capture" hidden="true">
+                <svg id='scene' width="${getBackgroundWidth()}" height="${getBackgroundHeight()}">
+                  <g id='circuitBoard'>${drawBoard()}</g>
+                </svg> 
+              </div>
             </body>
             </html>`
   }
@@ -166,10 +183,10 @@ export class CircuitPanel {
           localResourceRoots: [vscode.Uri.joinPath(extensionUri, "assets")],
           enableScripts: true,
         }
-        )
-        
-        CircuitPanel.instance = new CircuitPanel(panel, extensionUri, data)
-        CircuitPanel.instance.setHistogramPanelData()
+      )
+
+      CircuitPanel.instance = new CircuitPanel(panel, extensionUri, data)
+      CircuitPanel.instance.setHistogramPanelData()
     }
   }
 
@@ -186,8 +203,8 @@ export class CircuitPanel {
     const histStyleUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this.uri, "assets", "styles", "histStyle.css")
     )
-    
-      this.panel.webview.html = `
+
+    this.panel.webview.html = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -269,6 +286,71 @@ export class CircuitPanel {
    * Writes an exported image of the circuit board to the given directory
    * with the file type provided
    */
-  public static async exportCircuit(directory: string, ext: 'svg' | 'png') {
+  public static async exportCircuit() {
+    if (!CircuitPanel.instance) {
+      return
+    }
+
+    CircuitPanel.instance.panel.webview.postMessage({ command: 'export' });
+
+    // Remove some CSS to make svg dark themed
+    // if (vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark) {
+    //   let substring = '[data-vscode-theme-kind="vscode-dark"]'
+    //   const index = styleContent.indexOf(substring) + substring.length
+    //   styleContent = ':root' + styleContent.slice(index)
+    // }
+
+    // const webview = CircuitPanel.instance.panel.webview
+    // const uri = CircuitPanel.instance.uri
+    // const mainScriptUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(uri, "assets", "javascripts", "main.js")
+    // )
+    // const canvasScriptUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(uri, "assets", "javascripts", "html2canvas.js")
+    // )
+    // const styleUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(uri, "assets", "styles", "style.css")
+    // )
+
+    // initData(CircuitPanel.instance.jsonCircuitData, true)
+    // let svg = `<!DOCTYPE html>
+    //   <html lang="en">
+    //   <head>
+    //     <meta charset="UTF-8">
+    //     <link href="${styleUri}" rel="stylesheet">
+    //     <script src="${canvasScriptUri}"></script>
+    //     <script src="${mainScriptUri}"></script>
+    //   </head>
+    //   <body>
+    //     <div id="capture">
+    //       <svg id='scene' width="${getBackgroundWidth()}" height="${getBackgroundHeight()}" tabindex="0">
+    //         <g id='circuitBoard'>
+    //           ${drawBoard()}
+    //         </g>
+    //       </svg> 
+    //     </div>
+    //     <script>exportImage()</script>
+    //   </body>
+    //   </html>`
+
+    //   CircuitPanel.instance.panel.webview.html = svg
+
+    // let title = this.instance?.jsonCircuitData.title
+    // let filename = title?.replace(/\s+/g, "_")
+
+    // if (svg === undefined) {
+    //   return ""
+    // }
+
+
+    // fs.writeFile(`${directory}/${filename}.png`, svg, (err) => {
+    //   if (err) {
+    //     console.log("Error exporting file")
+    //     throw err
+    //   }
+    //   console.log('The file has been saved!')
+    // });
+
+
   }
 }

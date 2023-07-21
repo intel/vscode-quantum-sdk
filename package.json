@@ -2,7 +2,7 @@
   "name": "intel-quantum-sdk",
   "displayName": "Intel Quantum SDK",
   "description": "Visualization and language support for Visual Studio Code",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "publisher": "intel-corporation",
   "repository": {
     "type": "git",
@@ -48,14 +48,13 @@
         }
       },
       {
-        "command": "intel-quantum.exportSvg",
-        "title": "Export as SVG",
-        "category": "Intel Quantum"
-      },
-      {
         "command": "intel-quantum.exportPng",
         "title": "Export as PNG",
-        "category": "Intel Quantum"
+        "category": "Intel Quantum",
+        "icon": {
+          "light": "./assets/icons/export-light.svg",
+          "dark": "./assets/icons/export-dark.svg"
+        }
       }
     ],
     "menus": {
@@ -72,16 +71,8 @@
         },
         {
           "when": "activeWebviewPanelId == iqsdk-circuit",
-          "submenu": "export",
+          "command": "intel-quantum.exportPng",
           "group": "navigation"
-        }
-      ],
-      "export": [
-        {
-          "command": "intel-quantum.exportSvg"
-        },
-        {
-          "command": "intel-quantum.exportPng"
         }
       ]
     },
@@ -92,16 +83,6 @@
         "injectTo": [
           "source.cpp"
         ]
-      }
-    ],
-    "submenus": [
-      {
-        "id": "export",
-        "label": "Export",
-        "icon": {
-          "light": "./assets/icons/export-light.svg",
-          "dark": "./assets/icons/export-dark.svg"
-        }
       }
     ]
   },
