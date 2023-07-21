@@ -283,8 +283,7 @@ export class CircuitPanel {
   }
 
   /**
-   * Writes an exported image of the circuit board to the given directory
-   * with the file type provided
+   * Writes an exported image of the circuit board and lets the user download it
    */
   public static async exportCircuit() {
     if (!CircuitPanel.instance) {
@@ -292,65 +291,5 @@ export class CircuitPanel {
     }
 
     CircuitPanel.instance.panel.webview.postMessage({ command: 'export' });
-
-    // Remove some CSS to make svg dark themed
-    // if (vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark) {
-    //   let substring = '[data-vscode-theme-kind="vscode-dark"]'
-    //   const index = styleContent.indexOf(substring) + substring.length
-    //   styleContent = ':root' + styleContent.slice(index)
-    // }
-
-    // const webview = CircuitPanel.instance.panel.webview
-    // const uri = CircuitPanel.instance.uri
-    // const mainScriptUri = webview.asWebviewUri(
-    //   vscode.Uri.joinPath(uri, "assets", "javascripts", "main.js")
-    // )
-    // const canvasScriptUri = webview.asWebviewUri(
-    //   vscode.Uri.joinPath(uri, "assets", "javascripts", "html2canvas.js")
-    // )
-    // const styleUri = webview.asWebviewUri(
-    //   vscode.Uri.joinPath(uri, "assets", "styles", "style.css")
-    // )
-
-    // initData(CircuitPanel.instance.jsonCircuitData, true)
-    // let svg = `<!DOCTYPE html>
-    //   <html lang="en">
-    //   <head>
-    //     <meta charset="UTF-8">
-    //     <link href="${styleUri}" rel="stylesheet">
-    //     <script src="${canvasScriptUri}"></script>
-    //     <script src="${mainScriptUri}"></script>
-    //   </head>
-    //   <body>
-    //     <div id="capture">
-    //       <svg id='scene' width="${getBackgroundWidth()}" height="${getBackgroundHeight()}" tabindex="0">
-    //         <g id='circuitBoard'>
-    //           ${drawBoard()}
-    //         </g>
-    //       </svg> 
-    //     </div>
-    //     <script>exportImage()</script>
-    //   </body>
-    //   </html>`
-
-    //   CircuitPanel.instance.panel.webview.html = svg
-
-    // let title = this.instance?.jsonCircuitData.title
-    // let filename = title?.replace(/\s+/g, "_")
-
-    // if (svg === undefined) {
-    //   return ""
-    // }
-
-
-    // fs.writeFile(`${directory}/${filename}.png`, svg, (err) => {
-    //   if (err) {
-    //     console.log("Error exporting file")
-    //     throw err
-    //   }
-    //   console.log('The file has been saved!')
-    // });
-
-
   }
 }
