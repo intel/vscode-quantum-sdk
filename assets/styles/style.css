@@ -18,12 +18,12 @@
 }
 
 @font-face {
-    font-family: "Intel";
-    src: url("./../fonts/intelone-display-font-family-regular.woff2") format("woff2");
+    font-family: Intel;
+    src: url('./../fonts/intelone-display-font-family-regular.woff2') format('woff2');
 }
 
 body {
-    font-family: "Intel";
+    font-family: Intel, sans-serif;
     display: flex;
     height: 100vh;
     overflow: hidden;
@@ -62,6 +62,11 @@ text {
     text-anchor: middle;
     dominant-baseline: middle;
     fill: black !important;
+}
+
+.subscript {
+    font-size: 3px;
+    fill: black;
 }
 
 .line {

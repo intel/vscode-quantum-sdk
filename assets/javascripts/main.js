@@ -70,6 +70,7 @@ function hideAttributes() {
 function exportImage(boardWidth, boardHeight) {
     var circuitBoard = document.querySelector("#capture")
     circuitBoard.style.display = "block"
+
     html2canvas(circuitBoard, {
         scale: 5,
         width: boardWidth,
