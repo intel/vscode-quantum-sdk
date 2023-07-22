@@ -10,8 +10,6 @@ import { QCircuitData, QHistogramData } from './types'
 
 export function activate(context: vscode.ExtensionContext) {
 
-	let dir = vscode.workspace.workspaceFolders![0].uri.path
-
 	updateCustomContext(vscode.window.activeTextEditor)
 	vscode.window.onDidChangeActiveTextEditor(editor => { updateCustomContext(editor) })
 
@@ -104,13 +102,8 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(drawHistogramCommand, drawHistogram))
 
-
-	const exportSvgCommand = "intel-quantum.exportSvg"
-	const exportSvg = () => { CircuitPanel.exportCircuit(dir, "svg") }
-	context.subscriptions.push(vscode.commands.registerCommand(exportSvgCommand, exportSvg))
-
 	const exportPngCommand = "intel-quantum.exportPng"
-	const exportPng = () => { CircuitPanel.exportCircuit(dir, "png") }
+	const exportPng = () => { CircuitPanel.exportCircuit() }
 	context.subscriptions.push(vscode.commands.registerCommand(exportPngCommand, exportPng))
 }
 

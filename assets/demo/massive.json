@@ -1,6 +1,7 @@
 {
     "IntelQuantumID": "Circuit-v1",
     "title" : "massive",
+    "gateColorMethod": "axis",
     "numQbits" : 30,
     "qbitNames": [
         "",

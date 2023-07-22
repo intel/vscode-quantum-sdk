@@ -4,19 +4,23 @@
     "states": [
         {
             "value": "00",
-            "prob": "0.2"
+            "probability": 0.2,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "01",
-            "prob": "0.075"
+            "probability": 0.075,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "10",
-            "prob": "0.7"
+            "probability": 0.7,
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "11",
-            "prob": "0.025"
+            "probability": 0.025,
+            "amplitude": [0.6, 0.1]
         }
     ]
 }

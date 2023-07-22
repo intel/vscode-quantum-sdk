@@ -39,10 +39,10 @@ function initializePanzoom(backgroundWidth, backgroundHeight) {
 
     let zoomX = 0
     let zoomY = 0
-    if (startX != 0) {
+    if (startX !== 0) {
         zoomX = scene.clientWidth / 2
     }
-    if (startY != 0) {
+    if (startY !== 0) {
         zoomY = scene.clientHeight / 2
     }
     if (minZoomSize > 1) {
@@ -65,4 +65,25 @@ function showAttributes(evt, text) {
 function hideAttributes() {
     var attrBlock = document.getElementById("attributes");
     attrBlock.style.display = "none";
+}
+
+function exportImage(boardWidth, boardHeight) {
+    var circuitBoard = document.querySelector("#capture")
+    circuitBoard.style.display = "block"
+
+    html2canvas(circuitBoard, {
+        scale: 5,
+        width: boardWidth,
+        height: boardHeight,
+        logging: true
+    }).then(canvas => {
+        //document.body.appendChild(canvas)
+
+        const dataURL = canvas.toDataURL("image/png");
+        const anchor = document.createElement("a");
+        anchor.href = dataURL;
+        anchor.download = "image.png";
+        anchor.click();
+    });
+    circuitBoard.style.display = "none"
 }
