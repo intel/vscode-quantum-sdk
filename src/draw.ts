@@ -115,8 +115,6 @@ function init(): void {
 
         if (data.gates[i].qubits.length > 1) {
 
-
-
             //Find the leftmost open spot for this gate
             curMax = 0
             for (let j = minQbit; j <= maxQbit; j++) {
