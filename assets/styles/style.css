@@ -51,8 +51,7 @@ text {
 }
 
 .gate {
-    fill: #00C7FD;
-    /* TODO: Choose a gate color for custom gates */
+    fill: #E9E9E9;
     border: none;
     padding: 0;
     outline-width: 0;
