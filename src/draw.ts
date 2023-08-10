@@ -5,8 +5,12 @@
 
 // This file is used to generate the inside of the
 // circuit board svg with the given json data
+import { QGate, QCircuitData, GateData, ColorMethod } from './types'
 
-var data: QData
+var data: QCircuitData
+var exporting: boolean
+
+const gateMap = new Map<string, GateData>()
 
 //Constants for spacing
 const yPos = 20
@@ -14,6 +18,7 @@ const xPos = 20
 var lineWidth: number
 const gateWidth = 10
 const gateHeight = 10
+const textFontSize = 5
 
 var positionCounter: number[]
 const linePadding = 5
@@ -27,8 +32,11 @@ var backgroundHeight: number
 
 var maxGatesInOneLine: number
 
-export function initData(content: QData): void {
+export function initData(content: QCircuitData, isExporting: boolean): void {
     data = content
+    exporting = isExporting
+    setGateMap()
+    if (data.gateColorMethod === undefined) { data.gateColorMethod = 'default' }
     init()
 }
 
@@ -61,6 +69,33 @@ export function getBackgroundHeight(): number {
     return backgroundHeight
 }
 
+function setGateMap() {
+    gateMap.set('H', { name: 'H', subscript: '', colors: ['blue', 'green', 'green', 'blue'] })
+    gateMap.set('X', { name: 'X', subscript: '', colors: ['orange', 'green', 'yellow', 'orange'] })
+    gateMap.set('CNOT', { name: 'X', subscript: '', colors: ['purple', 'green', 'yellow', 'orange'] })
+    gateMap.set('Toffoli', { name: 'X', subscript: '', colors: ['purple', 'green', 'yellow', 'orange'] })
+    gateMap.set('Y', { name: 'Y', subscript: '', colors: ['orange', 'green', 'red', 'yellow'] })
+    gateMap.set('Z', { name: 'Z', subscript: '', colors: ['orange', 'green', 'blue', 'purple'] })
+    gateMap.set('CZ', { name: 'Z', subscript: '', colors: ['purple', 'green', 'blue', 'purple'] })
+    gateMap.set('S', { name: 'S', subscript: '', colors: ['red', 'green', 'blue', 'gray'] })
+    gateMap.set('Sdag', { name: 'S', subscript: 'I', colors: ['red', 'green', 'blue', 'gray'] })
+    gateMap.set('CPhase', { name: 'P', subscript: '', colors: ['purple', 'red', 'blue', 'gray'] })
+    gateMap.set('RX', { name: 'R', subscript: 'X', colors: ['red', 'red', 'yellow', 'gray'] })
+    gateMap.set('RY', { name: 'R', subscript: 'Y', colors: ['red', 'red', 'red', 'gray'] })
+    gateMap.set('RZ', { name: 'R', subscript: 'Z', colors: ['red', 'red', 'blue', 'gray'] })
+    gateMap.set('RXY', { name: 'R', subscript: 'XY', colors: ['red', 'red', 'orange', 'gray'] })
+    gateMap.set('T', { name: 'T', subscript: '', colors: ['red', 'red', 'blue', 'gray'] })
+    gateMap.set('Tdag', { name: 'T', subscript: 'I', colors: ['red', 'red', 'blue', 'gray'] })
+    gateMap.set('SWAP', { name: 'Swap', subscript: '', colors: ['yellow', 'green', 'gray', 'gray'] })
+    gateMap.set('SwapA', { name: 'Swap', subscript: 'A', colors: ['yellow', 'green', 'gray', 'gray'] })
+    gateMap.set('MeasX', { name: 'Meas', subscript: 'X', colors: ['green', 'blue', 'yellow', 'red'] })
+    gateMap.set('MeasY', { name: 'Meas', subscript: 'Y', colors: ['green', 'blue', 'red', 'red'] })
+    gateMap.set('MeasZ', { name: 'Meas', subscript: 'Z', colors: ['green', 'blue', 'blue', 'red'] })
+    gateMap.set('PrepX', { name: 'Prep', subscript: 'X', colors: ['green', 'blue', 'yellow', 'green'] })
+    gateMap.set('PrepY', { name: 'Prep', subscript: 'Y', colors: ['green', 'blue', 'red', 'green'] })
+    gateMap.set('PrepZ', { name: 'Prep', subscript: 'Z', colors: ['green', 'blue', 'blue', 'green'] })
+}
+
 function init(): void {
 
     positionCounter = new Array<number>(data.numQbits)
@@ -74,15 +109,24 @@ function init(): void {
     let curMax = 0
     for (let i = 0; i < data.gates.length; i++) {
 
-        //Find the leftmost open spot for this gate
-        curMax = 0
-        for (let j = 0; j < data.gates[i].qubits.length; j++) {
-            curMax = Math.max(curMax, positionCounter[data.gates[i].qubits[j]])
+        //Find range of qbits that a multi-qbit gate crosses over
+        let minQbit = Math.min(...data.gates[i].qubits)
+        let maxQbit = Math.max(...data.gates[i].qubits)
+
+        if (data.gates[i].qubits.length > 1) {
+
+            //Find the leftmost open spot for this gate
+            curMax = 0
+            for (let j = minQbit; j <= maxQbit; j++) {
+                curMax = Math.max(curMax, positionCounter[j])
+            }
+        } else {
+            curMax = positionCounter[data.gates[i].qubits[0]]
         }
 
         //Set the position for the gate and mark that this space is taken
         data.gates[i].position = curMax + 1
-        for (let j = Math.min(...data.gates[i].qubits); j <= Math.max(...data.gates[i].qubits); j++) {
+        for (let j = minQbit; j <= maxQbit; j++) {
             positionCounter[j] = data.gates[i].position!
         }
     }
@@ -109,8 +153,13 @@ function init(): void {
 }
 
 function background(): string {
-    return `<rect class="backbackground" width="100%" height="100%"/>` +
-        `<rect onclick="pos(evt)" id="background" class="background" width="${backgroundWidth}" height="${backgroundHeight}"/>`
+    let output = `<rect onclick="pos(evt)" id="background" class="background" width="${backgroundWidth}" height="${backgroundHeight}"/>`
+
+    if (!exporting) {
+        output = `<rect class="backbackground" width="100%" height="100%"/>` + output
+    }
+
+    return output
 }
 
 function drawNames(): string {
@@ -154,17 +203,25 @@ function drawGate(gate: QGate): string {
     let x = (xPos + linePadding) + gateSpacing * (gate.position! - 1) + padName
     let y = (gate.qubits[gate.qubits.length - 1] + 1) * yPos - gateHeight / 2
 
-    // TODO: Account for more font sizes
+    //Parse gate
+    let [gateName, gateSubscript, gateColor] = parseGate(gate.name)
+
     // Check name length to make sure it fits
-    let fontsize = ""
-    if (gate.name.length > 3) {
-        fontsize = `style="font-size:4"`
+    let fontSizeNum = textFontSize
+    let extraSpaceForSubscript = 0
+    if (gateName.length > 3) {
+        fontSizeNum -= 1.5
+        if (gateSubscript !== '') {
+            extraSpaceForSubscript = 1
+        }
     }
+
+    let fontSize = `style="font-size: ${fontSizeNum}"`
 
     // Add potential attributes
     let attributes = ""
     let attrFunctionCall = ""
-    if (gate.attributes !== null && gate.attributes !== undefined) {
+    if (!exporting && gate.attributes !== null && gate.attributes !== undefined) {
         for (var attr of gate.attributes) {
             attributes += attr + '<br>'
         }
@@ -187,19 +244,10 @@ function drawGate(gate: QGate): string {
         }
     }
 
-    //Find subscript
-    let subscript: string = '?'
-    if (gate.name.length > 1) {
-        subscript = gate.name.slice(-1);
-        if (subscript === 'X' || subscript === 'Y' || subscript === 'Z') {
-            gate.name = gate.name.slice(0, -1)
-        }
-    }
+    //draw gate 
+    output += `<rect class="gate" x="${x}" y="${y}" rx="1" ry="1" width="${gateWidth}" height="${gateHeight}" id="${gateColor}" ${attrFunctionCall}/>`
 
-    //draw gate
-    output += `<rect class="gate" x="${x}" y="${y}" rx="1" ry="1" width="${gateWidth}" height="${gateHeight}" id="${gate.name}" ${attrFunctionCall}/>`
-
-    switch (gate.name) {
+    switch (gateName) {
         case "Meas":
             // Meas icon
             output += `
@@ -208,19 +256,27 @@ function drawGate(gate: QGate): string {
             break
         default:
             // Print gate name
-            output += `<text class="gateText" x="${x + gateWidth / 2}" y="${y + gateHeight / 2}" ${fontsize} ${attrFunctionCall} >${gate.name}</text>`
+            output += `<text class="gateText" x="${x + gateWidth / 2}" y="${y - extraSpaceForSubscript + gateHeight / 2}" ${fontSize} ${attrFunctionCall}>${gateName}</text>`
     }
 
-    switch (subscript) {
-        case 'X':
-            output += `<path transform="translate(${x}, ${y + 2})" d="M9.196 5.332L8.472 5.988L9.188 6.66L9.428 6.78V7H8.524V6.78L8.756 6.66L8.22 6.16L7.708 6.66L7.94 6.78V7H7.1V6.78L7.34 6.66L8.056 6.004L7.332 5.332L7.1 5.22V4.992H8V5.22L7.768 5.332L8.304 5.836L8.828 5.332L8.596 5.22V4.992H9.428V5.22L9.196 5.332Z" fill="black"/>`
+    switch (gateSubscript) {
+        case 'I':
+            output += `<line transform="translate(${x}, ${y})" x1="7.5" y1="1" x2="7.5" y2="4" stroke="black" stroke-width="0.2"/>
+                       <line transform="translate(${x}, ${y})"x1="6.5" y1="2" x2="8.5" y2="2" stroke="black" stroke-width="0.2"/>`
             break
-        case 'Y':
-            output += `<path transform="translate(${x}, ${y + 2})" d="M9.508 4.992V5.216L9.18 5.328L8.296 7.3C8.22933 7.452 8.15467 7.56933 8.072 7.652C7.992 7.73733 7.88933 7.79867 7.764 7.836C7.64133 7.876 7.48133 7.896 7.284 7.896H7.204V7.6C7.30533 7.608 7.40267 7.612 7.496 7.612C7.59733 7.612 7.67733 7.59867 7.736 7.572C7.79733 7.54533 7.85733 7.48933 7.916 7.404C7.97733 7.32133 8.05067 7.188 8.136 7.004L7.368 5.328L7.04 5.216V4.992H8.06V5.216L7.736 5.324L8.312 6.616L8.88 5.324L8.556 5.216V4.992H9.508Z" fill="black"/>`
-            break
-        case 'Z':
-            output += `<path transform="translate(${x}, ${y + 2})" d="M9.132 6.38V7H7.2V6.692L8.684 5.272H7.504L7.42 5.612H7.212V4.992H9.104V5.3L7.62 6.72H8.848L8.924 6.38H9.132Z" fill="black"/>`
+        default:
+            output += `<text class="subscript" x="${x + gateWidth - 1}" y="${y + gateHeight - 1}">${gateSubscript}</text>`
     }
 
     return output
+}
+
+// Takes a gate name and returns the visible gate name, subscript and  color
+function parseGate(name: string): [name: string, subscript: string, color: string] {
+    if (gateMap.has(name)) {
+        const gate = gateMap.get(name)
+        return [gate!.name, gate!.subscript, gate!.colors[ColorMethod[data.gateColorMethod as keyof typeof ColorMethod]]]
+    } else {
+        return [name, '', 'gray']
+    }
 }

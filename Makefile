@@ -7,9 +7,9 @@ build:
 	vsce package
 
 install:
-	code --install-extension intel-quantum-sdk-1.1.0.vsix
+	code --install-extension intel-quantum-sdk-1.3.1.vsix
 
 clean:
-	code --uninstall-extension intel-quantum-sdk-1.1.0.vsix
+	code --uninstall-extension intel-quantum-sdk-1.3.1.vsix
 	@echo "CTRL + SHIFT + P -> Reload Window" 
 

@@ -2,9 +2,28 @@
  *  Copyright (c) Intel Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
- 
+
+:root {
+    --background: #f7f7f7;
+    --backbackground: #ffffff;
+    --text-color: #202020;
+    --dot-color: #919191;
+}
+
+[data-vscode-theme-kind="vscode-dark"] {
+    --background: #262626;
+    --backbackground: #1E1E1E;
+    --text-color: #808080;
+    --dot-color: #080808;
+}
+
+@font-face {
+    font-family: Intel;
+    src: url('./../fonts/intelone-display-font-family-regular.woff2') format('woff2');
+}
+
 body {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: Intel, sans-serif;
     display: flex;
     height: 100vh;
     overflow: hidden;
@@ -18,21 +37,21 @@ h1 {
 }
 
 text {
-    fill: #808080;
-    font: 5px Courier;
+    fill: var(--text-color);
+    font-size: 5px;
     text-anchor: end;
 }
 
 .background {
-    fill: #262626
+    fill: var(--background);
 }
 
 .backbackground {
-    fill: #1E1E1E;
+    fill: var(--backbackground);
 }
 
 .gate {
-    fill: #00C7FD; /* TODO: Choose a gate color for custom gates */
+    fill: #E9E9E9;
     border: none;
     padding: 0;
     outline-width: 0;
@@ -44,9 +63,15 @@ text {
     fill: black !important;
 }
 
+.subscript {
+    font-size: 3px;
+    fill: black;
+}
+
 .line {
     stroke: #808080;
     stroke-width: 0.7;
+    fill: var(--dot-color);
 }
 
 .title {
@@ -60,7 +85,7 @@ text {
 #attributes {
     background: rgb(48, 48, 48);
     border: 1px solid rgb(97, 97, 97);
-    color:rgb(225, 225, 225);
+    color: rgb(225, 225, 225);
     border-radius: 5px;
     border-width: 2px;
     padding: 5px;
@@ -69,9 +94,30 @@ text {
 }
 
 /* Gate Colors */
-#H { fill: #00C7FD; }
-#X { fill: #FF8F51; }
-#Z { fill: #CC94DA; }
-#Meas { fill: #B1D272; }
-#Prep { fill: rgb(247, 132, 132)}
+#blue {
+    fill: #00C7FD;
+}
 
+#orange {
+    fill: #FF8F51;
+}
+
+#purple {
+    fill: #CC94DA;
+}
+
+#red {
+    fill: #FF5662;
+}
+
+#yellow {
+    fill: #FFE17A;
+}
+
+#green {
+    fill: #B1D272;
+}
+
+#gray {
+    fill: #E9E9E9;
+}

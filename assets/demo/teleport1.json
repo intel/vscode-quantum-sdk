@@ -1,6 +1,7 @@
 {
     "IntelQuantumID": "Circuit-v1",
     "title" : "Teleport |1⟩",
+    "gateColorMethod": "simple",
     "numQbits" : 3,
     "qbitNames": [
         "example_0",

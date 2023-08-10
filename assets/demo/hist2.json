@@ -5,22 +5,22 @@
         {
             "value": "00",
             "probability": 0.2,
-            "amplitude": [0.0, 0.0]
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "01",
             "probability": 0.075,
-            "amplitude": [0.0, 0.0]
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "10",
             "probability": 0.7,
-            "amplitude": [0.0, 0.0]
+            "amplitude": [0.6, 0.1]
         },
         {
             "value": "11",
             "probability": 0.025,
-            "amplitude": [0.0, 0.0]
+            "amplitude": [0.6, 0.1]
         }
     ]
 }

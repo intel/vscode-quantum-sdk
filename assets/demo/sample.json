@@ -1,6 +1,7 @@
 {
     "IntelQuantumID": "Circuit-v1",
     "title" : "Sample Circuit 1",
+    "gateColorMethod": "default",
     "numQbits" : 3,
     "qbitNames": [
         "example_0",

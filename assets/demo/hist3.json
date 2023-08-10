@@ -1,0 +1,46 @@
+{
+    "IntelQuantumID": "Histogram-v1",
+    "title": "3 Qubit Example",
+    "states": [
+        {
+            "value": "000",
+            "probability": 0.1,
+            "amplitude": [0.6, 0.1]
+        },
+        {
+            "value": "001",
+            "probability": 0.2,
+            "amplitude": [0.6, 0.1]
+        },
+        {
+            "value": "010",
+            "probability": 0.3,
+            "amplitude": [0.6, 0.1]
+        },
+        {
+            "value": "011",
+            "probability": 0.025,
+            "amplitude": [0.6, 0.1]
+        },
+        {
+            "value": "100",
+            "probability": 0.075,
+            "amplitude": [0.6, 0.1]
+        },
+        {
+            "value": "101",
+            "probability": 0.2,
+            "amplitude": [0.6, 0.1]
+        },
+        {
+            "value": "110",
+            "probability": 0.05,
+            "amplitude": [0.6, 0.1]
+        },
+        {
+            "value": "111",
+            "probability": 0.05,
+            "amplitude": [0.6, 0.1]
+        }
+    ]
+}

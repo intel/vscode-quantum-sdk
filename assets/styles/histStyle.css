@@ -1,0 +1,57 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Intel Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+ 
+ :root {
+  --background: #f7f7f7;
+  --backbackground: #ffffff;
+  --text-color: black;
+  --line-color: #808080;
+  --bar-color: #0068B5;
+}
+
+[data-vscode-theme-kind="vscode-dark"] {
+  --background: #262626;
+  --backbackground: #1E1E1E;
+  --text-color: white;
+  --line-color: #808080;
+  --bar-color: #00C7FD;
+}
+ 
+ h1 {
+  margin-top: 30px;
+  text-align: center;
+}
+
+ #histogram {
+  width: 90%;
+  height: 60%;
+  display: inline;
+  margin-left: 5%;
+}
+
+.background {
+  fill: var(--background);
+}
+
+.bar {
+  fill: var(--bar-color);
+}
+
+.labelX {
+  font-size: 48px;
+  text-anchor: middle;  
+  fill: var(--text-color);
+}
+
+.labelY {
+  font-size: 40px; 
+  fill: var(--text-color);
+  text-anchor: end;
+  dominant-baseline: middle;
+}
+
+.line {
+  stroke: var(--line-color);
+}
