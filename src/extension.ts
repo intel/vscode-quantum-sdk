@@ -6,9 +6,20 @@
 import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
+import { QCircuitData, QHistogramData } from './types'
+import * as subp from 'child_process'
 
-// this method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
+
+	let dir = vscode.workspace.workspaceFolders![0].uri.path
+
+    	//promise based system shell commnd, hoist if deemed useful elsewhere
+    	const subShell = (cmd: string ) => new Promise<string>((resolve, reject) => {
+    	    subp.exec(cmd, (err, out) => {
+    	        if (err) return reject(err);
+    	        return resolve(out);
+    	    });
+    	});
 
 	updateCustomContext(vscode.window.activeTextEditor)
 	vscode.window.onDidChangeActiveTextEditor(editor => { updateCustomContext(editor) })
@@ -16,12 +27,12 @@ export function activate(context: vscode.ExtensionContext) {
 	const setupCommand = 'intel-quantum.setup'
 	const setup = () => {
 		let assetPath: string = context.extensionUri.fsPath + '/assets/setupExamples'
-		let dir: string = vscode.workspace.workspaceFolders![0].uri.fsPath + '/visualization'
+		let visDir: string = vscode.workspace.workspaceFolders![0].uri.fsPath + '/visualization'
 
-		if (!fs.existsSync(dir)) {
-			fs.mkdirSync(dir + '/circuits', { recursive: true });
+		if (!fs.existsSync(visDir)) {
+			fs.mkdirSync(visDir + '/circuits', { recursive: true });
 
-			fs.copyFile(assetPath + '/exampleCircuit.json', dir + '/circuits/exampleCircuit.json', function (err) {
+			fs.copyFile(assetPath + '/exampleCircuit.json', visDir + '/circuits/exampleCircuit.json', function (err) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -29,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			})
 
-			fs.copyFile(assetPath + '/histogram.json', dir + '/histogram.json', function (err) {
+			fs.copyFile(assetPath + '/histogram.json', visDir + '/histogram.json', function (err) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -37,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			})
 
-			fs.copyFile(assetPath + '/README.md', dir + '/README.md', function (err) {
+			fs.copyFile(assetPath + '/README.md', visDir + '/README.md', function (err) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -48,6 +59,19 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(setupCommand, setup))
 
+	const execDrawRoutine = ( circuitData: string ) => {
+        	try {
+        	    let data: QData = JSON.parse(circuitData) as QData
+        	    CircuitPanel.validateQData(data)
+        	    CircuitPanel.displayWebview(context.extensionUri, data, true)
+        	    //vscode.ViewColumn.One
+        	} catch (e) {
+        	    let dataError: QData = { title: (e as Error).message } as QData
+        	    CircuitPanel.displayWebview(context.extensionUri, dataError, false)
+        	    //vscode.ViewColumn.One
+        	}
+    	}
+
 	const drawCircuitCommand = "intel-quantum.drawCircuit"
 	const drawCircuit = () => {
 		const editor = vscode.window.activeTextEditor
@@ -55,53 +79,89 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (editor !== undefined) {
 			if (editor.document.languageId === 'json') {
-				fileContent = editor.document.getText()
+                		execDrawRoutine( editor.document.getText() )
 			} else if (editor.document.languageId === 'cpp') {
-				// Frisco - Add Code Here
+                		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
+                		subShell( "cd /home/workspace && make -f /home/iqsdk_user/Makefile NAME="+name ).then( () => {
+                			const cursorPosition = editor.selection.active;
+                			const lineText = editor.document.lineAt(cursorPosition.line).text;
+                			let KernelName = "MainCircuit";
 
-				// Compile C++ Code
-
-				// Get json data
-				
-				// fileContent = JSON DATA as a string		
-			}
-
-			try {
-				let data: QData = JSON.parse(fileContent) as QData
-				CircuitPanel.validateQData(data)
-				CircuitPanel.displayWebview(context.extensionUri, data, true)
-				vscode.ViewColumn.One
-			} catch (e) {
-				let dataError: QData = { title: (e as Error).message } as QData
-				CircuitPanel.displayWebview(context.extensionUri, dataError, false)
-				vscode.ViewColumn.One
+                			subShell("cat /home/workspace/Visualization/*MainCircuit*.json").then((out)=> {
+                        	    		//console.log(out)
+                				execDrawRoutine(out)
+                			})
+                		})
 			}
 		} else {
 			console.log("No Active Editor")
 		}
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitCommand, drawCircuit))
+
+	const drawHistogramCommand = "intel-quantum.drawHistogram"
+	const drawHistogram = () => {
+		const editor = vscode.window.activeTextEditor
+		let fileContent: string = ''
+
+		if (editor !== undefined) {
+			if (editor.document.languageId === 'json') {
+				fileContent = editor.document.getText()
+			}
+			// else if (editor.document.languageId === 'cpp') {
+
+			// }
+
+			try {
+				let data: QHistogramData = JSON.parse(fileContent) as QHistogramData
+				CircuitPanel.validateQHistogramData(data)
+				CircuitPanel.displayHistogramWebview(context.extensionUri, data)
+			} catch (e) {
+				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
+				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
+			}
+		} else {
+			console.log("No Active Editor")
+		}
+	}
+	context.subscriptions.push(vscode.commands.registerCommand(drawHistogramCommand, drawHistogram))
+
+	const exportPngCommand = "intel-quantum.exportPng"
+	const exportPng = () => { CircuitPanel.exportCircuit() }
+	context.subscriptions.push(vscode.commands.registerCommand(exportPngCommand, exportPng))
 }
 
 function updateCustomContext(editor: vscode.TextEditor | undefined) {
+	// Set all contexts to false
+	vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', false)
+	vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', false)
+	vscode.commands.executeCommand('setContext', 'customContext.quantumFile', false)
+
+	// Set correct context to true
 	if (editor && editor.document.languageId === "json") {
 		let editorText = editor.document.getText()
-		if (editorText.includes('IntelQuantumID')) {
-			vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
+		if (!editorText.includes('IntelQuantumID')) {
 			return
 		}
-	} else if (editor && editor.document.languageId === "cpp") { // Frisco - This code adds the button to cpp files with '#include <quantum.hpp>'
+
+		if (editorText.includes('Circuit')) {
+			vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', true)
+			return
+		}
+
+		if (editorText.includes('Histogram')) {
+			vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', true)
+			return
+		}
+	} else if (editor && editor.document.languageId === "cpp") {
 		let editorText = editor.document.getText()
-		if (editorText.includes('#include <quantum.hpp>')) { 
+        //const regex = new RegExp('^[^\S\r\n]*#[^\S\r\n]*include[^\S\r\n]*<[^\S\r\n]*quantum.hpp[^\S\r\n]*>[^\S\r\n]*$');
+        const regex = new RegExp('#include[^\S\r\n]*<[^\S\r\n]*quantum.hpp[^\S\r\n]*>', 'g');
+		if( regex.test(editorText) ){ 
+		//if (editorText.includes('#include <quantum.hpp>')) { 
 			vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
 			return
 		}
-	}
-	
-	vscode.commands.executeCommand('setContext', 'customContext.quantumFile', false)
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() { }
-
-
