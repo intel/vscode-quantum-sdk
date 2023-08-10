@@ -7,10 +7,7 @@ import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
 import { QCircuitData, QHistogramData } from './types'
-<<<<<<< HEAD
 import * as subp from 'child_process'
-=======
->>>>>>> main
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -82,7 +79,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (editor !== undefined) {
 			if (editor.document.languageId === 'json') {
-<<<<<<< HEAD
                 		execDrawRoutine( editor.document.getText() )
 			} else if (editor.document.languageId === 'cpp') {
                 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
@@ -96,21 +92,6 @@ export function activate(context: vscode.ExtensionContext) {
                 				execDrawRoutine(out)
                 			})
                 		})
-=======
-				fileContent = editor.document.getText()
-			}
-			// else if (editor.document.languageId === 'cpp') {
-
-			// }
-
-			try {
-				let data: QCircuitData = JSON.parse(fileContent) as QCircuitData
-				CircuitPanel.validateQCircuitData(data)
-				CircuitPanel.displayCircuitWebview(context.extensionUri, data, true)
-			} catch (e) {
-				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
-				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
->>>>>>> main
 			}
 		} else {
 			console.log("No Active Editor")
@@ -154,10 +135,7 @@ function updateCustomContext(editor: vscode.TextEditor | undefined) {
 	// Set all contexts to false
 	vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', false)
 	vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', false)
-<<<<<<< HEAD
-	vscode.commands.executeCommand('setContext', 'customContext.quantumFile', false)
-=======
->>>>>>> main
+	vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', false)
 
 	// Set correct context to true
 	if (editor && editor.document.languageId === "json") {
@@ -173,7 +151,6 @@ function updateCustomContext(editor: vscode.TextEditor | undefined) {
 
 		if (editorText.includes('Histogram')) {
 			vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', true)
-<<<<<<< HEAD
 			return
 		}
 	} else if (editor && editor.document.languageId === "cpp") {
@@ -188,17 +165,3 @@ function updateCustomContext(editor: vscode.TextEditor | undefined) {
 }
 
 export function deactivate() { }
-=======
-			return
-		}
-	}
-	// else if (editor && editor.document.languageId === "cpp") {
-		// 	let editorText = editor.document.getText()
-		// 	if (editorText.includes('#include <quantum.hpp>')) { 
-		// 		vscode.commands.executeCommand('setContext', 'customContext.quantumFile', true)
-		// 		return
-		// 	}
-}
-
-export function deactivate() { }
->>>>>>> main
