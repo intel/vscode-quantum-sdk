@@ -6,28 +6,6 @@ function runD3(histogramData) {
     var xScale = d3.scaleBand().domain(histogramData.map((dataPoint) => dataPoint.value)).rangeRound([100, 1500]).padding(0.1)
     const yScale = d3.scaleLinear().domain([0, 1]).range([900, 50])
 
-    
-    // const buttonContainer = d3.select('#options')
-    
-    // buttonContainer
-    // .append('button')
-    // .text('Descending Order')
-    
-    // let order = true
-    // buttonContainer.on("click", function() {
-    //     if (order) {
-    //         histogramData.sort((a,b) => d3.descending(a.probability, b.probability))
-    //         order = false
-    //     } else  {
-    //         histogramData.sort((a,b) => d3.ascending(a.value, b.value))
-    //         order = true
-    //     }
-    //     // console.log(histogramData)
-    //     // console.log("TEST")
-    //     // xScale = d3.scaleBand().domain(histogramData.sort((a,b) => d3.descending(a.probability, b.probability)).map((dataPoint) => dataPoint.value)).rangeRound([100, 1500]).padding(0.1)
-    //     updateBars()
-    // })
-
     const graphContainer = d3.select("#histogram")
 
     graphContainer

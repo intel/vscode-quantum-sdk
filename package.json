@@ -48,6 +48,20 @@
         }
       },
       {
+        "command": "intel-quantum.compileCPP",
+        "title": "Compile CPP",
+        "category": "Intel Quantum"
+      },
+      {
+        "command": "intel-quantum.executeCPP",
+        "title": "Execute CPP",
+        "category": "Intel Quantum",
+        "icon": {
+          "light": "./assets/icons/editor-actions-light.svg",
+          "dark": "./assets/icons/editor-actions-dark.svg"
+        }
+      },
+      {
         "command": "intel-quantum.exportPng",
         "title": "Export as PNG",
         "category": "Intel Quantum",
@@ -67,6 +81,11 @@
         {
           "when": "customContext.quantumHistogramFile",
           "command": "intel-quantum.drawHistogram",
+          "group": "navigation"
+        },
+        {
+          "when": "customContext.quantumCPPScript",
+          "command": "intel-quantum.executeCPP",
           "group": "navigation"
         },
         {
