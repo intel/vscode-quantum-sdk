@@ -12,9 +12,7 @@ import MyCodeLensProvider from './codeLensProvider'
 
 export function activate(context: vscode.ExtensionContext) {
 
-	updateCustomContext(vscode.window.activeTextEditor)
-	vscode.window.onDidChangeActiveTextEditor(editor => { updateCustomContext(editor) })
-
+	// Commands
 	const setupCommand = 'intel-quantum.setup'
 	const setup = () => {
 		let assetPath: string = context.extensionUri.fsPath + '/assets/setupExamples'
@@ -96,6 +94,7 @@ export function activate(context: vscode.ExtensionContext) {
 			return
 		}
 
+		prepDocker()
 		setup()
 		const dir = vscode.workspace.workspaceFolders![0].uri.path
 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
@@ -127,6 +126,7 @@ export function activate(context: vscode.ExtensionContext) {
 			return
 		}
 
+		prepDocker()
 		setup()
 		const dir = vscode.workspace.workspaceFolders![0].uri.path
 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
@@ -157,7 +157,6 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand(exportPngCommand, exportPng))
 
 	// Helper functions
-	//promise based system shell commnd, hoist if deemed useful elsewhere
 	const subShell = (cmd: string) => new Promise<string>((resolve, reject) => {
 		subp.exec(cmd, (err, out) => {
 			if (err) { return reject(err) }
@@ -175,40 +174,56 @@ export function activate(context: vscode.ExtensionContext) {
 			CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
 		}
 	}
-}
 
-function updateCustomContext(editor: vscode.TextEditor | undefined) {
-	// Set all contexts to false
-	vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', false)
-	vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', false)
-	vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', false)
+	const updateCustomContext = () => {
 
-	// Set correct context to true
-	if (editor && editor.document.languageId === "json") {
+		const editor = vscode.window.activeTextEditor
+		if (editor === undefined) {
+			console.log("No Active Editor")
+			return
+		}
+
+		// Set all contexts to false
+		vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', false)
+		vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', false)
+		vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', false)
+
+		// Set correct context to true
 		let editorText = editor.document.getText()
-		if (!editorText.includes('IntelQuantumID')) {
-			return
-		}
-
-		if (editorText.includes('Circuit')) {
-			vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', true)
-			return
-		}
-
-		if (editorText.includes('Histogram')) {
-			vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', true)
-			return
-		}
-	} else if (editor && editor.document.languageId === "cpp") {
-		let editorText = editor.document.getText()
-		//const regex = new RegExp('^[^\S\r\n]*#[^\S\r\n]*include[^\S\r\n]*<[^\S\r\n]*quantum.hpp[^\S\r\n]*>[^\S\r\n]*$')
-		const regex = new RegExp(/#include[^\S\r\n]*<[^\S\r\n]*quantum.hpp[^\S\r\n]*>/, 'g')
-		if (regex.test(editorText)) {
-			//if (editorText.includes('#include <quantum.hpp>')) { 
-			vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', true)
-			return
+		if (editor.document.languageId === "json") {
+			if (!editorText.includes('IntelQuantumID')) {
+				return
+			} else if (editorText.includes('Circuit')) {
+				vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', true)
+				return
+			} else if (editorText.includes('Histogram')) {
+				vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', true)
+				return
+			}
+		} else if (editor.document.languageId === "cpp") {
+			const regex = new RegExp(/[^\S\r\n]*#[^\S\r\n]*include[^\S\r\n]*<[^\S\r\n]*quantum.hpp[^\S\r\n]*>[^\S\r\n]*/)
+			if (regex.test(editorText)) {
+				vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', true)
+				return
+			}
 		}
 	}
+
+	const prepDocker = () => {
+		const checkImageCommand = 'docker image inspect intellabs/intel_quantum_sdk:latest > /dev/null 2>&1'
+		subShell(checkImageCommand).then(() => {}).catch(() => {
+			const channel = vscode.window.createOutputChannel('MyExtension')
+			channel.appendLine('Docker Image Required!\n')
+			channel.appendLine('If you have not installed Docker go here https://www.docker.com/get-started/ \n')
+			channel.appendLine('Once Docker is installed run the following command')
+			channel.appendLine('docker pull intellabs/intel_quantum_sdk')
+			channel.show()
+		})
+	}
+
+	// On activate
+	updateCustomContext()
+	vscode.window.onDidChangeActiveTextEditor(() => { updateCustomContext() })
 }
 
 export function deactivate() { }
