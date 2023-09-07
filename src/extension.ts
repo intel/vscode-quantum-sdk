@@ -216,7 +216,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}).catch(() => {
 			channel.appendLine('Docker is required\n')
 			channel.appendLine('install Docker go here https://www.docker.com/get-started/\n')
-			channel.appendLine('Then follow these steps to use docker as a nonroot user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user')
+			channel.appendLine('Then follow these steps to use docker as a nonroot user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user\n\n')
 			channel.show()
 		})
 	}
