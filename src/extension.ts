@@ -101,17 +101,13 @@ export function activate(context: vscode.ExtensionContext) {
 		const command = `docker run --rm -p 3000:3000 -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler -P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/visualization/circuits/${kernelName}.json"`
 
 		subShell(command).then((stdout) => {
-
-			const channel = vscode.window.createOutputChannel('MyExtension')
 			channel.appendLine(stdout)
 			channel.show()
 
 			const filePath = dir + '/visualization/circuits/' + kernelName + '.json'
 			const fileContents = fs.readFileSync(filePath, 'utf8')
 			execDrawRoutine(fileContents)
-
 		}).catch((output) => {
-			const channel = vscode.window.createOutputChannel('MyExtension')
 			channel.appendLine(output)
 			channel.show()
 		})
@@ -119,7 +115,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand(compileCPPCommand, compileCPP))
 
 	const executeCPPCommand = "intel-quantum.executeCPP"
-	const executeCPP = (kernelName: string) => {
+	const executeCPP = () => {
 		const editor = vscode.window.activeTextEditor
 		if (editor === undefined) {
 			console.log("No Active Editor")
@@ -133,8 +129,6 @@ export function activate(context: vscode.ExtensionContext) {
 		const command = `docker run --rm -p 3000:3000 -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler /data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/visualization/outputs/${name}.out"`
 
 		subShell(command).then((stdout) => {
-
-			const channel = vscode.window.createOutputChannel('MyExtension')
 			channel.appendLine(stdout)
 			channel.show()
 
@@ -145,7 +139,6 @@ export function activate(context: vscode.ExtensionContext) {
 			})
 
 		}).catch((output) => {
-			const channel = vscode.window.createOutputChannel('MyExtension')
 			channel.appendLine(output)
 			channel.show()
 		})
@@ -177,18 +170,15 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const updateCustomContext = () => {
 
-		const editor = vscode.window.activeTextEditor
-		if (editor === undefined) {
-			console.log("No Active Editor")
-			return
-		}
-
 		// Set all contexts to false
 		vscode.commands.executeCommand('setContext', 'customContext.quantumCircuitFile', false)
 		vscode.commands.executeCommand('setContext', 'customContext.quantumHistogramFile', false)
 		vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', false)
 
 		// Set correct context to true
+		const editor = vscode.window.activeTextEditor
+		if (editor === undefined) { return }
+
 		let editorText = editor.document.getText()
 		if (editor.document.languageId === "json") {
 			if (!editorText.includes('IntelQuantumID')) {
@@ -210,20 +200,32 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 
 	const prepDocker = () => {
+		const checkDockerCommand = 'command -v docker || exit 1'
 		const checkImageCommand = 'docker image inspect intellabs/intel_quantum_sdk:latest > /dev/null 2>&1'
-		subShell(checkImageCommand).then(() => {}).catch(() => {
-			const channel = vscode.window.createOutputChannel('MyExtension')
-			channel.appendLine('Docker Image Required!\n')
-			channel.appendLine('If you have not installed Docker go here https://www.docker.com/get-started/ \n')
-			channel.appendLine('Once Docker is installed run the following command')
-			channel.appendLine('docker pull intellabs/intel_quantum_sdk')
+
+		subShell(checkDockerCommand).then(() => {
+			subShell(checkImageCommand).then(() => { }).catch(() => {
+				channel.appendLine('Docker Image Required!\n')
+				channel.appendLine('Attempting to install docker image')
+				channel.show()
+
+				const terminal = vscode.window.createTerminal(`Pull Intel Quantum Docker Image`);
+				terminal.sendText('docker pull intellabs/intel_quantum_sdk')
+				terminal.show()
+			})
+		}).catch(() => {
+			channel.appendLine('Docker is required\n')
+			channel.appendLine('install Docker go here https://www.docker.com/get-started/\n')
+			channel.appendLine('Then follow these steps to use docker as a nonroot user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user')
 			channel.show()
 		})
 	}
 
 	// On activate
+	const channel = vscode.window.createOutputChannel('Quantum Compile Output')
 	updateCustomContext()
 	vscode.window.onDidChangeActiveTextEditor(() => { updateCustomContext() })
+	vscode.workspace.onDidSaveTextDocument(() => { updateCustomContext() })
 }
 
 export function deactivate() { }
