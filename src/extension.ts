@@ -100,11 +100,11 @@ export function activate(context: vscode.ExtensionContext) {
 			return
 		}
 
-		prepDocker()
+		prepPodman()
 		setup()
 		const dir = vscode.workspace.workspaceFolders![0].uri.path
 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
-		const command = `docker run --rm -p 3000:3000 -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler -P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/visualization/circuits/${kernelName}.json"`
+		const command = `podman run --rm -p 3000:3000 -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler -P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/visualization/circuits/${kernelName}.json"`
 
 		subShell(command).then((stdout) => {
 			channel.appendLine(stdout)
@@ -128,11 +128,11 @@ export function activate(context: vscode.ExtensionContext) {
 			return
 		}
 
-		prepDocker()
+		prepPodman()
 		setup()
 		const dir = vscode.workspace.workspaceFolders![0].uri.path
 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
-		const command = `docker run --rm -p 3000:3000 -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler /data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/visualization/outputs/${name}.out"`
+		const command = `podman run --rm -p 3000:3000 -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler /data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/visualization/outputs/${name}.out"`
 
 		subShell(command).then((stdout) => {
 			channel.appendLine(stdout)
@@ -205,24 +205,23 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}
 
-	const prepDocker = () => {
-		const checkDockerCommand = 'command -v docker || exit 1'
-		const checkImageCommand = 'docker image inspect intellabs/intel_quantum_sdk:latest > /dev/null 2>&1'
+	const prepPodman = () => {
+		const checkPodmanCommand = 'command -v podman || exit 1'
+		const checkImageCommand = 'podman image inspect intellabs/intel_quantum_sdk:latest > /dev/null 2>&1'
 
-		subShell(checkDockerCommand).then(() => {
+		subShell(checkPodmanCommand).then(() => {
 			subShell(checkImageCommand).then(() => { }).catch(() => {
-				channel.appendLine('Docker Image Required!\n')
-				channel.appendLine('Attempting to install docker image')
+				channel.appendLine('Podman Image Required!\n')
+				channel.appendLine('Attempting to pull Intel Quantum SDK image')
 				channel.show()
 
-				const terminal = vscode.window.createTerminal(`Pull Intel Quantum Docker Image`);
-				terminal.sendText('docker pull intellabs/intel_quantum_sdk')
+				const terminal = vscode.window.createTerminal(`Pull Intel Quantum Image`);
+				terminal.sendText('podman pull docker.io/intellabs/intel_quantum_sdk')
 				terminal.show()
 			})
 		}).catch(() => {
-			channel.appendLine('Docker is required\n')
-			channel.appendLine('install Docker go here https://www.docker.com/get-started/\n')
-			channel.appendLine('Then follow these steps to use docker as a nonroot user https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user\n\n')
+			channel.appendLine('Podman is required\n')
+			channel.appendLine('To install Podman go here https://podman.io/\n\n')
 			channel.show()
 		})
 	}
