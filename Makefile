@@ -13,5 +13,5 @@ clean:
 	code --uninstall-extension intel-quantum-sdk-1.4.0.vsix
 	@echo "CTRL + SHIFT + P -> Reload Window" 
 
-podman:
-	podman run -it --rm --name quantum -v ~/workspace:/opt/intel/data  intellabs/intel_quantum_sdk
+docker:
+	docker run -it --rm --name quantum -v ~/workspace:/opt/intel/data  intellabs/intel_quantum_sdk
