@@ -221,7 +221,9 @@ export function activate(context: vscode.ExtensionContext) {
 			})
 		}).catch(() => {
 			channel.appendLine('Podman is required\n')
-			channel.appendLine('To install Podman go here https://podman.io/\n\n')
+			channel.appendLine('To install Podman use the following links\n')
+			channel.appendLine('Ubuntu or WSL with Ubuntu - https://podman.io/docs/installation#ubuntu')
+			channel.appendLine('MacOS - https://podman.io/docs/installation#macos')
 			channel.show()
 		})
 	}
