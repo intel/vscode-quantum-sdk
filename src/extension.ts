@@ -19,6 +19,9 @@ export function activate(context: vscode.ExtensionContext) {
 		let visDir: string = vscode.workspace.workspaceFolders![0].uri.fsPath + '/visualization'
 
 		if (!fs.existsSync(visDir)) {
+			fs.mkdirSync(visDir)
+		}
+		if (!fs.existsSync(visDir + '/circuits')) {
 			fs.mkdirSync(visDir + '/circuits', { recursive: true })
 
 			fs.copyFile(assetPath + '/exampleCircuit.json', visDir + '/circuits/exampleCircuit.json', function (err) {
@@ -28,6 +31,8 @@ export function activate(context: vscode.ExtensionContext) {
 					console.log("exampleCircuit.json written successfully\n")
 				}
 			})
+		}
+		if (!fs.existsSync(visDir + '/histograms')) {
 
 			fs.mkdirSync(visDir + '/histograms', { recursive: true })
 
@@ -38,8 +43,9 @@ export function activate(context: vscode.ExtensionContext) {
 					console.log("histogram.json written successfully\n")
 				}
 			})
-
-			fs.mkdirSync(visDir + '/outputs', { recursive: true })
+		}
+		if (!fs.existsSync(visDir + '/outputs')) {
+			fs.mkdirSync(visDir + '/outputs', { recursive: true })	
 		}
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(setupCommand, setup))
