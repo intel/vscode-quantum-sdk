@@ -7,9 +7,11 @@ build:
 	vsce package
 
 install:
-	code --install-extension intel-quantum-sdk-1.3.1.vsix
+	code --install-extension intel-quantum-sdk-1.4.0.vsix
 
 clean:
-	code --uninstall-extension intel-quantum-sdk-1.3.1.vsix
+	code --uninstall-extension intel-quantum-sdk-1.4.0.vsix
 	@echo "CTRL + SHIFT + P -> Reload Window" 
 
+docker:
+	docker run -it --rm --name quantum -v ~/workspace:/opt/intel/data  intellabs/intel_quantum_sdk

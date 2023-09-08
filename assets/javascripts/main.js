@@ -17,7 +17,7 @@ function initializePanzoom(backgroundWidth, backgroundHeight) {
     var pz = panzoom(circuitBoard, {
         bounds: true,
         boundsPadding: 0,
-        minZoom: minZoomSize,
+        minZoom: minZoomSize - 1,
         maxZoom: 10,
         smoothScroll: false,
         zoomSpeed: 0.3
