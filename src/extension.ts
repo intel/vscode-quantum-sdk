@@ -197,7 +197,7 @@ export function activate(context: vscode.ExtensionContext) {
 				return
 			}
 		} else if (editor.document.languageId === "cpp") {
-			const regex = new RegExp(/[^\S\r\n]*#[^\S\r\n]*include[^\S\r\n]*<[^\S\r\n]*quantum.hpp[^\S\r\n]*>[^\S\r\n]*/)
+			const regex = new RegExp(/[ \t]*#[ \t]*include[ \t]*<clang\/Quantum\/quintrinsics.h>[ \t]*/)
 			if (regex.test(editorText)) {
 				vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', true)
 				return

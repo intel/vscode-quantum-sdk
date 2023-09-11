@@ -4,7 +4,7 @@
 # ----------------------------------------------------------------------------------------------
 
 build: 
-	vsce package
+	npx vsce package
 
 install:
 	code --install-extension intel-quantum-sdk-1.4.1.vsix

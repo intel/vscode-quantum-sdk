@@ -120,6 +120,7 @@
     "@types/vscode": "^1.56.0",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
+    "@vscode/vsce": "^2.21.0",
     "eslint": "^7.19.0",
     "glob": "^7.1.6",
     "mocha": "^10.2.0",
