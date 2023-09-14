@@ -104,7 +104,7 @@ export function activate(context: vscode.ExtensionContext) {
 		setup()
 		const dir = vscode.workspace.workspaceFolders![0].uri.path
 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
-		const command = `podman run --rm -p 3000:3000 -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler -P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/visualization/circuits/${kernelName}.json"`
+		const command = `podman run --rm -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler -P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/visualization/circuits/${kernelName}.json"`
 
 		subShell(command).then((stdout) => {
 			channel.appendLine(stdout)
@@ -132,7 +132,7 @@ export function activate(context: vscode.ExtensionContext) {
 		setup()
 		const dir = vscode.workspace.workspaceFolders![0].uri.path
 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
-		const command = `podman run --rm -p 3000:3000 -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler /data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/visualization/outputs/${name}.out"`
+		const command = `podman run --rm -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler /data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/visualization/outputs/${name}.out"`
 
 		subShell(command).then((stdout) => {
 			channel.appendLine(stdout)

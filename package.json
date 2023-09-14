@@ -2,7 +2,7 @@
   "name": "intel-quantum-sdk",
   "displayName": "Intel Quantum SDK",
   "description": "Visualization and language support for Visual Studio Code",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "publisher": "intel-corporation",
   "repository": {
     "type": "git",
