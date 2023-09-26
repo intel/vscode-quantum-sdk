@@ -6,6 +6,7 @@
 import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
+import * as path from 'path'
 import { QCircuitData, QHistogramData } from './types'
 import * as subp from 'child_process'
 import MyCodeLensProvider from './codeLensProvider'
@@ -16,7 +17,8 @@ export function activate(context: vscode.ExtensionContext) {
 	const setupCommand = 'intel-quantum.setup'
 	const setup = () => {
 		let assetPath: string = context.extensionUri.fsPath + '/assets/setupExamples'
-		let visDir: string = vscode.workspace.workspaceFolders![0].uri.fsPath + '/visualization'
+		//let visDir: string = vscode.workspace.workspaceFolders![0].uri.fsPath + '/visualization'
+		let visDir = path.posix.dirname(vscode.window.activeTextEditor!.document.fileName) + '/visualization';
 
 		if (!fs.existsSync(visDir)) {
 			fs.mkdirSync(visDir)
@@ -102,7 +104,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 		prepPodman()
 		setup()
-		const dir = vscode.workspace.workspaceFolders![0].uri.path
+		//const dir = vscode.workspace.workspaceFolders![0].uri.path
+		const dir = path.posix.dirname(vscode.window.activeTextEditor!.document.fileName);
 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
 		const command = `podman run --rm -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler -P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/visualization/circuits/${kernelName}.json"`
 
@@ -130,7 +133,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 		prepPodman()
 		setup()
-		const dir = vscode.workspace.workspaceFolders![0].uri.path
+		//const dir = vscode.workspace.workspaceFolders![0].uri.path
+		const dir = path.posix.dirname(vscode.window.activeTextEditor!.document.fileName);
 		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
 		const command = `podman run --rm -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler /data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/visualization/outputs/${name}.out"`
 
@@ -197,7 +201,10 @@ export function activate(context: vscode.ExtensionContext) {
 				return
 			}
 		} else if (editor.document.languageId === "cpp") {
-			const regex = new RegExp(/[ \t]*#[ \t]*include[ \t]*<clang\/Quantum\/quintrinsics.h>[ \t]*/)
+			//need to match both prod and dev includes, the following regex is overly accepting...
+			//#include <clang/Quantum/quintrinsics.h>
+			//#include "../../clang/include/clang/Quantum/quintrinsics.h"
+			const regex = new RegExp(/[ \t]*#[ \t]*include[ \t\S]*clang\/Quantum\/quintrinsics.h[ \t>"]*/)
 			if (regex.test(editorText)) {
 				vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', true)
 				return
