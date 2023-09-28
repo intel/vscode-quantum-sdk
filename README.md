@@ -4,14 +4,22 @@
 
 # Intel<sub>®</sub> Quantum SDK Extension for VS Code
 
-The purpose of this extension is to create a visual representation of code for the C++ [Intel<sub>®</sub> Quantum Compiler](https://developer.intel.com/quantumsdk) in the form of a circuit board.
+The purpose of this extension is to provide compilation and visualization tools for the C++ [Intel<sub>®</sub> Quantum Compiler](https://developer.intel.com/quantumsdk). The extension connects to the compiler and represents it's output as an exportable svg circuit board.
 
 > Note: See `README-Dev.md` for development instructions
 
-## Generate Circuit Board
-Navigate to a valid `json` file that represents a quantum circuit board (Either test files or the output of the compiler). Then press the |0⟩ button on the right side of the tab bar. This will display a [Webview](https://code.visualstudio.com/api/extension-guides/webview) containing the circuit board. 
+## Execute C++
+In a valid Quantum C++ file there will be a `|0⟩` button on the right side of the tab bar. Clicking this button will compile and run the file, then display the output in a `.out` file.
 
-![circuitUsageExample.png](./assets/documentation/circuitUsageExample.png)
+> Note: Podman must be setup properly. See [Podman Setup](./README.md#podman-setup) for details
+
+## Generate Circuit Board
+In a valid Quantum C++ file there will be a button labeled `View Circuit` above every kernel. Clicking one of these buttons will generate a circuit board that will be displayed in the form of a [Webview](https://code.visualstudio.com/api/extension-guides/webview).
+
+> Note: Podman must be setup properly. See [Podman Setup](./README.md#podman-setup) for details
+
+## Podman Setup
+
 
 ## Export Circuit Board
 Click on the tab with the generated circuit board to make it the active window. On the right side of the tab bar there will be an export button. This gives the user the option to export to an svg or png. The file will then appear as `title.(chosen extension)` in the directory opened in VS Code.
@@ -21,6 +29,10 @@ Click on the tab with the generated circuit board to make it the active window. 
 > Note: There is an issue where exported images do not contain Intel's custom font.
 
 ## Understanding the json
+After clicking a `View Circuit` button above a kernel in a C++ file the circuit that is shown will be saved in [workspace]/visualization/circuits. After navigating to one of these json files there will be a button `|0⟩` on the right side of the tab bar. This will display the circuit board. Edits made to this json file will be reflected in the circuit board.
+
+![circuitUsageExample.png](./assets/documentation/circuitUsageExample.png)
+
 IntelQuantumID: Tells the extension that this json represents a quantum circuit board
 ``` json 
 "IntelQuantumID": "Circuit-v1",
