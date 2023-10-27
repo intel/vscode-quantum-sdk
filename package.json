@@ -30,7 +30,7 @@
         "category": "Intel Quantum"
       },
       {
-        "command": "intel-quantum.drawCircuit",
+        "command": "intel-quantum.drawCircuitFromJson",
         "title": "Draw Circuit",
         "category": "Intel Quantum",
         "icon": {
@@ -48,7 +48,7 @@
         }
       },
       {
-        "command": "intel-quantum.compileCPP",
+        "command": "intel-quantum.drawCircuitFromCPP",
         "title": "Compile CPP",
         "category": "Intel Quantum"
       },
@@ -75,7 +75,7 @@
       "editor/title": [
         {
           "when": "customContext.quantumCircuitFile",
-          "command": "intel-quantum.drawCircuit",
+          "command": "intel-quantum.drawCircuitFromJson",
           "group": "navigation"
         },
         {

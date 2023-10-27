@@ -1,0 +1,34 @@
+{
+    "version": "1.5.0",
+    "active-circuit-option": "option1",
+    "active-execute-option": "option2",
+    "options" : [
+        {
+            "name": "option1",
+            "remove": true,
+            "engine": "podman",
+            "color": "default",
+            "args" : [
+
+            ]
+        },
+        {
+            "name": "option2",
+            "remove": true,
+            "engine": "podman",
+            "color": "default",
+            "args" : [
+
+            ]
+        },
+        {
+            "name": "option3",
+            "remove": true,
+            "engine": "podman",
+            "color": "default",
+            "args" : [
+
+            ]
+        }
+    ]
+}

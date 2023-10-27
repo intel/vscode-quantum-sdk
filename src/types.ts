@@ -42,10 +42,32 @@ export interface GateData {
     colors: string[]
 }
 
+// Holds the compiler options that the user sets in the .iqsdk/compile.json file
+export interface CompilerOption {
+    name: string,
+    remove: boolean,
+    engine: CompilerEngine
+    color: ColorMethod
+    args: string[]
+}
+
+// Defines the different methods for using the sdk
+export enum CompilerEngine {
+    podman = 'podman',
+    docker = 'docker',
+    local = 'local'
+}
+
 // Defines the different ways the gates can be grouped and colored
 export enum ColorMethod {
     default,
     clifford,
     axis,
     simple
+}
+
+// Defines the different actions that require accessing the sdk
+export enum SDKAction {
+    drawCircuit,
+    executeCPP
 }
