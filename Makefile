@@ -26,4 +26,7 @@ clean:
 	@echo "CTRL + SHIFT + P -> Reload Window" 
 
 podman:
-	podman run -it --rm --name quantum -v ~/workspace:/opt/intel/data  intellabs/intel_quantum_sdk
+	podman run -it --rm --name quantum -v ~/workspace:/opt/intel/data intellabs/intel_quantum_sdk
+
+docker:
+	docker run -it --name quantum -v ~/workspace:/opt/intel/data intellabs/intel_quantum_sdk

@@ -297,15 +297,22 @@ export function activate(context: vscode.ExtensionContext) {
 		const rm = activeOption.remove ? '--rm' : ''
 		const args = activeOption.args.join(' ')
 
+		let pathPrefix = ''
+		if (activeOption.engine == CompilerEngine.local) {
+			pathPrefix = '.'
+		} else {
+			pathPrefix = '/data'
+		}
+
 		let secondHalfOfCommand = ''
 		if (action == SDKAction.drawCircuit) {
-			secondHalfOfCommand = `-P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/.iqsdk/circuits/${kernelName}.json && chmod 660 /data/.iqsdk/circuits/${kernelName}.json`
+			secondHalfOfCommand = `-P json ${pathPrefix}/${name}.cpp && mv Visualization/**${kernelName}** ${pathPrefix}/.iqsdk/circuits/${kernelName}.json && chmod 660 ${pathPrefix}/.iqsdk/circuits/${kernelName}.json`
 		} else if (action == SDKAction.executeCPP) {
-			secondHalfOfCommand = `/data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/.iqsdk/outputs/${name}.out && chmod 666 /data/.iqsdk/outputs/${name}.out`
+			secondHalfOfCommand = `${pathPrefix}/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out ${pathPrefix}/.iqsdk/outputs/${name}.out && chmod 666 ${pathPrefix}/.iqsdk/outputs/${name}.out`
 		}
 
 		if (activeOption.engine == CompilerEngine.local) {
-			var command = `${activeOption.localSDKPath}/intel-quantum-compiler ${args} ${secondHalfOfCommand}` // Todo: Create local command
+			var command = `${activeOption.localSDKPath}/intel-quantum-compiler ${args} ${secondHalfOfCommand}`
 		} else {
 			prepContainerEngine(activeOption.engine)
 			var command = `${activeOption.engine} run ${rm} -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler ${args} ${secondHalfOfCommand}"`
