@@ -15,7 +15,7 @@ export interface QGate {
 // a quantum circuit board
 export interface QCircuitData {
     title: string,
-    gateColorMethod: string
+    gateColorMethod: ColorMethod
     numQbits: number,
     qbitNames: string[],
     gates: QGate[]
@@ -60,12 +60,13 @@ export enum CompilerEngine {
 }
 
 // Defines the different ways the gates can be grouped and colored
-export enum ColorMethod {
-    default,
-    clifford,
-    axis,
-    simple
-}
+export type ColorMethod = 'default' | 'clifford' | 'axis' | 'simple'
+export const ColorMap = new Map<ColorMethod, number>([
+    ['default', 0],
+    ['clifford', 1],
+    ['axis', 2],
+    ['simple', 3]
+]);
 
 // Defines the different actions that require accessing the sdk
 export enum SDKAction {

@@ -5,7 +5,7 @@
 
 // This file is used to generate the inside of the
 // circuit board svg with the given json data
-import { QGate, QCircuitData, GateData, ColorMethod } from './types'
+import { QGate, QCircuitData, GateData, ColorMap, ColorMethod } from './types'
 
 var data: QCircuitData
 var exporting: boolean
@@ -275,7 +275,8 @@ function drawGate(gate: QGate): string {
 function parseGate(name: string): [name: string, subscript: string, color: string] {
     if (gateMap.has(name)) {
         const gate = gateMap.get(name)
-        return [gate!.name, gate!.subscript, gate!.colors[ColorMethod[data.gateColorMethod as keyof typeof ColorMethod]]]
+        return [gate!.name, gate!.subscript, gate!.colors[ColorMap.get(data.gateColorMethod)!]]
+        
     } else {
         return [name, '', 'gray']
     }

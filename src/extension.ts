@@ -15,9 +15,20 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Commands
 	const setupCommand = 'intel-quantum.setup'
-	const prepFileStructure = () => {
+	const prepFileStructure = (): any => {
 		let assetPath: string = context.extensionUri.fsPath + '/assets/setupExamples'
 		let visDir = path.posix.dirname(vscode.window.activeTextEditor!.document.fileName) + '/.iqsdk';
+
+		const workspaceFolders = vscode.workspace.workspaceFolders
+		if (workspaceFolders && workspaceFolders.length > 0) {
+			if (!visDir.startsWith(workspaceFolders[0].uri.path)) {
+				vscode.window.showErrorMessage('CPP file is not in the active workspace.')
+				return new Error('CPP file not in workspace')
+			}
+		} else {
+			vscode.window.showErrorMessage('There is no active workspace. In the Explorer choose \"Open Folder\" to create a workspace.')
+			return new Error('No workspace open')
+		}
 
 		if (!fs.existsSync(visDir)) {
 			fs.mkdirSync(visDir)
@@ -57,6 +68,8 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			})
 		}
+
+		return null;
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(setupCommand, prepFileStructure))
 
@@ -103,10 +116,11 @@ export function activate(context: vscode.ExtensionContext) {
 	const drawCircuitFromCPPCommand = "intel-quantum.drawCircuitFromCPP"
 	const drawCircuitFromCPP = (kernelName: string) => {
 
-		prepFileStructure()
-		const [dir, name, command] = getShellInfo(SDKAction.drawCircuit, kernelName)
+		let err = prepFileStructure()
+		if (err !== null) { return }
 
-		if (command === '') { return }
+		const [dir, name, command, activeOption] = getShellInfo(SDKAction.drawCircuit, kernelName)
+		if (activeOption === null) { return }
 
 		subShell(command).then((stdout) => {
 			channel.appendLine(command + "\n")
@@ -115,7 +129,25 @@ export function activate(context: vscode.ExtensionContext) {
 
 			const filePath = dir + '/.iqsdk/circuits/' + kernelName + '.json'
 			const fileContents = fs.readFileSync(filePath, 'utf8')
-			execDrawRoutine(fileContents)
+
+			try {
+				let data: QCircuitData = JSON.parse(fileContents) as QCircuitData
+				data.gateColorMethod = activeOption.color
+
+				const jsonString = JSON.stringify(data, null, 2)
+				fs.writeFile(filePath, jsonString, 'utf-8', (err) => {
+					if (err) {
+						console.error('Error writing to JSON file:', err);
+					} else {
+						console.log('JSON file updated successfully.');
+					}
+				})
+
+				execDrawRoutine(jsonString)
+			} catch (e) {
+				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
+				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
+			}
 		}).catch((output) => {
 			channel.appendLine(output)
 			channel.show()
@@ -126,10 +158,11 @@ export function activate(context: vscode.ExtensionContext) {
 	const executeCPPCommand = "intel-quantum.executeCPP"
 	const executeCPP = () => {
 
-		prepFileStructure()
-		const [dir, name, command] = getShellInfo(SDKAction.executeCPP)
+		let err = prepFileStructure()
+		if (err !== null) { return }
 
-		if (command === '') { return }
+		const [dir, name, command, activeOption] = getShellInfo(SDKAction.executeCPP)
+		if (activeOption === null) { return }
 
 		subShell(command).then((stdout) => {
 			channel.appendLine(command + "\n")
@@ -226,11 +259,11 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	}
 
-	const getShellInfo = (action: SDKAction, kernelName?: string): [string, string, string] => {
+	const getShellInfo = (action: SDKAction, kernelName?: string): [string, string, string, CompilerOption | null] => {
 		const editor = vscode.window.activeTextEditor
 		if (editor === undefined) {
 			console.log("No Active Editor")
-			return ['', '', '']
+			return ['', '', '', null]
 		}
 
 		const dir = path.posix.dirname(vscode.window.activeTextEditor!.document.fileName);
@@ -249,13 +282,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (!activeOptionName) {
 			console.log('active option is not defined')
-			return ['', '', ''] 
+			return ['', '', '', null] 
 		} else if (!optionsList || optionsList.length === 0) {
 			console.log('options list is not defined')
-			return ['', '', '']
+			return ['', '', '', null]
 		} else if (!activeOptionName) {
 			console.log('active option does not match any defined options')
-			return ['', '', '']
+			return ['', '', '', null]
 		}
 
 		const activeOption : CompilerOption = optionsList.find((option: any) => option.name === activeOptionName)
@@ -278,7 +311,7 @@ export function activate(context: vscode.ExtensionContext) {
 			var command = `${activeOption.engine} run ${rm} -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler ${args} ${secondHalfOfCommand}"`
 		}
 
-		return [dir, name!, command]
+		return [dir, name!, command, activeOption]
 	}
 
 	// On activate
