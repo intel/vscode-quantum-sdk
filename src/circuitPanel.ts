@@ -5,7 +5,6 @@
 
 import * as vscode from "vscode"
 import { drawBoard, getBackgroundHeight, getBackgroundWidth, initData } from "./draw"
-import * as fs from 'fs'
 import { QCircuitData, QHistogramData } from "./types"
 
 /**

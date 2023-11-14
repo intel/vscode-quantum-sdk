@@ -109,6 +109,7 @@ export function activate(context: vscode.ExtensionContext) {
 		if (command === '') { return }
 
 		subShell(command).then((stdout) => {
+			channel.appendLine(command + "\n")
 			channel.appendLine(stdout)
 			channel.show()
 
@@ -131,6 +132,7 @@ export function activate(context: vscode.ExtensionContext) {
 		if (command === '') { return }
 
 		subShell(command).then((stdout) => {
+			channel.appendLine(command + "\n")
 			channel.appendLine(stdout)
 			channel.show()
 
@@ -236,7 +238,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		// Parse compile.json
 		const jsonData = fs.readFileSync(`${dir}/.iqsdk/compile.json`, 'utf-8')
-		const parsedData = JSON.parse(jsonData)
+		const parsedData = JSON.parse(jsonData) 
 		const optionsList = parsedData["options"]
 
 		const optionNames = {
@@ -261,18 +263,19 @@ export function activate(context: vscode.ExtensionContext) {
 		// Create Command
 		const rm = activeOption.remove ? '--rm' : ''
 		const args = activeOption.args.join(' ')
+
 		let secondHalfOfCommand = ''
 		if (action == SDKAction.drawCircuit) {
-			secondHalfOfCommand = `-P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/.iqsdk/circuits/${kernelName}.json`
+			secondHalfOfCommand = `-P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/.iqsdk/circuits/${kernelName}.json && chmod 660 /data/.iqsdk/circuits/${kernelName}.json`
 		} else if (action == SDKAction.executeCPP) {
-			secondHalfOfCommand = `/data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/.iqsdk/outputs/${name}.out`
+			secondHalfOfCommand = `/data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/.iqsdk/outputs/${name}.out && chmod 666 /data/.iqsdk/outputs/${name}.out`
 		}
 
 		if (activeOption.engine == CompilerEngine.local) {
-			var command = ''
+			var command = `${activeOption.localSDKPath}/intel-quantum-compiler ${args} ${secondHalfOfCommand}` // Todo: Create local command
 		} else {
 			prepContainerEngine(activeOption.engine)
-			var command = `${activeOption.engine} run ${rm} ${args} -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler ${secondHalfOfCommand}"`
+			var command = `${activeOption.engine} run ${rm} -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler ${args} ${secondHalfOfCommand}"`
 		}
 
 		return [dir, name!, command]

@@ -47,6 +47,7 @@ export interface CompilerOption {
     name: string,
     remove: boolean,
     engine: CompilerEngine
+    localSDKPath?: string, 
     color: ColorMethod
     args: string[]
 }
