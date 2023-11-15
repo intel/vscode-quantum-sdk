@@ -122,10 +122,13 @@ export function activate(context: vscode.ExtensionContext) {
 		const [dir, name, command, activeOption] = getShellInfo(SDKAction.drawCircuit, kernelName)
 		if (activeOption === null) { return }
 
-		subShell(command).then((stdout) => {
-			channel.appendLine(command + "\n")
-			channel.appendLine(stdout)
-			channel.show()
+		const terminal = vscode.window.createTerminal(`Draw Quantum Circuit`);
+		const outputLocation = activeOption.engine === 'local' ? '' : '> ./.iqsdk/terminal.log 2>&1'
+		terminal.sendText(`${command} ${outputLocation}`)
+		terminal.sendText(`exit`)
+
+		const disposable = vscode.window.onDidCloseTerminal(closedTerminal => {
+			if (closedTerminal !== terminal) { return }
 
 			const filePath = dir + '/.iqsdk/circuits/' + kernelName + '.json'
 			const fileContents = fs.readFileSync(filePath, 'utf8')
@@ -148,9 +151,8 @@ export function activate(context: vscode.ExtensionContext) {
 				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
 				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
 			}
-		}).catch((output) => {
-			channel.appendLine(output)
-			channel.show()
+
+			disposable.dispose()
 		})
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitFromCPPCommand, drawCircuitFromCPP))
@@ -164,20 +166,20 @@ export function activate(context: vscode.ExtensionContext) {
 		const [dir, name, command, activeOption] = getShellInfo(SDKAction.executeCPP)
 		if (activeOption === null) { return }
 
-		subShell(command).then((stdout) => {
-			channel.appendLine(command + "\n")
-			channel.appendLine(stdout)
-			channel.show()
+		const terminal = vscode.window.createTerminal(`Execute Quantum CPP`);
+		const outputLocation = activeOption.engine === 'local' ? '' : '> ./.iqsdk/terminal.log 2>&1'
+		terminal.sendText(`${command} ${outputLocation}`)
+		terminal.sendText(`exit`)
 
-			const filePath = dir + '/.iqsdk/outputs/' + name + '.out'
-			const openPath = vscode.Uri.file(filePath)
-			vscode.workspace.openTextDocument(openPath).then(doc => {
+		const disposable = vscode.window.onDidCloseTerminal(closedTerminal => {
+			if (closedTerminal !== terminal) { return }
+
+			const filePath: string = dir + '/.iqsdk/outputs/' + name + '.log'
+			vscode.workspace.openTextDocument(vscode.Uri.file(filePath)).then(doc => {
 				vscode.window.showTextDocument(doc, vscode.ViewColumn.Two)
 			})
 
-		}).catch((output) => {
-			channel.appendLine(output)
-			channel.show()
+			disposable.dispose()
 		})
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(executeCPPCommand, executeCPP))
@@ -271,7 +273,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		// Parse compile.json
 		const jsonData = fs.readFileSync(`${dir}/.iqsdk/compile.json`, 'utf-8')
-		const parsedData = JSON.parse(jsonData) 
+		const parsedData = JSON.parse(jsonData)
 		const optionsList = parsedData["options"]
 
 		const optionNames = {
@@ -282,7 +284,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (!activeOptionName) {
 			console.log('active option is not defined')
-			return ['', '', '', null] 
+			return ['', '', '', null]
 		} else if (!optionsList || optionsList.length === 0) {
 			console.log('options list is not defined')
 			return ['', '', '', null]
@@ -291,7 +293,7 @@ export function activate(context: vscode.ExtensionContext) {
 			return ['', '', '', null]
 		}
 
-		const activeOption : CompilerOption = optionsList.find((option: any) => option.name === activeOptionName)
+		const activeOption: CompilerOption = optionsList.find((option: any) => option.name === activeOptionName)
 
 		// Create Command
 		const rm = activeOption.remove ? '--rm' : ''
@@ -305,10 +307,12 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		let secondHalfOfCommand = ''
+		const outputLocation = activeOption.engine === 'local' ? '> ./.iqsdk/terminal.log 2>&1' : ''
+		const concatOutput = activeOption.engine === 'local' ? '>' + outputLocation : ''
 		if (action == SDKAction.drawCircuit) {
-			secondHalfOfCommand = `-P json ${pathPrefix}/${name}.cpp && mv Visualization/**${kernelName}** ${pathPrefix}/.iqsdk/circuits/${kernelName}.json && chmod 660 ${pathPrefix}/.iqsdk/circuits/${kernelName}.json`
+			secondHalfOfCommand = `-P json ${pathPrefix}/${name}.cpp ${outputLocation} && mv Visualization/**${kernelName}** ${pathPrefix}/.iqsdk/circuits/${kernelName}.json ${concatOutput} && chmod 660 ${pathPrefix}/.iqsdk/circuits/${kernelName}.json ${concatOutput}`
 		} else if (action == SDKAction.executeCPP) {
-			secondHalfOfCommand = `${pathPrefix}/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out ${pathPrefix}/.iqsdk/outputs/${name}.out && chmod 666 ${pathPrefix}/.iqsdk/outputs/${name}.out`
+			secondHalfOfCommand = `${pathPrefix}/${name}.cpp ${outputLocation} && ./${name} > ${name}.log && mv ${name}.log ${pathPrefix}/.iqsdk/outputs/${name}.log ${concatOutput} && chmod 666 ${pathPrefix}/.iqsdk/outputs/${name}.log ${concatOutput}`
 		}
 
 		if (activeOption.engine == CompilerEngine.local) {
