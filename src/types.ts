@@ -15,7 +15,7 @@ export interface QGate {
 // a quantum circuit board
 export interface QCircuitData {
     title: string,
-    gateColorMethod: string
+    gateColorMethod: ColorMethod
     numQbits: number,
     qbitNames: string[],
     gates: QGate[]
@@ -42,10 +42,34 @@ export interface GateData {
     colors: string[]
 }
 
+// Holds the compiler options that the user sets in the .iqsdk/compile.json file
+export interface CompilerOption {
+    name: string,
+    remove: boolean,
+    engine: CompilerEngine
+    localSDKPath?: string, 
+    color: ColorMethod
+    args: string[]
+}
+
+// Defines the different methods for using the sdk
+export enum CompilerEngine {
+    podman = 'podman',
+    docker = 'docker',
+    local = 'local'
+}
+
 // Defines the different ways the gates can be grouped and colored
-export enum ColorMethod {
-    default,
-    clifford,
-    axis,
-    simple
+export type ColorMethod = 'default' | 'clifford' | 'axis' | 'simple'
+export const ColorMap = new Map<ColorMethod, number>([
+    ['default', 0],
+    ['clifford', 1],
+    ['axis', 2],
+    ['simple', 3]
+]);
+
+// Defines the different actions that require accessing the sdk
+export enum SDKAction {
+    drawCircuit,
+    executeCPP
 }
