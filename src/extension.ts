@@ -310,7 +310,7 @@ export function activate(context: vscode.ExtensionContext) {
 		const outputLocation = activeOption.engine === 'local' ? '> ./.iqsdk/terminal.log 2>&1' : ''
 		const concatOutput = activeOption.engine === 'local' ? '>' + outputLocation : ''
 		if (action == SDKAction.drawCircuit) {
-			secondHalfOfCommand = `-P json ${pathPrefix}/${name}.cpp ${outputLocation} && mv Visualization/**${kernelName}** ${pathPrefix}/.iqsdk/circuits/${kernelName}.json ${concatOutput} && chmod 660 ${pathPrefix}/.iqsdk/circuits/${kernelName}.json ${concatOutput}`
+			secondHalfOfCommand = `-P json ${pathPrefix}/${name}.cpp ${outputLocation} && mv Visualization/**${kernelName}** ${pathPrefix}/.iqsdk/circuits/${kernelName}.json ${concatOutput} && chmod 666 ${pathPrefix}/.iqsdk/circuits/${kernelName}.json ${concatOutput}`
 		} else if (action == SDKAction.executeCPP) {
 			secondHalfOfCommand = `${pathPrefix}/${name}.cpp ${outputLocation} && ./${name} > ${name}.log && mv ${name}.log ${pathPrefix}/.iqsdk/outputs/${name}.log ${concatOutput} && chmod 666 ${pathPrefix}/.iqsdk/outputs/${name}.log ${concatOutput}`
 		}

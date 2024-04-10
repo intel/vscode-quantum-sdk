@@ -30,7 +30,7 @@ Click on the tab with the generated circuit board to make it the active window. 
 ![exportButton.png](./assets/documentation/exportButton.png)
 
 ## Execute Code
-In a valid Quantum C++ file there will be a `|0⟩` button on the right side of the tab bar. If a container engine or local SDK installation is set up then clicking this button will compile the C++ file, execute the program, and display a log file with the output to the user. The log file will then be stored in `.iqsdk/circuits/kernelName.json`
+In a valid Quantum C++ file there will be a `|0⟩` button on the right side of the tab bar. If a container engine or local SDK installation is set up then clicking this button will compile the C++ file, execute the program, and display a log file with the output to the user. The log file will then be stored in `.iqsdk/outputs/fileName.log`
 
 > Note: See [Set Up](#set-up) for instructions on installing a container engine or installing the SDK locally.
 
