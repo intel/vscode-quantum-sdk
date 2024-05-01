@@ -6,7 +6,8 @@
 import * as vscode from 'vscode'
 import { CircuitPanel } from './circuitPanel'
 import * as fs from 'fs'
-import { QCircuitData, QHistogramData } from './types'
+import * as path from 'path'
+import { CompilerEngine, CompilerOption, QCircuitData, QHistogramData, SDKAction } from './types'
 import * as subp from 'child_process'
 import MyCodeLensProvider from './codeLensProvider'
 
@@ -14,9 +15,20 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Commands
 	const setupCommand = 'intel-quantum.setup'
-	const setup = () => {
+	const prepFileStructure = (): any => {
 		let assetPath: string = context.extensionUri.fsPath + '/assets/setupExamples'
-		let visDir: string = vscode.workspace.workspaceFolders![0].uri.fsPath + '/visualization'
+		let visDir = path.posix.dirname(vscode.window.activeTextEditor!.document.fileName) + '/.iqsdk';
+
+		const workspaceFolders = vscode.workspace.workspaceFolders
+		if (workspaceFolders && workspaceFolders.length > 0) {
+			if (!visDir.startsWith(workspaceFolders[0].uri.path)) {
+				vscode.window.showErrorMessage('CPP file is not in the active workspace.')
+				return new Error('CPP file not in workspace')
+			}
+		} else {
+			vscode.window.showErrorMessage('There is no active workspace. In the Explorer choose \"Open Folder\" to create a workspace.')
+			return new Error('No workspace open')
+		}
 
 		if (!fs.existsSync(visDir)) {
 			fs.mkdirSync(visDir)
@@ -45,29 +57,38 @@ export function activate(context: vscode.ExtensionContext) {
 			})
 		}
 		if (!fs.existsSync(visDir + '/outputs')) {
-			fs.mkdirSync(visDir + '/outputs', { recursive: true })	
+			fs.mkdirSync(visDir + '/outputs', { recursive: true })
 		}
-	}
-	context.subscriptions.push(vscode.commands.registerCommand(setupCommand, setup))
+		if (!fs.existsSync(visDir + '/compile.json')) {
+			fs.copyFile(assetPath + '/compile.json', visDir + '/compile.json', function (err) {
+				if (err) {
+					console.log(err)
+				} else {
+					console.log("compile.json written successfully\n")
+				}
+			})
+		}
 
-	const drawCircuitCommand = "intel-quantum.drawCircuit"
-	const drawCircuit = () => {
+		return null;
+	}
+	context.subscriptions.push(vscode.commands.registerCommand(setupCommand, prepFileStructure))
+
+	const drawCircuitFromJsonCommand = "intel-quantum.drawCircuitFromJson"
+	const drawCircuitFromJson = () => {
 		const editor = vscode.window.activeTextEditor
-		if (editor === undefined) {
+		if (!editor) {
 			console.log("No Active Editor")
 			return
 		}
 
-		if (editor.document.languageId === 'json') {
-			execDrawRoutine(editor.document.getText())
-		}
+		execDrawRoutine(editor.document.getText())
 	}
-	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitCommand, drawCircuit))
+	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitFromJsonCommand, drawCircuitFromJson))
 
 	const drawHistogramCommand = "intel-quantum.drawHistogram"
 	const drawHistogram = () => {
 		const editor = vscode.window.activeTextEditor
-		if (editor === undefined) {
+		if (!editor) {
 			console.log("No Active Editor")
 			return
 		}
@@ -92,61 +113,73 @@ export function activate(context: vscode.ExtensionContext) {
 	)
 	context.subscriptions.push(codeLensProviderDisposable)
 
-	const compileCPPCommand = "intel-quantum.compileCPP"
-	const compileCPP = (kernelName: string) => {
-		const editor = vscode.window.activeTextEditor
-		if (editor === undefined) {
-			console.log("No Active Editor")
-			return
-		}
+	const drawCircuitFromCPPCommand = "intel-quantum.drawCircuitFromCPP"
+	const drawCircuitFromCPP = (kernelName: string) => {
 
-		prepPodman()
-		setup()
-		const dir = vscode.workspace.workspaceFolders![0].uri.path
-		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
-		const command = `podman run --rm -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler -P json /data/${name}.cpp && mv Visualization/**${kernelName}** /data/visualization/circuits/${kernelName}.json"`
+		let err = prepFileStructure()
+		if (err !== null) { return }
 
-		subShell(command).then((stdout) => {
-			channel.appendLine(stdout)
-			channel.show()
+		const [dir, name, command, activeOption] = getShellInfo(SDKAction.drawCircuit, kernelName)
+		if (activeOption === null) { return }
 
-			const filePath = dir + '/visualization/circuits/' + kernelName + '.json'
+		const terminal = vscode.window.createTerminal(`Draw Quantum Circuit`);
+		const outputLocation = activeOption.engine === 'local' ? '' : '> ./.iqsdk/terminal.log 2>&1'
+		terminal.sendText(`${command} ${outputLocation}`)
+		terminal.sendText(`exit`)
+
+		const disposable = vscode.window.onDidCloseTerminal(closedTerminal => {
+			if (closedTerminal !== terminal) { return }
+
+			const filePath = dir + '/.iqsdk/circuits/' + kernelName + '.json'
 			const fileContents = fs.readFileSync(filePath, 'utf8')
-			execDrawRoutine(fileContents)
-		}).catch((output) => {
-			channel.appendLine(output)
-			channel.show()
+
+			try {
+				let data: QCircuitData = JSON.parse(fileContents) as QCircuitData
+				data.gateColorMethod = activeOption.color
+
+				const jsonString = JSON.stringify(data, null, 2)
+				fs.writeFile(filePath, jsonString, 'utf-8', (err) => {
+					if (err) {
+						console.error('Error writing to JSON file:', err);
+					} else {
+						console.log('JSON file updated successfully.');
+					}
+				})
+
+				execDrawRoutine(jsonString)
+			} catch (e) {
+				let dataError: QCircuitData = { title: (e as Error).message } as QCircuitData
+				CircuitPanel.displayCircuitWebview(context.extensionUri, dataError, false)
+			}
+
+			disposable.dispose()
 		})
 	}
-	context.subscriptions.push(vscode.commands.registerCommand(compileCPPCommand, compileCPP))
+	context.subscriptions.push(vscode.commands.registerCommand(drawCircuitFromCPPCommand, drawCircuitFromCPP))
 
 	const executeCPPCommand = "intel-quantum.executeCPP"
 	const executeCPP = () => {
-		const editor = vscode.window.activeTextEditor
-		if (editor === undefined) {
-			console.log("No Active Editor")
-			return
-		}
 
-		prepPodman()
-		setup()
-		const dir = vscode.workspace.workspaceFolders![0].uri.path
-		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
-		const command = `podman run --rm -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler /data/${name}.cpp && ./${name} > ${name}.out && mv ${name}.out /data/visualization/outputs/${name}.out"`
+		let err = prepFileStructure()
+		if (err !== null) { return }
 
-		subShell(command).then((stdout) => {
-			channel.appendLine(stdout)
-			channel.show()
+		const [dir, name, command, activeOption] = getShellInfo(SDKAction.executeCPP)
+		if (activeOption === null) { return }
 
-			const filePath = dir + '/visualization/outputs/' + name + '.out'
-			const openPath = vscode.Uri.file(filePath)
-			vscode.workspace.openTextDocument(openPath).then(doc => {
+		const terminal = vscode.window.createTerminal(`Execute Quantum CPP`);
+		const outputLocation = activeOption.engine === 'local' ? '' : '> ./.iqsdk/terminal.log 2>&1'
+		terminal.sendText(`${command} ${outputLocation}`)
+		terminal.sendText(`exit`)
+
+		const disposable = vscode.window.onDidCloseTerminal(closedTerminal => {
+			if (closedTerminal !== terminal) { return }
+
+			const filePath: string = dir + '/.iqsdk/outputs/' + name + '.log'
+			vscode.workspace.openTextDocument(vscode.Uri.file(filePath)).then(doc => {
 				vscode.window.showTextDocument(doc, vscode.ViewColumn.Two)
 			})
 
-		}).catch((output) => {
-			channel.appendLine(output)
-			channel.show()
+			disposable.dispose()
 		})
 	}
 	context.subscriptions.push(vscode.commands.registerCommand(executeCPPCommand, executeCPP))
@@ -197,7 +230,10 @@ export function activate(context: vscode.ExtensionContext) {
 				return
 			}
 		} else if (editor.document.languageId === "cpp") {
-			const regex = new RegExp(/[ \t]*#[ \t]*include[ \t]*<clang\/Quantum\/quintrinsics.h>[ \t]*/)
+			//need to match both prod and dev includes, the following regex is overly accepting...
+			//#include <clang/Quantum/quintrinsics.h>
+			//#include "../../clang/include/clang/Quantum/quintrinsics.h"
+			const regex = new RegExp(/[ \t]*#[ \t]*include[ \t\S]*clang\/Quantum\/quintrinsics.h[ \t>"]*/)
 			if (regex.test(editorText)) {
 				vscode.commands.executeCommand('setContext', 'customContext.quantumCPPScript', true)
 				return
@@ -205,27 +241,88 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}
 
-	const prepPodman = () => {
-		const checkPodmanCommand = 'command -v podman || exit 1'
-		const checkImageCommand = 'podman image inspect intellabs/intel_quantum_sdk:latest > /dev/null 2>&1'
+	const prepContainerEngine = (engine: CompilerEngine) => {
+		const checkEngineCommand = `command -v ${CompilerEngine[engine]} || exit 1`
+		const checkImageCommand = `${CompilerEngine[engine]} image inspect intellabs/intel_quantum_sdk:latest > /dev/null 2>&1`
 
-		subShell(checkPodmanCommand).then(() => {
+		subShell(checkEngineCommand).then(() => {
 			subShell(checkImageCommand).then(() => { }).catch(() => {
-				channel.appendLine('Podman Image Required!\n')
+				channel.appendLine(`${CompilerEngine[engine]} Image Required!\n`)
 				channel.appendLine('Attempting to pull Intel Quantum SDK image')
 				channel.show()
 
 				const terminal = vscode.window.createTerminal(`Pull Intel Quantum Image`);
-				terminal.sendText('podman pull docker.io/intellabs/intel_quantum_sdk')
+				terminal.sendText(`${CompilerEngine[engine]} pull docker.io/intellabs/intel_quantum_sdk`)
 				terminal.show()
 			})
 		}).catch(() => {
-			channel.appendLine('Podman is required\n')
-			channel.appendLine('To install Podman use the following links\n')
-			channel.appendLine('Ubuntu or WSL with Ubuntu - https://podman.io/docs/installation#ubuntu')
-			channel.appendLine('MacOS - https://podman.io/docs/installation#macos')
+			channel.appendLine(`The container engine specified in your compile.json file (${CompilerEngine[engine]}) is required\n`)
 			channel.show()
 		})
+	}
+
+	const getShellInfo = (action: SDKAction, kernelName?: string): [string, string, string, CompilerOption | null] => {
+		const editor = vscode.window.activeTextEditor
+		if (editor === undefined) {
+			console.log("No Active Editor")
+			return ['', '', '', null]
+		}
+
+		const dir = path.posix.dirname(vscode.window.activeTextEditor!.document.fileName);
+		const name = editor.document.fileName.split('.').slice(0, -1).join('.').split('/').pop()
+
+		// Parse compile.json
+		const jsonData = fs.readFileSync(`${dir}/.iqsdk/compile.json`, 'utf-8')
+		const parsedData = JSON.parse(jsonData)
+		const optionsList = parsedData["options"]
+
+		const optionNames = {
+			[SDKAction.drawCircuit]: 'active-circuit-option',
+			[SDKAction.executeCPP]: 'active-execute-option',
+		}
+		const activeOptionName = parsedData[optionNames[action]]
+
+		if (!activeOptionName) {
+			console.log('active option is not defined')
+			return ['', '', '', null]
+		} else if (!optionsList || optionsList.length === 0) {
+			console.log('options list is not defined')
+			return ['', '', '', null]
+		} else if (!activeOptionName) {
+			console.log('active option does not match any defined options')
+			return ['', '', '', null]
+		}
+
+		const activeOption: CompilerOption = optionsList.find((option: any) => option.name === activeOptionName)
+
+		// Create Command
+		const rm = activeOption.remove ? '--rm' : ''
+		const args = activeOption.args.join(' ')
+
+		let pathPrefix = ''
+		if (activeOption.engine == CompilerEngine.local) {
+			pathPrefix = '.'
+		} else {
+			pathPrefix = '/data'
+		}
+
+		let secondHalfOfCommand = ''
+		const outputLocation = activeOption.engine === 'local' ? '> ./.iqsdk/terminal.log 2>&1' : ''
+		const concatOutput = activeOption.engine === 'local' ? '>' + outputLocation : ''
+		if (action == SDKAction.drawCircuit) {
+			secondHalfOfCommand = `-P json ${pathPrefix}/${name}.cpp ${outputLocation} && mv Visualization/**${kernelName}** ${pathPrefix}/.iqsdk/circuits/${kernelName}.json ${concatOutput} && chmod 666 ${pathPrefix}/.iqsdk/circuits/${kernelName}.json ${concatOutput}`
+		} else if (action == SDKAction.executeCPP) {
+			secondHalfOfCommand = `${pathPrefix}/${name}.cpp ${outputLocation} && ./${name} > ${name}.log && mv ${name}.log ${pathPrefix}/.iqsdk/outputs/${name}.log ${concatOutput} && chmod 666 ${pathPrefix}/.iqsdk/outputs/${name}.log ${concatOutput}`
+		}
+
+		if (activeOption.engine == CompilerEngine.local) {
+			var command = `${activeOption.localSDKPath}/intel-quantum-compiler ${args} ${secondHalfOfCommand}`
+		} else {
+			prepContainerEngine(activeOption.engine)
+			var command = `${activeOption.engine} run ${rm} -v ${dir}:/data intellabs/intel_quantum_sdk bash -c "./intel-quantum-compiler ${args} ${secondHalfOfCommand}"`
+		}
+
+		return [dir, name!, command, activeOption]
 	}
 
 	// On activate

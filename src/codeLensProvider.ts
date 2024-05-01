@@ -13,7 +13,7 @@ class MyCodeLensProvider implements CodeLensProvider {
 
                 const lineRange = new Range(lineNumber, 0, lineNumber, lineText.length);
                 let command: Command = {
-                    command: 'intel-quantum.compileCPP',
+                    command: 'intel-quantum.drawCircuitFromCPP',
                     title: 'View Circuit',
                     arguments: [kernelName]
                 }
