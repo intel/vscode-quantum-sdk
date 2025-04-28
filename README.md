@@ -4,19 +4,18 @@
 
 # Intel<sub>®</sub> Quantum SDK Extension for VS Code
 
-The purpose of this extension is to provide tools for the C++ [Intel<sub>®</sub> Quantum Compiler](https://developer.intel.com/quantumsdk). These tools include compilation and execution of C++ files as well as a circuit board generator for visualizing quantum code. The compiler can be seemlessly called from either a container or local installation of the SDK.
+The purpose of this extension is to extend the IDE tools for working with source code compiled by the [Intel<sub>®</sub> Quantum Compiler](https://developer.intel.com/quantumsdk). This includes IDE integration with an existing Intel Quantum Compiler from either a container or local installation of the SDK; as well as a circuit board generator for visualizing quantum code.
+> Note: See [Set Up](#set-up) for instructions on installing a container engine or installing the SDK locally.
 
 ## Generate Circuit Board
 
 ### Generate Circuit from Kernel
 Above every kernel in a valid Quantum C++ file there will be a `View Circuit` button. If a container engine or local SDK installation is set up then clicking this button will compile the C++ file, generate a circuit board, and display it to the user. 
 
-> Note: See [Set Up](#set-up) for instructions on installing a container engine or installing the SDK locally.
-
 ![viewCircuitButton.png](./assets/documentation/viewCircuitButton.png)
 
 ### Edit and Generate Circuit from Json
-After the compiler generates a circuit board, the information for the circuit will be stored in `.iqsdk/circuits/kernelName.json`. This file can be changed manually and then used to generate a circuit board using the `|0⟩` button on the right side of the tab bar.
+After the compiler generates a circuit board during compilation using the `-P json` flag, the information for the circuit will be written to `kernelName.json` in the output sub-directory. This file can be changed manually and then used to generate a circuit board using the `|0⟩` button on the right side of the tab bar.
 
 > Note: For an indepth description of the circuit board json structure, see [Circuit Json Structure](#circuit-json-structure)
 
